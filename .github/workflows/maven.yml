@@ -27,4 +27,5 @@ jobs:
         cache: maven
     - name: Build with Maven
       run: 
+        cd ../../deliveries
         mvn clean package
