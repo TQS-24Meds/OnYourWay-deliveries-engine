@@ -33,7 +33,7 @@ public class Ride {
 
     @OneToOne(mappedBy = "ride", cascade = CascadeType.ALL, orphanRemoval = true)
     @JsonIgnore
-    private Package ride_package;
+    private PackageOrder ride_package;
 
     //* HashMap<Latitude, Longitude>
     @Column(name = "route_start", nullable = false)
@@ -55,8 +55,7 @@ public class Ride {
     @Max(value = 5, message = "Review should not be more than 5.")
     private int rating;
 
-    public Ride(int id, Rider rider, Package ride_package, HashMap<Float,Float> route_start, HashMap<Float,Float> route_end, Timestamp time_start, Timestamp time_end, int rating) {
-        this.id = id;
+    public Ride(Rider rider, PackageOrder ride_package, HashMap<Float,Float> route_start, HashMap<Float,Float> route_end, Timestamp time_start, Timestamp time_end, int rating) {
         this.rider = rider;
         this.ride_package = ride_package;
         this.route_start = route_start;

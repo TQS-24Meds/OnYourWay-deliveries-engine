@@ -18,18 +18,13 @@ import lombok.*;
 @Setter
 @NoArgsConstructor
 @ToString
-@Table(name = "package")
-public class Package {
+@Table(name = "package_order")
+public class PackageOrder {
     
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
-    @Column(name = "id_package")
+    @Column(name = "id_package_order")
     private int id;
-
-    // vem do api n sei como fazer
-    @Column(name = "products")
-    // private ProductList products;
-    private ProductList products;
 
     @Column(name = "client_lat", nullable = false)
     private float client_lat; 
@@ -80,20 +75,18 @@ public class Package {
     private Timestamp finalizedts;
 
     // Package pending
-    public Package(int id, ProductList products, float client_lat, float client_long, String client_addr, float price, DeliveryStatusEnum status) {
-        this.id = id;
-        this.products = products;
+    public PackageOrder(float client_lat, float client_long, String client_addr, float price, DeliveryStatusEnum status, int order_id, int store_id) {
         this.client_lat = client_lat;
         this.client_long = client_long;
         this.client_addr = client_addr;
         this.price = price;
         this.status = DeliveryStatusEnum.PENDENT;
+        this.order_id = order_id;
+        this.store_id = store_id;
     }
 
     // Package accepted
-    public Package(int id, ProductList products, float client_lat, float client_long, String client_addr, float price, DeliveryStatusEnum status, Ride ride, int order_id, int rider_id, int store_id) {
-        this.id = id;
-        this.products = products;
+    public PackageOrder(float client_lat, float client_long, String client_addr, float price, DeliveryStatusEnum status, Ride ride, int order_id, int rider_id, int store_id) {
         this.client_lat = client_lat;
         this.client_long = client_long;
         this.client_addr = client_addr;
@@ -101,8 +94,8 @@ public class Package {
         this.status = DeliveryStatusEnum.ACCEPTED;
         this.ride = ride;
         this.order_id = order_id;
-        this.rider_id = rider_id;
         this.store_id = store_id;
+        this.rider_id = rider_id;
     }
 
 }

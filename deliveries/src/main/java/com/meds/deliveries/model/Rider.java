@@ -3,24 +3,32 @@ package com.meds.deliveries.model;
 import java.util.Set;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.meds.deliveries.enums.RiderStatusEnum;
 
 import lombok.*;
 
+@Data
 @Entity
 @Getter
 @Setter
 @NoArgsConstructor
 @ToString
 @Table(name = "rider")
-public class Rider extends Person {
+public class Rider {
     
-    // @Id
-    // @GeneratedValue(strategy = GenerationType.SEQUENCE)
-    // @Column(name = "id_rider")
-    // private int id;
+    @Id
+    @GeneratedValue(strategy = GenerationType.SEQUENCE)
+    @Column(name = "id_rider")
+    private int id;
+
+    @NotNull
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "id_person_rider", referencedColumnName = "id_person")
+    @JsonIgnore
+    private Person rider;
 
     @Column(name = "lat", nullable = false)
     private float lat;
@@ -28,8 +36,11 @@ public class Rider extends Person {
     @Column(name = "lon", nullable = false)
     private float lon;
 
+    @Column(name = "address", nullable = false)
+    private String address;
+
     @Column(name = "average_rating", nullable = false)
-    private String average_rating;
+    private float average_rating;
 
     @Column(name = "num_reviews", nullable = false)
     private int num_reviews;
@@ -43,8 +54,9 @@ public class Rider extends Person {
     private Set<Ride> rides;
 
     // Unavailable
-    public Rider(String name, String username, String password, String email, String address, int phone, String average_rating, int num_reviews, RiderStatusEnum status, Set<Ride> rides) {
-        super(name, username, password, email, address, phone);
+    public Rider(Person rider, String address, float average_rating, int num_reviews, RiderStatusEnum status, Set<Ride> rides) {
+        this.rider = rider;
+        this.address = address;
         this.average_rating = average_rating;
         this.num_reviews = num_reviews;
         this.status = RiderStatusEnum.UNAVAILABLE;
@@ -52,10 +64,11 @@ public class Rider extends Person {
     }
 
     // Available
-    public Rider(String name, String username, float lat, float lon, String password, String email, String address, int phone, String average_rating, int num_reviews, RiderStatusEnum status, Set<Ride> rides) {
-        super(name, username, password, email, address, phone);
+    public Rider(Person rider, float lat, float lon, String address, float average_rating, int num_reviews, RiderStatusEnum status, Set<Ride> rides) {
+        this.rider = rider;
         this.lat = lat;
         this.lon = lon;
+        this.address = address;
         this.average_rating = average_rating;
         this.num_reviews = num_reviews;
         this.status = RiderStatusEnum.AVAILABLE;
