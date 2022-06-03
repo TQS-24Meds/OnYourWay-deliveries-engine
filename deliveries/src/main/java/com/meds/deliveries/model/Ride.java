@@ -1,7 +1,6 @@
 package com.meds.deliveries.model;
 
-import java.sql.Timestamp;
-
+import java.util.Date;
 import java.util.HashMap;
 
 import javax.persistence.*;
@@ -33,7 +32,7 @@ public class Ride {
 
     @OneToOne(mappedBy = "ride", cascade = CascadeType.ALL, orphanRemoval = true)
     @JsonIgnore
-    private PackageOrder ride_package;
+    private Package ride_package;
 
     //* HashMap<Latitude, Longitude>
     @Column(name = "route_start", nullable = false)
@@ -44,24 +43,23 @@ public class Ride {
 
     @CreationTimestamp
     @Column(name = "time_start")
-    private Timestamp time_start;
+    private Date time_start;
 
     @UpdateTimestamp
     @Column(name = "time_end")
-    private Timestamp time_end;
+    private Date time_end;
 
     @Column(name = "rating")
     @Min(value = 0, message = "Review should not be less than 0.")
     @Max(value = 5, message = "Review should not be more than 5.")
     private int rating;
 
-    public Ride(Rider rider, PackageOrder ride_package, HashMap<Float,Float> route_start, HashMap<Float,Float> route_end, Timestamp time_start, Timestamp time_end, int rating) {
-        this.rider = rider;
+    public Ride(Package ride_package, int rating) {
         this.ride_package = ride_package;
-        this.route_start = route_start;
-        this.route_end = route_end;
-        this.time_start = time_start;
-        this.time_end = time_end;
+        this.route_start = new HashMap<Float, Float>();
+        this.route_end = new HashMap<Float, Float>();
+        this.time_start = new Date();
+        this.time_end = new Date();
         this.rating = rating;
     }
 
