@@ -23,13 +23,12 @@ public class PersonRepositoryTest {
 
     @Test
     public void whenFindPersonByExistingId_thenReturnPerson() {
-        Person john = new Person("John Doe", "johndoe", "mypassword", "john@doe.com", "Some address", 912345678);
+        Person john = new Person("John Doe", "johndoe", "mypassword", "john@doe.com", 912345678);
         entityManager.persistAndFlush(john);
 
         Person found = repository.findById(john.getId());
         assertThat( found, is(john) );
     }
-
 
     @Test
     public void whenFindPersonByInvalidId_thenReturnNull() {
@@ -40,7 +39,7 @@ public class PersonRepositoryTest {
 
     @Test
     public void whenFindPersonByValidUsername_thenReturnValidPerson() {
-        Person john = new Person("John Doe", "johndoe", "mypassword", "john@doe.com", "Some address", 912345678);
+        Person john = new Person("John Doe", "johndoe", "mypassword", "john@doe.com", 912345678);
         entityManager.persistAndFlush(john);
 
         Optional<Person> found = repository.findByUsername(john.getUsername());
@@ -49,14 +48,14 @@ public class PersonRepositoryTest {
 
     @Test
     public void whenFindPersonByInvalidUsername_thenReturnNull() {
-        String invalidPersonname = "ThisPersonnameDoesNotExist";
-        Optional<Person> found = repository.findByUsername(invalidPersonname);
+        String invalidUsername = "anndoe";
+        Optional<Person> found = repository.findByUsername(invalidUsername);
         assertThat( found.isPresent(), is(false) );
     }
 
     @Test
     public void whenFindByValidPhoneNumber_thenReturnValidPerson() {
-        Person john = new Person("John Doe", "johndoe", "mypassword", "john@doe.com", "Some address", 912345678);
+        Person john = new Person("John Doe", "johndoe", "mypassword", "john@doe.com", 912345678);
         entityManager.persistAndFlush(john);
 
         Person found = repository.findByPhone(john.getPhone());
@@ -65,8 +64,8 @@ public class PersonRepositoryTest {
 
     @Test
     public void whenFindPersonByInvalidPhoneNumber() {
-        int invalidPhoneNumber = 1234;
-        Person found = repository.findByPhone(invalidPhoneNumber);
+        int invalidPhone = 1234;
+        Person found = repository.findByPhone(invalidPhone);
         assertThat( found, is(nullValue()) );
     }
 

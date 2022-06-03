@@ -14,12 +14,11 @@ import lombok.*;
 @NoArgsConstructor
 @ToString
 @Table(name = "person")
-@Inheritance(strategy = InheritanceType.SINGLE_TABLE)
 public class Person {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "person_id")
+    @Column(name = "id_person")
     private int id;
 
     @Column(name = "name", nullable = false)
@@ -37,19 +36,23 @@ public class Person {
     @Column(name = "email", nullable = false, unique=true)
     private String email;
 
-    @Column(name = "address", nullable = false)
-    private String address;
-
     @Column(name = "phone", nullable = false)
     private int phone;
 
+    @OneToOne(mappedBy = "rider", cascade = CascadeType.ALL, orphanRemoval = true)
+    @JsonIgnore
+    private Rider rider;
 
-    public Person(String name, String username, String password, String email, String address, int phone) {
+    @OneToOne(mappedBy = "admin", cascade = CascadeType.ALL, orphanRemoval = true)
+    @JsonIgnore
+    private Admin admin;
+
+
+    public Person(String name, String username, String password, String email, int phone) {
         this.name = name;
         this.username = username;
         this.password = password;
         this.email = email;
-        this.address = address;
         this.phone = phone;
     }
 
