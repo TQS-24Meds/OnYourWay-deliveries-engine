@@ -24,4 +24,9 @@
     <string name="phone">Phone Number</string>
     <string name="welcome">Welcome, </string>
     <string name="qrcode">QR Code</string>
+    <string name="swapregister">swap to register</string>
+    <string name="swaplogin">swap to login</string>
+    <string name="map">Map</string>
+    <string name="deliveries">deliveries</string>
+    <string name="new_request">New requests</string>
 </resources>

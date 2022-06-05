@@ -117,13 +117,24 @@
                 android:id="@+id/btn_register"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:background="@drawable/custom_btn"
+                android:layout_centerHorizontal="true"
                 android:layout_marginLeft="20dp"
                 android:layout_marginRight="20dp"
-                android:layout_marginBottom="30dp"
-                android:layout_centerInParent="true"
-                android:textColor="@android:color/white"
-                android:text="@string/register"/>
+                android:background="@drawable/custom_btn"
+                android:text="@string/register"
+                android:textColor="@android:color/white" />
+
+            <Button
+                android:id="@+id/swapRegister"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/btn_register"
+                android:layout_marginLeft="100dp"
+                android:layout_marginTop="20dp"
+                android:layout_marginRight="100dp"
+                android:background="@drawable/custom_btn"
+                android:text="@string/swaplogin"
+                android:textColor="@android:color/white" />
 
 
         </RelativeLayout>
