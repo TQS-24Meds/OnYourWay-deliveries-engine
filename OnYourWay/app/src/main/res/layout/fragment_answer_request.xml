@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".AnswerRequest">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <Button
+            android:id="@+id/nobtn"
+            android:layout_width="130dp"
+            android:layout_height="58dp"
+            android:layout_marginTop="41dp"
+            android:backgroundTint="#CF1616"
+            android:text="@string/no"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toEndOf="@+id/yesbtn"
+            app:layout_constraintTop_toBottomOf="@+id/locationbtn"
+
+            app:layout_constraintVertical_bias="0.0" />
+
+        <Button
+            android:id="@+id/yesbtn"
+            android:layout_width="130dp"
+            android:layout_height="58dp"
+            android:layout_marginTop="41dp"
+            android:backgroundTint="#298F2D"
+            android:text="@string/yes"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/nobtn"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/locationbtn"
+            app:layout_constraintVertical_bias="0.0" />
+
+
+        <Button
+            android:id="@+id/locationbtn"
+            android:layout_width="411dp"
+            android:layout_height="92dp"
+            android:background="@drawable/rectangle"
+            android:drawableEnd="@drawable/arrow"
+            android:text="@string/rqlocation"
+            android:textAlignment="textStart"
+            android:textColor="#000000"
+            android:textSize="20sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/productsbtn" />
+
+        <TextView
+            android:id="@+id/statictext"
+            android:layout_width="291dp"
+
+            android:layout_height="137dp"
+            android:layout_marginTop="@dimen/top_margin"
+            android:text="@string/rqfrom"
+            android:textAlignment="center"
+            android:textSize="54sp"
+            android:typeface="normal"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/user_dinamic"
+            android:layout_width="175dp"
+            android:layout_height="81dp"
+            android:layout_marginTop="44dp"
+            android:text="@string/empty"
+            android:textAlignment="center"
+            android:textSize="48sp"
+            android:textStyle="bold"
+
+            app:layout_constraintBottom_toTopOf="@+id/productsbtn"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/statictext" />
+
+        <Button
+            android:id="@+id/productsbtn"
+            android:layout_width="411dp"
+
+            android:layout_height="92dp"
+            android:layout_marginTop="84dp"
+            android:background="@drawable/rectangle"
+            android:drawableEnd="@drawable/arrow"
+            android:hapticFeedbackEnabled="false"
+            android:text="@string/products"
+            android:textAlignment="textStart"
+            android:textColor="#000000"
+            android:textSize="20sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/user_dinamic" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</FrameLayout>

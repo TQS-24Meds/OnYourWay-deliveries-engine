@@ -10,7 +10,6 @@ import static org.hamcrest.core.Is.is;
 import static org.hamcrest.CoreMatchers.nullValue;
 
 import com.meds.deliveries.model.Admin;
-import com.meds.deliveries.model.Person;
 
 @DataJpaTest
 class AdminRepositoryTest {
@@ -21,7 +20,7 @@ class AdminRepositoryTest {
 
     @Test
     public void whenFindAdminByValidId_thenReturnValidAdmin() {
-        Admin admin = new Admin(new Person("John Admin", "admin", "admin1234", "admin@store.com", 91234567));
+        Admin admin = new Admin("John Admin", "admin", "admin1234", "admin@store.com", 91234567);
         entityManager.persistAndFlush(admin);
 
         Admin adminFound = adminRepository.findById(admin.getId());

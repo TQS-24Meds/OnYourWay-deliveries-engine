@@ -8,11 +8,11 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.*;
 
 @Data
-@Entity
-@Getter
-@Setter
 @NoArgsConstructor
+@AllArgsConstructor
 @ToString
+@Entity
+@Inheritance(strategy = InheritanceType.JOINED)
 @Table(name = "person")
 public class Person {
 
@@ -24,7 +24,7 @@ public class Person {
     @Column(name = "name", nullable = false)
     private String name;
 
-    @Column(name = "username", nullable = false)
+    @Column(name = "username", nullable = false, unique = true)
     private String username;
 
     @JsonIgnore
@@ -39,14 +39,13 @@ public class Person {
     @Column(name = "phone", nullable = false)
     private int phone;
 
-    @OneToOne(mappedBy = "rider", cascade = CascadeType.ALL, orphanRemoval = true)
-    @JsonIgnore
-    private Rider rider;
+    // @OneToOne(mappedBy = "rider", cascade = CascadeType.ALL, orphanRemoval = true)
+    // @JsonIgnore
+    // private Rider rider;
 
-    @OneToOne(mappedBy = "admin", cascade = CascadeType.ALL, orphanRemoval = true)
-    @JsonIgnore
-    private Admin admin;
-
+    // @OneToOne(mappedBy = "admin", cascade = CascadeType.ALL, orphanRemoval = true)
+    // @JsonIgnore
+    // private Admin admin;
 
     public Person(String name, String username, String password, String email, int phone) {
         this.name = name;

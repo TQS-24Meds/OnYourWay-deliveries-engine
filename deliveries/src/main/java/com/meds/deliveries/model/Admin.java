@@ -1,10 +1,6 @@
 package com.meds.deliveries.model;
 
 import javax.persistence.*;
-import javax.validation.constraints.NotNull;
-
-import com.fasterxml.jackson.annotation.JsonIgnore;
-
 import lombok.*;
 
 @Data
@@ -14,20 +10,24 @@ import lombok.*;
 @NoArgsConstructor
 @AllArgsConstructor
 @ToString
+@EqualsAndHashCode(callSuper = true)
 @Table(name = "admin")
-public class Admin {
+public class Admin extends Person {
     
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
     @Column(name = "id_admin")
     private int id;
     
-    @NotNull
-    @OneToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "id_person_admin", referencedColumnName = "id_person") 
-    @JsonIgnore
-    private Person admin;
+    // @NotNull
+    // @OneToOne(cascade = CascadeType.ALL)
+    // @JoinColumn(name = "id_person_admin", referencedColumnName = "id_person") 
+    // @JsonIgnore
+    // private Person admin;
 
-    public Admin(Person admin) {this.admin = admin;}
+    @Builder
+    public Admin(String name, String username, String password, String email, int phone) {
+        super(name, username, password, email, phone);
+    }
     
 }

@@ -1,6 +1,7 @@
 package com.meds.deliveries.model;
 
 import java.sql.Timestamp;
+import java.util.Date;
 
 import javax.persistence.*;
 
@@ -19,7 +20,7 @@ import lombok.*;
 @NoArgsConstructor
 @ToString
 @Table(name = "package_order")
-public class PackageOrder {
+public class Package {
     
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
@@ -35,9 +36,12 @@ public class PackageOrder {
     @Column(name = "client_addr", nullable = false)
     private String client_addr;    
 
+    @Column(name = "client_name", nullable = false)
+    private String client_name;    
+
     @CreationTimestamp
     @Column(name = "timestamp")
-    private Timestamp timestamp;
+    private Date timestamp;
 
     @Column(name = "price", nullable = false)
     private float price;
@@ -50,17 +54,6 @@ public class PackageOrder {
     @JsonIgnore
     private Ride ride;
 
-    // @OneToOne(cascade = CascadeType.ALL)
-    // @JoinTable(name = "package_ride", 
-    //   joinColumns = 
-    //     { @JoinColumn(name = "id_package", referencedColumnName = "id") },
-    //   inverseJoinColumns = 
-    //     { @JoinColumn(name = "id_ride", referencedColumnName = "id") })
-    // @JsonIgnore
-    // private Ride ride;
-
-
-    // estes vem do API por isso n sei ainda como meter aqui, se fosse p criar as entidades order/rider/store era outra historia  
     @Column(name = "order_id", nullable = false)
     private int order_id;
 
@@ -75,10 +68,11 @@ public class PackageOrder {
     private Timestamp finalizedts;
 
     // Package pending
-    public PackageOrder(float client_lat, float client_long, String client_addr, float price, DeliveryStatusEnum status, int order_id, int store_id) {
+    public Package(float client_lat, float client_long, String client_addr, String client_name, float price, DeliveryStatusEnum status, int order_id, int store_id) {
         this.client_lat = client_lat;
         this.client_long = client_long;
         this.client_addr = client_addr;
+        this.client_name = client_name;
         this.price = price;
         this.status = DeliveryStatusEnum.PENDENT;
         this.order_id = order_id;
@@ -86,10 +80,11 @@ public class PackageOrder {
     }
 
     // Package accepted
-    public PackageOrder(float client_lat, float client_long, String client_addr, float price, DeliveryStatusEnum status, Ride ride, int order_id, int rider_id, int store_id) {
+    public Package(float client_lat, float client_long, String client_addr, String client_name, float price, DeliveryStatusEnum status, Ride ride, int order_id, int rider_id, int store_id) {
         this.client_lat = client_lat;
         this.client_long = client_long;
         this.client_addr = client_addr;
+        this.client_name = client_name;
         this.price = price;
         this.status = DeliveryStatusEnum.ACCEPTED;
         this.ride = ride;
