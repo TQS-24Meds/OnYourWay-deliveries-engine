@@ -5,8 +5,6 @@ import static org.mockito.Mockito.reset;
 import static org.mockito.BDDMockito.given;
 
 import java.util.ArrayList;
-import java.util.Date;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -57,7 +55,7 @@ public class RiderServiceTest {
     @Test
     void whenRequestRides_thenGetRides() throws Exception {
         List<Ride> allRides = new ArrayList<>();
-        Package ride_package = new Package(36.58569f, 36.58569f, "Client address", "Client name", 5.0f, DeliveryStatusEnum.DELIVERED, 1, 1);
+        Package ride_package = new Package(36.58569f, 36.58569f, "Client address", "Client name", 5.0f, 1, 1);
         Ride r1 = new Ride(ride_package, 5);
         
         allRides.add(r1);

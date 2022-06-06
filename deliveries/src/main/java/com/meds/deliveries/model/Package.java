@@ -68,7 +68,7 @@ public class Package {
     private Timestamp finalizedts;
 
     // Package pending
-    public Package(float client_lat, float client_long, String client_addr, String client_name, float price, DeliveryStatusEnum status, int order_id, int store_id) {
+    public Package(float client_lat, float client_long, String client_addr, String client_name, float price, int order_id, int store_id) {
         this.client_lat = client_lat;
         this.client_long = client_long;
         this.client_addr = client_addr;
@@ -80,14 +80,14 @@ public class Package {
     }
 
     // Package accepted
-    public Package(float client_lat, float client_long, String client_addr, String client_name, float price, DeliveryStatusEnum status, Ride ride, int order_id, int rider_id, int store_id) {
+    public Package(float client_lat, float client_long, String client_addr, String client_name, float price, int order_id, int rider_id, int store_id) {
         this.client_lat = client_lat;
         this.client_long = client_long;
         this.client_addr = client_addr;
         this.client_name = client_name;
         this.price = price;
         this.status = DeliveryStatusEnum.ACCEPTED;
-        this.ride = ride;
+        this.ride = new Ride();
         this.order_id = order_id;
         this.store_id = store_id;
         this.rider_id = rider_id;
