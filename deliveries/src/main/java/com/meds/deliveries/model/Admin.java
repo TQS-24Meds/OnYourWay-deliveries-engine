@@ -1,5 +1,7 @@
 package com.meds.deliveries.model;
 
+import java.util.List;
+
 import javax.persistence.*;
 import lombok.*;
 
@@ -18,6 +20,10 @@ public class Admin extends Person {
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
     @Column(name = "id_admin")
     private int id;
+
+    @OneToMany(cascade = CascadeType.ALL ,mappedBy = "admin")
+    private List<Store> stores;
+
     
     // @NotNull
     // @OneToOne(cascade = CascadeType.ALL)
@@ -26,8 +32,11 @@ public class Admin extends Person {
     // private Person admin;
 
     @Builder
+    
     public Admin(String name, String username, String password, String email, int phone) {
         super(name, username, password, email, phone);
     }
+
+
     
 }

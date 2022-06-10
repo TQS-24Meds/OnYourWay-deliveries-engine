@@ -12,5 +12,5 @@ import org.springframework.stereotype.Repository;
 public interface PackageRepository extends JpaRepository<Package, Integer> {
     Package findById(int id);
     List<Package> findByStatus(DeliveryStatusEnum status);
-    List<Package> findAll();
+    
 }

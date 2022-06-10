@@ -1,4 +1,4 @@
-/* package com.meds.deliveries.repository;
+package com.meds.deliveries.repository;
 
 import java.util.Optional;
 
@@ -13,6 +13,5 @@ public interface PersonRepository extends JpaRepository<Person, Integer> {
     Optional<Person> findByUsername(String username);
     Optional<Person> findByEmail(String email);
     Person findByPhone(int phone);
-    Person findById(int id);
+    Optional<Person> findById(int id);
 }
- */
