@@ -1,9 +1,13 @@
 package com.meds.deliveries.model;
 
+import java.util.List;
+
 import javax.persistence.*;
 import javax.validation.constraints.*;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+
+import org.springframework.security.core.GrantedAuthority;
 
 import lombok.*;
 
@@ -40,6 +44,9 @@ public class Person {
     @Column(name = "phone", nullable = false)
     private int phone;
 
+    @NonNull
+    private List<GrantedAuthority> permissions;
+
     // @OneToOne(mappedBy = "rider", cascade = CascadeType.ALL, orphanRemoval = true)
     // @JsonIgnore
     // private Rider rider;
@@ -48,12 +55,13 @@ public class Person {
     // @JsonIgnore
     // private Admin admin;
 
-    public Person(String name, String username, String password, String email, int phone) {
+    public Person(String name, String username, String password, String email, int phone, List<GrantedAuthority> permissions) {
         this.name = name;
         this.username = username;
         this.password = password;
         this.email = email;
         this.phone = phone;
+        this.permissions = permissions;
     }
 
 }
