@@ -12,6 +12,7 @@ import static org.hamcrest.CoreMatchers.nullValue;
 import com.meds.deliveries.enums.RiderStatusEnum;
 import com.meds.deliveries.model.Rider;
 
+import java.util.Collections;
 import java.util.List;
 
 
@@ -24,7 +25,7 @@ class RiderRepositoryTest {
 
     @Test
     public void whenFindRiderByValidId_thenReturnValidRider() {
-        Rider rider = new Rider("John Doe", "johndoe", "mypassword", "john@doe.com", 912345678, "My house");
+        Rider rider = new Rider("John Doe", "johndoe", "mypassword", "john@doe.com", 912345678, Collections.emptyList(), "My house");
         entityManager.persistAndFlush(rider);
 
         Rider riderFound = repository.findById(rider.getId());
@@ -40,9 +41,9 @@ class RiderRepositoryTest {
 
     @Test
     public void whenFindRidersByStatus_thenReturnValidRiders() {
-        Rider john = new Rider("John", "john", "mypassword", "john@user.com", 911111111, "John house");
-        Rider alice = new Rider("Alice", "alice", "mypassword", "alice@user.com", 922222222, "Alice house");
-        Rider alex = new Rider("Alex", "alex", "mypassword", "alex@user.com", 933333333, "Alex house");
+        Rider john = new Rider("John", "john", "mypassword", "john@user.com", 911111111, Collections.emptyList(), "John house");
+        Rider alice = new Rider("Alice", "alice", "mypassword", "alice@user.com", 922222222, Collections.emptyList(), "Alice house");
+        Rider alex = new Rider("Alex", "alex", "mypassword", "alex@user.com", 933333333, Collections.emptyList(), "Alex house");
 
         alice.setStatus(RiderStatusEnum.AVAILABLE);
         alex.setStatus(RiderStatusEnum.AVAILABLE);
