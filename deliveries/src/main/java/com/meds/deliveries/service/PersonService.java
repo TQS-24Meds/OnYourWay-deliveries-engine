@@ -12,7 +12,6 @@ import org.springframework.stereotype.Service;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.Optional;
 
 @Service
 public class PersonService {
@@ -42,6 +41,10 @@ public class PersonService {
         return repository.findByUsername(username).orElseThrow(() -> new ResourceNotFoundException("Person not found for this username:" + username));
     }
 
+    public Person getPersonByEmail(String email) {
+        return repository.findByEmail(email).orElseThrow(() -> new ResourceNotFoundException("Person not found for this email:" + email));
+    }
+  
     public Map<String, Boolean> deletePerson(Person Person) throws ResourceNotFoundException {
 
         int id  = Person.getId();
@@ -69,5 +72,3 @@ public class PersonService {
         return repository.save(existingPerson);
     }
 }
-
- 

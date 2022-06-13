@@ -1,9 +1,13 @@
 package com.meds.deliveries.model;
 
+import java.util.List;
+
 import javax.persistence.*;
 import javax.validation.constraints.*;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+
+import org.springframework.security.core.GrantedAuthority;
 
 import lombok.*;
 
@@ -40,53 +44,8 @@ public class Person {
     @Column(name = "phone", nullable = false)
     private int phone;
 
-    public int getId() {
-        return this.id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
-    }
-
-    public String getName() {
-        return this.name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public String getUsername() {
-        return this.username;
-    }
-
-    public void setUsername(String username) {
-        this.username = username;
-    }
-
-    public String getPassword() {
-        return this.password;
-    }
-
-    public void setPassword(String password) {
-        this.password = password;
-    }
-
-    public String getEmail() {
-        return this.email;
-    }
-
-    public void setEmail(String email) {
-        this.email = email;
-    }
-
-    public int getPhone() {
-        return this.phone;
-    }
-
-    public void setPhone(int phone) {
-        this.phone = phone;
-    }
+    @NonNull
+    private List<GrantedAuthority> permissions;
 
     // @OneToOne(mappedBy = "rider", cascade = CascadeType.ALL, orphanRemoval = true)
     // @JsonIgnore
@@ -96,12 +55,13 @@ public class Person {
     // @JsonIgnore
     // private Admin admin;
 
-    public Person(String name, String username, String password, String email, int phone) {
+    public Person(String name, String username, String password, String email, int phone, List<GrantedAuthority> permissions) {
         this.name = name;
         this.username = username;
         this.password = password;
         this.email = email;
         this.phone = phone;
+        this.permissions = permissions;
     }
 
 }

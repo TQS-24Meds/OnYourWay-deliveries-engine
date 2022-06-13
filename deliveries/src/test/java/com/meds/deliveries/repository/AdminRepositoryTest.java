@@ -8,7 +8,7 @@ import org.springframework.boot.test.autoconfigure.orm.jpa.TestEntityManager;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.core.Is.is;
 
-import java.util.Optional;
+import java.util.Collections;
 
 import static org.hamcrest.CoreMatchers.nullValue;
 
@@ -26,7 +26,7 @@ class AdminRepositoryTest {
 
     @Test
     public void whenFindAdminByValidId_thenReturnValidAdmin() {
-        Admin admin = new Admin("John Admin", "admin", "admin1234", "admin@store.com", 91234567);
+        Admin admin = new Admin("John Admin", "admin", "admin1234", "admin@store.com", 91234567, Collections.emptyList());
         entityManager.persistAndFlush(admin);
 
         Optional<Admin> adminFound = adminRepository.findById(admin.getId());

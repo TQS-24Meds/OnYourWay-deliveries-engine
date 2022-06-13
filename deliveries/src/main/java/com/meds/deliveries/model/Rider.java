@@ -8,6 +8,8 @@ import javax.persistence.*;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.meds.deliveries.enums.RiderStatusEnum;
 
+import org.springframework.security.core.GrantedAuthority;
+
 import lombok.*;
 
 @Data
@@ -56,8 +58,8 @@ public class Rider extends Person {
 
     @Builder
     // Unavailable
-    public Rider(String name, String username, String password, String email, int phone, String address) {
-        super(name, username, password, email, phone);
+    public Rider(String name, String username, String password, String email, int phone, List<GrantedAuthority> permissions, String address) {
+        super(name, username, password, email, phone, permissions);
         this.address = address;
         this.average_rating = 0.0f;
         this.num_reviews = 0;
@@ -67,8 +69,8 @@ public class Rider extends Person {
     
     @Builder
     // Available
-    public Rider(String name, String username, String password, String email, int phone, String address, float lat, float lon) {
-        super(name, username, password, email, phone);
+    public Rider(String name, String username, String password, String email, int phone, List<GrantedAuthority> permissions, String address, float lat, float lon) {
+        super(name, username, password, email, phone, permissions);
         this.lat = lat;
         this.lon = lon;
         this.address = address;

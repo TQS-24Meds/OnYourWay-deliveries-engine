@@ -5,6 +5,9 @@ import static org.mockito.Mockito.reset;
 import static org.mockito.BDDMockito.given;
 
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -32,7 +35,7 @@ public class RiderServiceTest {
 
     @BeforeEach
     void setUp() {
-        this.rider = new Rider("John Doe", "johndoe", "mypassword", "john@doe.com", 912345678, "My house");
+        this.rider = new Rider("John Doe", "johndoe", "mypassword", "john@doe.com", 912345678, Collections.emptyList(), "My house");
     }
 
     @AfterEach
@@ -72,9 +75,10 @@ public class RiderServiceTest {
         
         List<Rider> allRiders = new ArrayList<>();
         
-        Rider john = new Rider("John", "john", "mypassword", "john@user.com", 911111111, "John house");
-        Rider alice = new Rider("Alice", "alice", "mypassword", "alice@user.com", 922222222, "Alice house");
-        Rider alex = new Rider("Alex", "alex", "mypassword", "alex@user.com", 933333333, "Alex house");
+        Rider john = new Rider("John", "john", "mypassword", "john@user.com", 911111111, Collections.emptyList(), "John house");
+        Rider alice = new Rider("Alice", "alice", "mypassword", "alice@user.com", 922222222, Collections.emptyList(), "Alice house");
+        Rider alex = new Rider("Alex", "alex", "mypassword", "alex@user.com", 933333333, Collections.emptyList(), "Alex house");
+
         john.setStatus(RiderStatusEnum.AVAILABLE);
         alice.setStatus(RiderStatusEnum.AVAILABLE);
         alex.setStatus(RiderStatusEnum.UNAVAILABLE);

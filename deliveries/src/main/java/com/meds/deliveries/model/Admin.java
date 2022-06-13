@@ -3,6 +3,9 @@ package com.meds.deliveries.model;
 import java.util.List;
 
 import javax.persistence.*;
+
+import org.springframework.security.core.GrantedAuthority;
+
 import lombok.*;
 
 @Data
@@ -32,11 +35,8 @@ public class Admin extends Person {
     // private Person admin;
 
     @Builder
-    
-    public Admin(String name, String username, String password, String email, int phone) {
-        super(name, username, password, email, phone);
+    public Admin(String name, String username, String password, String email, int phone, List<GrantedAuthority> permissions) {
+        super(name, username, password, email, phone, permissions);
     }
-
-
     
 }
