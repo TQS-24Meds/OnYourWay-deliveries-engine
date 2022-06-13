@@ -82,7 +82,7 @@ public class Package {
         this.client_addr = client_addr;
         this.client_name = client_name;
         this.status = DeliveryStatusEnum.ACCEPTED;
-        this.ride = ride;
+        this.ride = new Ride();
         this.order_id = order_id;
         this.store_id = store_id;
         this.rider_id = rider_id;

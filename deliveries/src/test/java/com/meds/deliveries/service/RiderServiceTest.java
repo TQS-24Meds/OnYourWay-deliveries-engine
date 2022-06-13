@@ -5,8 +5,6 @@ import static org.mockito.Mockito.reset;
 import static org.mockito.BDDMockito.given;
 
 import java.util.ArrayList;
-import java.util.Date;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -17,7 +15,6 @@ import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.*;
 import org.mockito.junit.jupiter.MockitoExtension;
 
-import com.meds.deliveries.enums.DeliveryStatusEnum;
 import com.meds.deliveries.enums.RiderStatusEnum;
 import com.meds.deliveries.model.Ride;
 import com.meds.deliveries.model.Rider;
