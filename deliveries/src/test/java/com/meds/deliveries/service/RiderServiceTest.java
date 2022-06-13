@@ -57,7 +57,7 @@ public class RiderServiceTest {
     @Test
     void whenRequestRides_thenGetRides() throws Exception {
         List<Ride> allRides = new ArrayList<>();
-        Package ride_package = new Package(36.58569f, 36.58569f, "Client address", "Client name", 5.0f, DeliveryStatusEnum.DELIVERED, 1, 1);
+        Package ride_package = new Package("40.631284 / N 40° 37' 52.623''", "40.631284 / N 40° 37' 52.623''", "Client address", "Client name", DeliveryStatusEnum.DELIVERED, 1, 1);
         Ride r1 = new Ride(ride_package, 5);
         
         allRides.add(r1);
@@ -78,7 +78,6 @@ public class RiderServiceTest {
         Rider john = new Rider("John", "john", "mypassword", "john@user.com", 911111111, "John house");
         Rider alice = new Rider("Alice", "alice", "mypassword", "alice@user.com", 922222222, "Alice house");
         Rider alex = new Rider("Alex", "alex", "mypassword", "alex@user.com", 933333333, "Alex house");
-
         john.setStatus(RiderStatusEnum.AVAILABLE);
         alice.setStatus(RiderStatusEnum.AVAILABLE);
         alex.setStatus(RiderStatusEnum.UNAVAILABLE);
@@ -99,6 +98,17 @@ public class RiderServiceTest {
         Map<String, Object> found = service.getRatingStatistics(rider);
 
         assertThat(found).containsEntry("numReviews", 10).containsEntry("avgReviews", 4.5f);
+    }
+
+
+    @Test
+    void changeRiderStatus() throws Exception {
+        rider.setStatus(RiderStatusEnum.AVAILABLE); // he has to become unavailable
+        System.out.println("this is " + rider);
+        Rider found = service.updateRiderStatus(rider);
+
+        assertEquals( RiderStatusEnum.UNAVAILABLE, found.getStatus());
+
     }
 
 }

@@ -28,10 +28,10 @@ public class Package {
     private int id;
 
     @Column(name = "client_lat", nullable = false)
-    private float client_lat; 
+    private String client_lat; 
 
     @Column(name = "client_long", nullable = false)
-    private float client_long; 
+    private String client_long; 
 
     @Column(name = "client_addr", nullable = false)
     private String client_addr;    
@@ -42,9 +42,6 @@ public class Package {
     @CreationTimestamp
     @Column(name = "timestamp")
     private Date timestamp;
-
-    @Column(name = "price", nullable = false)
-    private float price;
 
     @Column(name = "status", nullable = false)
     @Enumerated(EnumType.STRING)
@@ -68,24 +65,22 @@ public class Package {
     private Timestamp finalizedts;
 
     // Package pending
-    public Package(float client_lat, float client_long, String client_addr, String client_name, float price, DeliveryStatusEnum status, int order_id, int store_id) {
+    public Package(String client_lat, String client_long, String client_addr, String client_name, DeliveryStatusEnum status, int order_id, int store_id) {
         this.client_lat = client_lat;
         this.client_long = client_long;
         this.client_addr = client_addr;
         this.client_name = client_name;
-        this.price = price;
         this.status = DeliveryStatusEnum.PENDENT;
         this.order_id = order_id;
         this.store_id = store_id;
     }
 
     // Package accepted
-    public Package(float client_lat, float client_long, String client_addr, String client_name, float price, DeliveryStatusEnum status, Ride ride, int order_id, int rider_id, int store_id) {
+    public Package(String client_lat, String client_long, String client_addr, String client_name, DeliveryStatusEnum status, Ride ride, int order_id, int rider_id, int store_id) {
         this.client_lat = client_lat;
         this.client_long = client_long;
         this.client_addr = client_addr;
         this.client_name = client_name;
-        this.price = price;
         this.status = DeliveryStatusEnum.ACCEPTED;
         this.ride = ride;
         this.order_id = order_id;

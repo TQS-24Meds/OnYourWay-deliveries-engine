@@ -22,11 +22,16 @@ import org.springframework.stereotype.Service;
 @Log4j2
 public class RiderService {
 
-    @Autowired RiderRepository repository;
-    
-    List<Rider> getAllRiders() { return repository.findAll(); }
+    @Autowired
+    RiderRepository repository;
 
-    List<Ride> getAllRides(Rider rider){ return repository.findById(rider.getId()).getRides(); }
+    List<Rider> getAllRiders() {
+        return repository.findAll();
+    }
+
+    List<Ride> getAllRides(Rider rider) {
+        return repository.findById(rider.getId()).getRides();
+    }
 
     Rider registerRider(Rider rider) throws DuplicatedObjectException {
         if (repository.findByEmail(rider.getEmail()).isEmpty()) {
@@ -38,16 +43,16 @@ public class RiderService {
         }
 
         log.error("RIDER SERVICE: Duplicated rider email, when saving rider");
-        throw new DuplicatedObjectException("Rider with this email already exists."); 
+        throw new DuplicatedObjectException("Rider with this email already exists.");
     }
 
-    Rider updateLocation(float lat, float lon, Rider rider) throws ResourceNotFoundException{
-        
+    Rider updateLocation(float lat, float lon, Rider rider) throws ResourceNotFoundException {
+
         rider.setLat(lat);
         rider.setLon(lon);
         repository.save(rider);
 
-        if(rider.getLat() == lat && rider.getLon() == lon){
+        if (rider.getLat() == lat && rider.getLon() == lon) {
 
             log.info("RIDER SERVICE: Rider location updated successfully");
             return rider;
@@ -60,13 +65,14 @@ public class RiderService {
     }
 
     public List<Rider> getRidersByStatus(RiderStatusEnum status, List<Rider> riders) throws InvalidLoginException {
-        
-        List<Rider> ridersWithStatus = new ArrayList<>();
-    
 
-        System.out.println("all riders service :" + riders );
+        List<Rider> ridersWithStatus = new ArrayList<>();
+
+        System.out.println("all riders service :" + riders);
         for (Rider rider : riders) {
-            if (rider.getStatus() == status){ ridersWithStatus.add(rider);}
+            if (rider.getStatus() == status) {
+                ridersWithStatus.add(rider);
+            }
         }
 
         log.info("RIDER SERVICE: Retrieved riders with specific status with success");
@@ -74,7 +80,7 @@ public class RiderService {
     }
 
     public Map<String, Object> getRatingStatistics(Rider rider) throws InvalidLoginException {
-        
+
         Map<String, Object> resp = new TreeMap<>();
         resp.put("numReviews", rider.getNum_reviews());
         resp.put("avgReviews", rider.getAverage_rating());
@@ -82,5 +88,28 @@ public class RiderService {
         log.info("RIDER SERVICE: Retrieved rating statistics with success");
         return resp;
     }
+
+    // update Rider Status
+
+    public Rider updateRiderStatus(Rider rider) {
+
+        // unavailable
+        if (rider.getStatus() == RiderStatusEnum.AVAILABLE) {
+            rider.setStatus(RiderStatusEnum.UNAVAILABLE);
+            log.info("RIDER SERVICE: Rider Status set to unavailable");
+
+        }
+
+        // available
+        else if (rider.getStatus() == RiderStatusEnum.UNAVAILABLE) {
+            rider.setStatus(RiderStatusEnum.AVAILABLE);
+            log.info("RIDER SERVICE: Rider Status set to available");
+        }
+
+        return rider;
+
+    }
+
+    //Get Rider's location
 
 }
