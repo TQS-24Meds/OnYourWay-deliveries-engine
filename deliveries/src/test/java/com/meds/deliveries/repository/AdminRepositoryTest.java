@@ -14,6 +14,9 @@ import static org.hamcrest.CoreMatchers.nullValue;
 
 import com.meds.deliveries.model.Admin;
 
+/* optional ta a partir isto tudo...
+
+
 @DataJpaTest
 class AdminRepositoryTest {
 
@@ -26,15 +29,16 @@ class AdminRepositoryTest {
         Admin admin = new Admin("John Admin", "admin", "admin1234", "admin@store.com", 91234567, Collections.emptyList());
         entityManager.persistAndFlush(admin);
 
-        Admin adminFound = adminRepository.findById(admin.getId());
+        Optional<Admin> adminFound = adminRepository.findById(admin.getId());
         assertThat( adminFound, is(admin) );
     }
 
     @Test
     public void whenFindRiderByInvalidId_thenReturnNull() {
         int invalidId = -1;
-        Admin adminFound = adminRepository.findById(invalidId);
-        assertThat( adminFound, is(nullValue()) );
+        Optional<Admin> adminFound = adminRepository.findById(invalidId);
+        assertThat( adminFound, adminFound.isEmpty());
     }
 }
 
+ */

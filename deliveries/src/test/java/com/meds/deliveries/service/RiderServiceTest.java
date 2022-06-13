@@ -18,7 +18,6 @@ import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.*;
 import org.mockito.junit.jupiter.MockitoExtension;
 
-import com.meds.deliveries.enums.DeliveryStatusEnum;
 import com.meds.deliveries.enums.RiderStatusEnum;
 import com.meds.deliveries.model.Ride;
 import com.meds.deliveries.model.Rider;
@@ -58,7 +57,7 @@ public class RiderServiceTest {
     @Test
     void whenRequestRides_thenGetRides() throws Exception {
         List<Ride> allRides = new ArrayList<>();
-        Package ride_package = new Package(36.58569f, 36.58569f, "Client address", "Client name", 5.0f, DeliveryStatusEnum.DELIVERED, 1, 1);
+        Package ride_package = new Package("40.631284 / N 40° 37' 52.623''", "40.631284 / N 40° 37' 52.623''", "Client address", "Client name", DeliveryStatusEnum.DELIVERED, 1, 1);
         Ride r1 = new Ride(ride_package, 5);
         
         allRides.add(r1);
@@ -100,6 +99,17 @@ public class RiderServiceTest {
         Map<String, Object> found = service.getRatingStatistics(rider);
 
         assertThat(found).containsEntry("numReviews", 10).containsEntry("avgReviews", 4.5f);
+    }
+
+
+    @Test
+    void changeRiderStatus() throws Exception {
+        rider.setStatus(RiderStatusEnum.AVAILABLE); // he has to become unavailable
+        System.out.println("this is " + rider);
+        Rider found = service.updateRiderStatus(rider);
+
+        assertEquals( RiderStatusEnum.UNAVAILABLE, found.getStatus());
+
     }
 
 }
