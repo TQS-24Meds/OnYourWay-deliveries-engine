@@ -63,21 +63,4 @@ public class Ride {
         this.rating = rating;
     }
 
-    public int getId() { return this.id; }
-
-    @Override
-    public String toString() {
-        return "{" +
-            " id='" + getId() + "'" +
-            ", rider='" + getRider() + "'" +
-            ", ride_package='" + getRide_package() + "'" +
-            ", route_start='" + getRoute_start() + "'" +
-            ", route_end='" + getRoute_end() + "'" +
-            ", time_start='" + getTime_start() + "'" +
-            ", time_end='" + getTime_end() + "'" +
-            ", rating='" + getRating() + "'" +
-            "}";
-    }
-
-
 }
