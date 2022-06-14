@@ -9,6 +9,7 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Optional;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -25,6 +26,7 @@ import com.meds.deliveries.model.Rider;
 import com.meds.deliveries.model.Package;
 import com.meds.deliveries.repository.PackageRepository;
 import com.meds.deliveries.repository.RiderRepository;
+import com.meds.deliveries.security.auth.JWTTokenUtils;
 
 @ExtendWith(MockitoExtension.class)
 public class PackageServiceTest {
@@ -32,12 +34,14 @@ public class PackageServiceTest {
     @InjectMocks private PackageService service;
 
     @Mock( lenient = true ) private PackageRepository repository;
-    
-    
     private Package p;
 
+    
     @Mock
-    private JwtUserDetailsService jwtUserDetailsService;
+    private RiderRepository riderRepository;
+
+    @Mock
+    private SpringUserDetailsService userDetailsService;
     
 
     @BeforeEach
@@ -50,11 +54,15 @@ public class PackageServiceTest {
     @AfterEach
     void cleanUp() { reset(repository); }
 
-    @Test
-    void whenPackageAccepted_UpdateStatus
+    //Test
+    //void whenPackageAccepted_UpdateStatus
 
     //package has to have a valid rider accepting it
+    @Test
+    void testAssociateRiderToPackage_whenInvalidRider() {
+        Mockito.when(riderRepository.findByUsername("username_123")).thenReturn(Optional.empty());
 
+    }
     //package has to be delivered by a rider without a package altready
 
     //package update with valid rider

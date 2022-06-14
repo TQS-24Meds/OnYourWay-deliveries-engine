@@ -11,8 +11,8 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface RiderRepository extends JpaRepository<Rider, Integer> {
-    Rider findById(int id);
+    Optional<Rider> findById(int id);
     Optional<Rider> findByEmail(String email);
+    Optional<Rider> findByUsername(String username);
     List<Rider> findByStatus(RiderStatusEnum status);
-    List<Rider> findAll();
 }

@@ -14,6 +14,7 @@ import com.meds.deliveries.model.Rider;
 
 import java.util.Collections;
 import java.util.List;
+import java.util.Optional;
 
 
 @DataJpaTest
@@ -28,14 +29,14 @@ class RiderRepositoryTest {
         Rider rider = new Rider("John Doe", "johndoe", "mypassword", "john@doe.com", 912345678, Collections.emptyList(), "My house");
         entityManager.persistAndFlush(rider);
 
-        Rider riderFound = repository.findById(rider.getId());
+        Optional<Rider> riderFound = repository.findById(rider.getId());
         assertThat( riderFound, is(rider) );
     }
 
     @Test
     public void whenFindRiderByInvalidId_thenReturnNull() {
         int invalidId = -1;
-        Rider riderFound = repository.findById(invalidId);
+        Optional<Rider> riderFound = repository.findById(invalidId);
         assertThat( riderFound, is(nullValue()) );
     }
 

@@ -8,6 +8,7 @@ import org.springframework.boot.test.autoconfigure.orm.jpa.TestEntityManager;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.core.Is.is;
 
+import java.util.Collections;
 import java.util.Optional;
 
 import com.meds.deliveries.model.Person;
@@ -23,23 +24,23 @@ public class PersonRepositoryTest {
 
     @Test
     public void whenFindPersonByExistingId_thenReturnPerson() {
-        Person john = new Person("John Doe", "johndoe", "mypassword", "john@doe.com", 912345678);
+        Person john = new Person("John Doe", "johndoe", "mypassword", "john@doe.com", 912345678, Collections.emptyList());
         entityManager.persistAndFlush(john);
 
-        Person found = repository.findById(john.getId());
+        Optional<Person> found = repository.findById(john.getId());
         assertThat( found, is(john) );
     }
 
     @Test
     public void whenFindPersonByInvalidId_thenReturnNull() {
         int invalidId = -1;
-        Person found = repository.findById(invalidId);
+        Optional<Person> found = repository.findById(invalidId);
         assertThat( found, is(nullValue()) );
     }
 
     @Test
     public void whenFindPersonByValidUsername_thenReturnValidPerson() {
-        Person john = new Person("John Doe", "johndoe", "mypassword", "john@doe.com", 912345678);
+        Person john = new Person("John Doe", "johndoe", "mypassword", "john@doe.com", 912345678, Collections.emptyList());
         entityManager.persistAndFlush(john);
 
         Optional<Person> found = repository.findByUsername(john.getUsername());
@@ -55,17 +56,17 @@ public class PersonRepositoryTest {
 
     @Test
     public void whenFindByValidPhoneNumber_thenReturnValidPerson() {
-        Person john = new Person("John Doe", "johndoe", "mypassword", "john@doe.com", 912345678);
+        Person john = new Person("John Doe", "johndoe", "mypassword", "john@doe.com", 912345678, Collections.emptyList());
         entityManager.persistAndFlush(john);
 
-        Person found = repository.findByPhone(john.getPhone());
+        Optional<Person> found = repository.findByPhone(john.getPhone());
         assertThat( found, is(john) );
     }
 
     @Test
     public void whenFindPersonByInvalidPhoneNumber() {
         int invalidPhone = 1234;
-        Person found = repository.findByPhone(invalidPhone);
+        Optional<Person> found = repository.findByPhone(invalidPhone);
         assertThat( found, is(nullValue()) );
     }
 

@@ -10,6 +10,7 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Optional;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -18,6 +19,7 @@ import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.*;
 import org.mockito.junit.jupiter.MockitoExtension;
 
+import com.meds.deliveries.enums.DeliveryStatusEnum;
 import com.meds.deliveries.enums.RiderStatusEnum;
 import com.meds.deliveries.model.Ride;
 import com.meds.deliveries.model.Rider;
@@ -63,7 +65,7 @@ public class RiderServiceTest {
         allRides.add(r1);
         rider.setRides(allRides);
 
-        given(repository.findById(rider.getId())).willReturn(rider);
+        given(repository.findById(rider.getId())).willReturn(Optional.of(rider));
 
         List<Ride> response = service.getAllRides(rider);
 
