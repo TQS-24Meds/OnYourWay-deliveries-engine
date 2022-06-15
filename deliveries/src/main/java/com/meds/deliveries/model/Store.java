@@ -27,8 +27,6 @@ public class Store {
 
     @Column(name="name", nullable = false)
     private String name;
-
-
     
     @Column(name="storeuuid", nullable = false)
     private UUID storeuiid;

@@ -48,11 +48,12 @@ public class PackageServiceTest {
     void setUp() {
         //this.rider = new Rider("John Doe", "johndoe", "mypassword", "john@doe.com", 912345678, "My house");
         this.p = new Package("40.631284 / N 40° 37' 52.623''","-8.659886 / W 8° 39' 35.591''", "Rua Dr. Mário Sacramento 12", "Joana Vedor", DeliveryStatusEnum.PENDENT, 1, 1 );
-    
     }
 
     @AfterEach
-    void cleanUp() { reset(repository); }
+    void cleanUp() { 
+        reset(repository); 
+    }
 
     //Test
     //void whenPackageAccepted_UpdateStatus
