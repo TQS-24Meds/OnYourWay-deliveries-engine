@@ -1,5 +1,6 @@
 package com.meds.deliveries.model;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.*;
@@ -45,6 +46,7 @@ public class Person {
     private int phone;
 
     @NonNull
+    @Transient
     private List<GrantedAuthority> permissions;
 
     // @OneToOne(mappedBy = "rider", cascade = CascadeType.ALL, orphanRemoval = true)
@@ -61,7 +63,7 @@ public class Person {
         this.password = password;
         this.email = email;
         this.phone = phone;
-        this.permissions = permissions;
+        this.permissions = new ArrayList<>();
     }
 
 }
