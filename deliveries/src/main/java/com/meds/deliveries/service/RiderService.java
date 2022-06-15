@@ -24,14 +24,18 @@ public class RiderService {
 
     @Autowired RiderRepository repository;
     
-    List<Rider> getAllRiders() { return repository.findAll(); }
+    public List<Rider> getAllRiders() { return repository.findAll(); }
 
-    List<Ride> getAllRides(Rider rider){ 
-        Rider r = repository.findById(rider.getId()).orElseThrow(() -> new ResourceNotFoundException("There are no rider with this id"));
+    public Rider getRiderById(int rider_id) {
+        return repository.getById(rider_id);
+    }
+
+    public List<Ride> getAllRidesByRiderId(int rider_id){ 
+        Rider r = repository.findById(rider_id).orElseThrow(() -> new ResourceNotFoundException("There is no rider with this id"));
         return r.getRides();
-     }
-
-    Rider registerRider(Rider rider) throws DuplicatedObjectException {
+    }
+    
+    public Rider registerRider(Rider rider) throws DuplicatedObjectException {
         if (repository.findByEmail(rider.getEmail()).isEmpty()) {
             rider.setPassword(rider.getPassword());
             repository.saveAndFlush(rider);
@@ -44,7 +48,7 @@ public class RiderService {
         throw new DuplicatedObjectException("Rider with this email already exists."); 
     }
 
-    Rider updateLocation(float lat, float lon, Rider rider) throws ResourceNotFoundException{
+    public Rider updateLocation(float lat, float lon, Rider rider) throws ResourceNotFoundException {
         
         rider.setLat(lat);
         rider.setLon(lon);

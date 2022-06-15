@@ -32,12 +32,12 @@ public class PackageService {
   
     //find all packages 
 
-    List<Package> getAllPackages() { 
+    public List<Package> getAllPackages() { 
         return repository.findAll(); 
     }
     
     //find all packages on delivery
-    List<Package> getPackagesOnDelivery() throws ResourceNotFoundException{
+    public List<Package> getPackagesOnDelivery() throws ResourceNotFoundException{
         
         List<Package> onDelivery = repository.findByStatus(DeliveryStatusEnum.ON_DELIVERY).orElseThrow(() -> new ResourceNotFoundException("There are no packages on delivery"));
         
@@ -45,7 +45,7 @@ public class PackageService {
     }
 
     //find all packages pendent
-    List<Package> getPackagesPendent() throws ResourceNotFoundException{
+    public List<Package> getPackagesPendent() throws ResourceNotFoundException{
     
         List<Package> pendent = repository.findByStatus(DeliveryStatusEnum.PENDENT).orElseThrow(() -> new ResourceNotFoundException("There are no packages on delivery"));
         
@@ -53,7 +53,7 @@ public class PackageService {
     }
 
     //find all packages accepted
-    List<Package> getPackagesAccepted() throws ResourceNotFoundException{
+    public List<Package> getPackagesAccepted() throws ResourceNotFoundException{
 
         List<Package> packages_accepted = repository.findByStatus(DeliveryStatusEnum.ACCEPTED).orElseThrow(() -> new ResourceNotFoundException("There are no packages on delivery"));
         
@@ -62,7 +62,7 @@ public class PackageService {
 
 
     //find all packages delivered
-    List<Package> getPackagesPickedUp() throws ResourceNotFoundException{
+    public List<Package> getPackagesPickedUp() throws ResourceNotFoundException{
 
         List<Package> packages_delivered = repository.findByStatus(DeliveryStatusEnum.DELIVERED).orElseThrow(() -> new ResourceNotFoundException("There are no packages on delivery"));
         
