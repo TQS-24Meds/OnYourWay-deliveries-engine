@@ -1,10 +1,24 @@
 <?xml version="1.0" encoding="utf-8"?>
-<menu xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:android="http://schemas.android.com/apk/res/android">
+<menu
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    >
     <item
-        android:id="@+id/rulesFragment"
-        android:title="@string/rules" />
+        android:icon="@drawable/ic_baseline_home_24"
+        android:enabled="true"
+        android:id="@+id/mainPage2"
+
+        android:title="@string/requests" />
     <item
-        android:id="@+id/aboutFragment"
-        android:title="@string/about" />
+        android:icon="@drawable/ic_baseline_person_24"
+        android:enabled="true"
+
+        android:id="@+id/profile"
+        android:title="@string/profile" />
+
+    <item
+        android:icon="@drawable/ic_baseline_map_24"
+        android:enabled="true"
+
+        android:id="@+id/mapsFragment"
+        android:title="@string/map" />
 </menu>

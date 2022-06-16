@@ -2,13 +2,22 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     package="com.example.onyourway">
+
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION"/>
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION"/>
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
     <uses-permission android:name="android.permission.INTERNET"/>
     <uses-permission android:name="android.permission.CAMERA" />
     <uses-sdk android:minSdkVersion="21" android:targetSdkVersion="32" />
+
     <application
+
         android:allowBackup="true"
+        android:hardwareAccelerated="true"
         android:dataExtractionRules="@xml/data_extraction_rules"
         android:fullBackupContent="@xml/backup_rules"
         android:icon="@mipmap/ic_launcher"
@@ -17,7 +26,11 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.OnYourWay"
         tools:targetApi="31">
-        <meta-data  android:name="com.google.android.geo.API_KEY" android:value="@string/map_key"/>
+        <meta-data
+            android:name="com.google.android.geo.API_KEY"
+            android:value="${MAPS_API_KEY}" />
+
+
         <!--
              TODO: Before you run your application, you need a Google Maps API key.
 
@@ -34,6 +47,7 @@
 
         <activity
             android:name=".MainActivity"
+            android:theme="@style/Theme.OnYourWay"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

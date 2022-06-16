@@ -29,4 +29,6 @@
     <string name="map">Map</string>
     <string name="deliveries">deliveries</string>
     <string name="new_request">New requests</string>
+    <string name="profile">profile</string>
+    <string name="requests">requests</string>
 </resources>

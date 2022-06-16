@@ -1,10 +1,21 @@
 package com.example.onyourway
 
 import android.os.Bundle
+import android.telephony.PhoneNumberUtils.isGlobalPhoneNumber
+import android.text.TextUtils
+import android.util.Log
+
+import android.util.Patterns
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.EditText
+import android.widget.Toast
+import androidx.databinding.DataBindingUtil
+import androidx.navigation.findNavController
+import com.example.onyourway.databinding.FragmentSignUpBinding
+
 
 // TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -20,40 +31,86 @@ class SignUp : Fragment() {
     // TODO: Rename and change types of parameters
     private var param1: String? = null
     private var param2: String? = null
+    var flag : Boolean = true
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        arguments?.let {
-            param1 = it.getString(ARG_PARAM1)
-            param2 = it.getString(ARG_PARAM2)
+    lateinit var binding: FragmentSignUpBinding
+
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
+                              savedInstanceState: Bundle?): View? {
+        binding = DataBindingUtil.inflate<FragmentSignUpBinding>(inflater,
+            R.layout.fragment_sign_up,container,false)
+
+        binding.swapLogin.setOnClickListener { view : View ->
+            view.findNavController().navigate(R.id.action_signUp_to_login_frag)
         }
-    }
+        binding.btnRegister.setOnClickListener { view:View->
 
-    override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_sign_up, container, false)
-    }
-
-    companion object {
-        /**
-         * Use this factory method to create a new instance of
-         * this fragment using the provided parameters.
-         *
-         * @param param1 Parameter 1.
-         * @param param2 Parameter 2.
-         * @return A new instance of fragment SignUp.
-         */
-        // TODO: Rename and change types and number of parameters
-        @JvmStatic
-        fun newInstance(param1: String, param2: String) =
-            SignUp().apply {
-                arguments = Bundle().apply {
-                    putString(ARG_PARAM1, param1)
-                    putString(ARG_PARAM2, param2)
-                }
+            if (checkdata()) {
+                view.findNavController().navigate(R.id.action_signUp_to_login_frag)
             }
+        }
+
+
+        setHasOptionsMenu(true)
+        return binding.root
+
     }
+
+    private fun isEmail(text: EditText?): Boolean {
+        val email: CharSequence = text!!.text.toString()
+        return !TextUtils.isEmpty(email) && Patterns.EMAIL_ADDRESS.matcher(email).matches()
+    }
+    private fun isPhone(etPhonenumber: EditText): Boolean {
+        Log.d("tag",
+            isGlobalPhoneNumber(isGlobalPhoneNumber(binding.etPhonenumber.toString()).toString()).toString()
+        )
+        return !isGlobalPhoneNumber(isGlobalPhoneNumber(binding.etPhonenumber.toString()).toString())
+    }
+
+    private fun isEmpty(text: EditText?): Boolean {
+        val str: CharSequence = text!!.text.toString()
+        return TextUtils.isEmpty(str)
+    }
+    private fun checkdata(): Boolean {
+        flag= true
+        if (isEmpty(binding.etName)) {
+
+            binding.etName!!.error = "Name is required!"
+            flag=false
+        }
+        if (isEmpty(binding.etUsername)) {
+
+            binding.etUsername!!.error = "Username is required!"
+            flag=false
+        }
+
+        if (!isPhone(binding.etPhonenumber)) {
+
+            binding.etPhonenumber!!.error = "Enter valid phone!"
+            flag=false
+        }
+
+
+        if (isEmpty(binding.address)) {
+
+            binding.address!!.error = "Address is required!"
+            flag=false
+        }
+        if (isEmpty(binding.etPassword)) {
+
+            binding.etPassword!!.error = "Password is required!"
+            flag=false
+        }
+        if (!isEmail(binding.etEmail)) {
+            binding.etEmail!!.error = "Enter valid email!"
+            flag=false
+        }
+        if (!flag){
+            val t =
+                Toast.makeText(activity, "You must fill all required fields to Register !", Toast.LENGTH_SHORT)
+            t.show()
+        }
+        return flag
+    }
+
 }

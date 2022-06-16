@@ -1,10 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context=".MainActivity">
+    tools:context="com.example.android.navigation.main_page">
+
 
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -19,12 +18,12 @@
 
             android:drawableEnd="@drawable/arrow"
             android:text="@string/qrcode"
-            android:textAlignment="textStart"
+            android:textAlignment="center"
             android:textColor="#000000"
             android:textSize="20sp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintHorizontal_bias="1.0"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/madedeliveriesbtn"
             app:layout_constraintVertical_bias="0.0" />
@@ -37,11 +36,11 @@
 
             android:drawableEnd="@drawable/arrow"
             android:text="@string/deliveries"
-            android:textAlignment="textStart"
+            android:textAlignment="center"
             android:textColor="#000000"
             android:textSize="20sp"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintHorizontal_bias="1.0"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/reqbuttn" />
 
@@ -50,16 +49,16 @@
             android:layout_width="411dp"
 
             android:layout_height="92dp"
-            android:layout_marginTop="159dp"
+            android:layout_marginTop="100dp"
             android:background="@drawable/rectangle"
             android:drawableEnd="@drawable/arrow"
             android:hapticFeedbackEnabled="false"
             android:text="@string/new_request"
-            android:textAlignment="textStart"
+            android:textAlignment="center"
             android:textColor="#000000"
             android:textSize="20sp"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintHorizontal_bias="1.0"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/ridername" />
 
@@ -94,4 +93,4 @@
             app:layout_constraintTop_toTopOf="parent" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
-</FrameLayout>
+</layout>

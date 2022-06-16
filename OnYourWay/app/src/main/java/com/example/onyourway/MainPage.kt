@@ -2,7 +2,11 @@ package com.example.onyourway
 
 import android.os.Bundle
 import android.view.*
+import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
+import androidx.navigation.findNavController
+import com.example.onyourway.databinding.FragmentLoginFragBinding
+import com.example.onyourway.databinding.FragmentMainPageBinding
 import kotlinx.coroutines.Job
 
 
@@ -13,22 +17,34 @@ private const val ARG_PARAM2 = "param2"
 
 /**
  * A simple [Fragment] subclass.
- * Use the [TitleFragment.newInstance] factory method to
+ * Use the [LoginFrag.newInstance] factory method to
  * create an instance of this fragment.
  */
-class TitleFragment : Fragment() {
+class MainPage : Fragment() {
     // TODO: Rename and change types of parameters
     private var param1: String? = null
     private var param2: String? = null
 
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
+                              savedInstanceState: Bundle?): View? {
+        val binding = DataBindingUtil.inflate<FragmentMainPageBinding>(inflater,
+            R.layout.fragment_main_page,container,false)
+        binding.reqbuttn.setOnClickListener { view : View ->
+            view.findNavController().navigate(R.id.main_accept_request)
+        }
+        binding.madedeliveriesbtn.setOnClickListener { view : View ->
+            view.findNavController().navigate(R.id.main_rider_deliveries)
+        }
+        binding.qrcodebtn.setOnClickListener { view : View ->
+            view.findNavController().navigate(R.id.main_riderQR)
+        }
 
-    override fun onCreateView(
-        inflater: LayoutInflater,
-        parent: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
-        // Defines the xml file for the fragment
-        return inflater.inflate(R.layout.fragment_main_page, parent, false)
-    }}
 
+
+        setHasOptionsMenu(true)
+        return binding.root
+
+    }
+
+}
 
