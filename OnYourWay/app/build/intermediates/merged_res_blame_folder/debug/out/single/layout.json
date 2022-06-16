@@ -1,0 +1,58 @@
+[
+    {
+        "merged": "/home/xuldir/.gradle/daemon/7.3.3/com.example.onyourway.app-mergeDebugResources-48:/layout/nav_header.xml",
+        "source": "/home/xuldir/.gradle/daemon/7.3.3/com.example.onyourway.app-main-51:/layout/nav_header.xml"
+    },
+    {
+        "merged": "/home/xuldir/.gradle/daemon/7.3.3/com.example.onyourway.app-mergeDebugResources-48:/layout/activity_main.xml",
+        "source": "/home/xuldir/.gradle/daemon/7.3.3/com.example.onyourway.app-main-51:/layout/activity_main.xml"
+    },
+    {
+        "merged": "/home/xuldir/.gradle/daemon/7.3.3/com.example.onyourway.app-mergeDebugResources-48:/layout/fragment_qr_code.xml",
+        "source": "/home/xuldir/.gradle/daemon/7.3.3/com.example.onyourway.app-main-51:/layout/fragment_qr_code.xml"
+    },
+    {
+        "merged": "/home/xuldir/.gradle/daemon/7.3.3/com.example.onyourway.app-mergeDebugResources-48:/layout/fragment_answer_request.xml",
+        "source": "/home/xuldir/.gradle/daemon/7.3.3/com.example.onyourway.app-main-51:/layout/fragment_answer_request.xml"
+    },
+    {
+        "merged": "/home/xuldir/.gradle/daemon/7.3.3/com.example.onyourway.app-mergeDebugResources-48:/layout/fragment_maps.xml",
+        "source": "/home/xuldir/.gradle/daemon/7.3.3/com.example.onyourway.app-main-51:/layout/fragment_maps.xml"
+    },
+    {
+        "merged": "/home/xuldir/.gradle/daemon/7.3.3/com.example.onyourway.app-mergeDebugResources-48:/layout/fragment_main_page.xml",
+        "source": "/home/xuldir/.gradle/daemon/7.3.3/com.example.onyourway.app-main-51:/layout/fragment_main_page.xml"
+    },
+    {
+        "merged": "/home/xuldir/.gradle/daemon/7.3.3/com.example.onyourway.app-mergeDebugResources-48:/layout/fragment_requests.xml",
+        "source": "/home/xuldir/.gradle/daemon/7.3.3/com.example.onyourway.app-main-51:/layout/fragment_requests.xml"
+    },
+    {
+        "merged": "/home/xuldir/.gradle/daemon/7.3.3/com.example.onyourway.app-mergeDebugResources-48:/layout/layout_listitem.xml",
+        "source": "/home/xuldir/.gradle/daemon/7.3.3/com.example.onyourway.app-main-51:/layout/layout_listitem.xml"
+    },
+    {
+        "merged": "com.example.onyourway.app-mergeDebugResources-48:/layout/fragment_main_page.xml",
+        "source": "com.example.onyourway.app-main-51:/layout/fragment_main_page.xml"
+    },
+    {
+        "merged": "/home/xuldir/.gradle/daemon/7.3.3/com.example.onyourway.app-mergeDebugResources-48:/layout/fragment_login_frag.xml",
+        "source": "/home/xuldir/.gradle/daemon/7.3.3/com.example.onyourway.app-main-51:/layout/fragment_login_frag.xml"
+    },
+    {
+        "merged": "/home/xuldir/.gradle/daemon/7.3.3/com.example.onyourway.app-mergeDebugResources-48:/layout/fragment_profile.xml",
+        "source": "/home/xuldir/.gradle/daemon/7.3.3/com.example.onyourway.app-main-51:/layout/fragment_profile.xml"
+    },
+    {
+        "merged": "/home/xuldir/.gradle/daemon/7.3.3/com.example.onyourway.app-mergeDebugResources-48:/layout/fragment_package_products.xml",
+        "source": "/home/xuldir/.gradle/daemon/7.3.3/com.example.onyourway.app-main-51:/layout/fragment_package_products.xml"
+    },
+    {
+        "merged": "/home/xuldir/.gradle/daemon/7.3.3/com.example.onyourway.app-mergeDebugResources-48:/layout/fragment_sign_up.xml",
+        "source": "/home/xuldir/.gradle/daemon/7.3.3/com.example.onyourway.app-main-51:/layout/fragment_sign_up.xml"
+    },
+    {
+        "merged": "/home/xuldir/.gradle/daemon/7.3.3/com.example.onyourway.app-mergeDebugResources-48:/layout/fragment_deliveries.xml",
+        "source": "/home/xuldir/.gradle/daemon/7.3.3/com.example.onyourway.app-main-51:/layout/fragment_deliveries.xml"
+    }
+]

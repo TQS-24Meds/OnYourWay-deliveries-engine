@@ -1,0 +1,20 @@
+{
+    "logs": [
+        {
+            "outputFile": "com.example.onyourway.app-mergeDebugResources-47:/values-watch-v20/values-watch-v20.xml",
+            "map": [
+                {
+                    "source": "/home/xuldir/.gradle/caches/transforms-3/4ee88ca408f77f6793d84bbef72fbe22/transformed/appcompat-1.4.2/res/values-watch-v20/values-watch-v20.xml",
+                    "from": {
+                        "startLines": "2,5,8",
+                        "startColumns": "4,4,4",
+                        "startOffsets": "55,214,385",
+                        "endLines": "4,7,10",
+                        "endColumns": "12,12,12",
+                        "endOffsets": "209,380,553"
+                    }
+                }
+            ]
+        }
+    ]
+}

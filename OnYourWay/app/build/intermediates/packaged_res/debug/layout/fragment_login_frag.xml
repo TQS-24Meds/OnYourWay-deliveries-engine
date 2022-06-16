@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+
+
+                                                       
+                                                  
+                                                              
+
+
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+         android:tag="layout/fragment_login_frag_0" xmlns:android="http://schemas.android.com/apk/res/android" xmlns:app="http://schemas.android.com/apk/res-auto" xmlns:tools="http://schemas.android.com/tools" tools:context="com.example.android.navigation.login_frag">
+
+        <TextView
+            android:id="@+id/tv_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="25dp"
+            android:layout_marginBottom="10dp"
+            android:layout_marginTop="10dp"
+            android:text="@string/app_name"
+            android:textSize="50sp" />
+
+        <TextView
+            android:id="@+id/tv_subtitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/tv_title"
+            android:layout_marginStart="25dp"
+            android:layout_marginTop="15dp"
+
+            android:text="@string/tag"
+            android:textSize="17sp" />
+
+        <EditText
+            android:id="@+id/et_email"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_below="@+id/tv_subtitle"
+            android:layout_marginLeft="20dp"
+            android:layout_marginTop="20dp"
+            android:layout_marginRight="20dp"
+            android:background="@drawable/et_custom"
+            android:hint="@string/e_mail"
+            android:inputType="textEmailAddress"
+            android:padding="15dp"
+            android:textSize="15sp" />
+
+        <EditText
+            android:id="@+id/et_password"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_below="@+id/et_email"
+            android:layout_centerHorizontal="true"
+            android:layout_marginLeft="20dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginRight="20dp"
+            android:background="@drawable/et_custom"
+            android:hint="@string/password"
+            android:inputType="textPassword"
+            android:padding="15dp"
+            android:textSize="15sp" />
+
+        <Button
+            android:id="@+id/btn_login"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/et_password"
+            android:layout_marginLeft="20dp"
+            android:layout_marginTop="40dp"
+            android:layout_marginRight="20dp"
+            android:background="@drawable/custom_btn"
+            android:text="@string/login"
+            android:textColor="@android:color/white" />
+
+        <Button
+            android:id="@+id/swapRegister"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/btn_login"
+
+            android:layout_marginLeft="100dp"
+            android:layout_marginTop="237dp"
+            android:layout_marginRight="100dp"
+            android:layout_marginBottom="148dp"
+            android:background="@drawable/custom_btn"
+            android:text="@string/swapregister"
+            android:textColor="@android:color/white" />
+
+    </RelativeLayout>
+         
