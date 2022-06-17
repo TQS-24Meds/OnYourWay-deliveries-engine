@@ -1,30 +1,16 @@
 package com.meds.deliveries.service;
 
 import com.meds.deliveries.enums.DeliveryStatusEnum;
-import com.meds.deliveries.exception.DuplicatedObjectException;
-import com.meds.deliveries.exception.InvalidLoginException;
 import com.meds.deliveries.exception.ResourceNotFoundException;
 import com.meds.deliveries.model.Package;
-import com.meds.deliveries.model.Ride;
 
 import com.meds.deliveries.repository.PackageRepository;
-import com.meds.deliveries.repository.RiderRepository;
-
-import lombok.extern.log4j.Log4j2;
-import net.bytebuddy.implementation.StubMethod;
-
-import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
-import java.util.Optional;
-import java.util.TreeMap;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 
 @Service
-@Log4j2
 public class PackageService {
 
     @Autowired 
@@ -32,30 +18,30 @@ public class PackageService {
   
     //find all packages 
 
+  
     public List<Package> getAllPackages() { 
         return repository.findAll(); 
     }
     
     //find all packages on delivery
-    public List<Package> getPackagesOnDelivery() throws ResourceNotFoundException{
+    public List<Package> getPackagesOnDelivery() {
         
-        List<Package> onDelivery = repository.findByStatus(DeliveryStatusEnum.ON_DELIVERY).orElseThrow(() -> new ResourceNotFoundException("There are no packages on delivery"));
-        
+        List<Package> onDelivery = repository.findByStatus(DeliveryStatusEnum.ON_DELIVERY);
         return onDelivery;
     }
 
-    //find all packages pendent
-    public List<Package> getPackagesPendent() throws ResourceNotFoundException{
+    //find all packages by status
+    public List<Package> getPackagesByStatus(DeliveryStatusEnum status){
     
-        List<Package> pendent = repository.findByStatus(DeliveryStatusEnum.PENDENT).orElseThrow(() -> new ResourceNotFoundException("There are no packages on delivery"));
+        List<Package> res = repository.findByStatus(status);
         
-        return pendent;
+        return res;
     }
 
     //find all packages accepted
     public List<Package> getPackagesAccepted() throws ResourceNotFoundException{
 
-        List<Package> packages_accepted = repository.findByStatus(DeliveryStatusEnum.ACCEPTED).orElseThrow(() -> new ResourceNotFoundException("There are no packages on delivery"));
+        List<Package> packages_accepted = repository.findByStatus(DeliveryStatusEnum.ACCEPTED);
         
         return packages_accepted;
     }
@@ -64,22 +50,26 @@ public class PackageService {
     //find all packages delivered
     public List<Package> getPackagesPickedUp() throws ResourceNotFoundException{
 
-        List<Package> packages_delivered = repository.findByStatus(DeliveryStatusEnum.DELIVERED).orElseThrow(() -> new ResourceNotFoundException("There are no packages on delivery"));
+        List<Package> packages_delivered = repository.findByStatus(DeliveryStatusEnum.DELIVERED);
         
         return packages_delivered;
     }
     
 
     public Package getPackageById(int id) throws ResourceNotFoundException {
-        
-        Package  p = repository.findById(id).orElseThrow(() -> new ResourceNotFoundException("There are no packages with this id"));
-        
-        return p;
+        if (!repository.existsById(id)) {
+            throw new ResourceNotFoundException("There are no packages with this ID:" + id);
+        }
+        return repository.findById(id);
+     
     }
 
     //get status of a package 
-    public DeliveryStatusEnum getPackageStatus(int package_id) throws ResourceNotFoundException{
-        Package  p = repository.findById(package_id).orElseThrow(() -> new ResourceNotFoundException("There are no packages with this id"));
+    public DeliveryStatusEnum getPackageStatus(Package p) throws ResourceNotFoundException{
+        if (!repository.existsById(p.getId())) {
+            throw new ResourceNotFoundException("There are no packages with this ID:" + p.getId());
+        }
+
         DeliveryStatusEnum status = p.getStatus();
         return status;
 
@@ -88,8 +78,10 @@ public class PackageService {
     //set package as delivered
 
     public Package updatePackageStatus(int id, DeliveryStatusEnum status) throws ResourceNotFoundException {
-        
-        Package  p = repository.findById(id).orElseThrow(() -> new ResourceNotFoundException("There are no packages with this id"));
+        if (!repository.existsById(id)) {
+            throw new ResourceNotFoundException("There are no packages with this ID:" + id);
+        }
+        Package  p = repository.findById(id);
         p.setStatus(status);
         return p;
 

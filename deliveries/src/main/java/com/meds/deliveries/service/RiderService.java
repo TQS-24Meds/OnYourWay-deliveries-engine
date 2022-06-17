@@ -30,13 +30,20 @@ public class RiderService {
         return repository.getById(rider_id);
     }
 
+
     public List<Ride> getAllRidesByRiderId(int rider_id){ 
-        Rider r = repository.findById(rider_id).orElseThrow(() -> new ResourceNotFoundException("There is no rider with this id"));
+        if (!repository.existsById(rider_id)) {
+            throw new ResourceNotFoundException("There is no rider with this id:" + rider_id);
+        }
+
+        Rider r = repository.findById(rider_id);
         return r.getRides();
     }
+
     
+
     public Rider registerRider(Rider rider) throws DuplicatedObjectException {
-        if (repository.findByEmail(rider.getEmail()).isEmpty()) {
+        if (repository.existsByEmail(rider.getEmail()) == true) {
             rider.setPassword(rider.getPassword());
             repository.saveAndFlush(rider);
 
@@ -48,7 +55,7 @@ public class RiderService {
         throw new DuplicatedObjectException("Rider with this email already exists."); 
     }
 
-    public Rider updateLocation(float lat, float lon, Rider rider) throws ResourceNotFoundException {
+    public Rider updateLocation(Double lat, Double lon, Rider rider) throws ResourceNotFoundException {
         
         rider.setLat(lat);
         rider.setLon(lon);
@@ -91,7 +98,18 @@ public class RiderService {
     }
 
     public Rider updateRiderStatus(Rider rider) {
-        return null;
+        RiderStatusEnum status = rider.getStatus();
+
+        switch (status){
+            case UNAVAILABLE:
+                rider.setStatus(RiderStatusEnum.AVAILABLE);
+                break;
+            case AVAILABLE:
+                rider.setStatus(RiderStatusEnum.UNAVAILABLE);
+
+        }
+        return rider;
+
     }
 
 }

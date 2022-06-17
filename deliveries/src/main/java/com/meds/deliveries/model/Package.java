@@ -28,10 +28,10 @@ public class Package {
     private int id;
 
     @Column(name = "client_lat", nullable = false)
-    private String client_lat; 
+    private Double client_lat; 
 
     @Column(name = "client_long", nullable = false)
-    private String client_long; 
+    private Double client_long; 
 
     @Column(name = "client_addr", nullable = false)
     private String client_addr;    
@@ -65,7 +65,7 @@ public class Package {
     private Timestamp finalizedts;
 
     // Package pending
-    public Package(String client_lat, String client_long, String client_addr, String client_name, DeliveryStatusEnum status, int order_id, int store_id) {
+    public Package(Double client_lat, Double client_long, String client_addr, String client_name, DeliveryStatusEnum status, int order_id, int store_id) {
         this.client_lat = client_lat;
         this.client_long = client_long;
         this.client_addr = client_addr;
@@ -75,8 +75,8 @@ public class Package {
         this.store_id = store_id;
     }
 
-    // Package accepted
-    public Package(String client_lat, String client_long, String client_addr, String client_name, DeliveryStatusEnum status, Ride ride, int order_id, int rider_id, int store_id) {
+    // Package accepted isto vai desaparecer
+    public Package(Double client_lat, Double client_long, String client_addr, String client_name, DeliveryStatusEnum status, Ride ride, int order_id, int rider_id, int store_id) {
         this.client_lat = client_lat;
         this.client_long = client_long;
         this.client_addr = client_addr;

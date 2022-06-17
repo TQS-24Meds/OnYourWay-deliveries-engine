@@ -36,10 +36,10 @@ public class Ride {
 
     //* HashMap<Latitude, Longitude>
     @Column(name = "route_start", nullable = false)
-    private HashMap<Float, Float> route_start;
+    private HashMap<Double, Double> route_start;
 
     @Column(name = "route_end", nullable = false)
-    private HashMap<Float, Float> route_end;
+    private HashMap<Double, Double> route_end;
 
     @CreationTimestamp
     @Column(name = "time_start")
@@ -56,11 +56,19 @@ public class Ride {
 
     public Ride(Package ride_package, int rating) {
         this.ride_package = ride_package;
-        this.route_start = new HashMap<Float, Float>();
-        this.route_end = new HashMap<Float, Float>();
+        this.route_start = new HashMap<Double, Double>();
+        this.route_end = new HashMap<Double, Double>();
         this.time_start = new Date();
         this.time_end = new Date();
         this.rating = rating;
+    }
+
+    public Ride(Package ride_package) {
+        this.ride_package = ride_package;
+        this.route_start = new HashMap<Double, Double>();
+        this.route_end = new HashMap<Double, Double>();
+        this.time_start = new Date();
+        this.time_end = new Date();
     }
 
 }

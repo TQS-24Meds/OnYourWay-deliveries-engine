@@ -10,7 +10,6 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.Optional;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -51,28 +50,28 @@ public class RiderServiceTest {
 
     @Test
     void whenUpdateLocation_thenLocationIsUpdated() throws Exception {
-        Rider newRider = service.updateLocation(7.75404f, -15.95717f, rider);
-        assertThat(7.75404f).isEqualTo(newRider.getLat());
-        assertThat(-15.95717f).isEqualTo(newRider.getLon());
+        Rider newRider = service.updateLocation(7.75404, -15.95717, rider);
+        assertThat(7.75404).isEqualTo(newRider.getLat());
+        assertThat(-15.95717).isEqualTo(newRider.getLon());
     }
 
     @Test
     void whenRequestRides_thenGetRides() throws Exception {
         List<Ride> allRides = new ArrayList<>();
-        Package ride_package = new Package("40.631284 / N 40° 37' 52.623''", "40.631284 / N 40° 37' 52.623''", "Client address", "Client name", DeliveryStatusEnum.DELIVERED, 1, 1);
+        Package ride_package = new Package(40.631284, 40.631284, "Client address", "Client name", DeliveryStatusEnum.DELIVERED, 1, 1);
         Ride r1 = new Ride(ride_package, 5);
         
         allRides.add(r1);
         rider.setRides(allRides);
 
-        given(repository.findById(rider.getId())).willReturn(Optional.of(rider));
+        given(repository.findById(rider.getId())).willReturn(rider);
 
-        List<Ride> response = service.getAllRides(rider);
+        List<Ride> response = service.getAllRidesByRiderId(rider.getId());
 
         assertEquals(allRides, response);
     }
 
-    @Test
+    @Test 
     void givenStatus_whenGetRiders_thenReturnRiders() throws Exception {
         
         List<Rider> allRiders = new ArrayList<>();
@@ -108,9 +107,9 @@ public class RiderServiceTest {
     void changeRiderStatus() throws Exception {
         rider.setStatus(RiderStatusEnum.AVAILABLE); // he has to become unavailable
         System.out.println("this is " + rider);
-        Rider found = service.updateRiderStatus(rider);
+        service.updateRiderStatus(rider);
 
-        assertEquals( RiderStatusEnum.UNAVAILABLE, found.getStatus());
+        assertEquals( RiderStatusEnum.UNAVAILABLE, rider.getStatus());
 
     }
 

@@ -34,10 +34,10 @@ public class Rider extends Person {
     // private Person rider;
 
     @Column(name = "lat", nullable = false)
-    private float lat;
+    private Double lat;
 
     @Column(name = "lon", nullable = false)
-    private float lon;
+    private Double lon;
 
     @Column(name = "address", nullable = false)
     private String address;
@@ -61,7 +61,7 @@ public class Rider extends Person {
     public Rider(String name, String username, String password, String email, int phone, List<GrantedAuthority> permissions, String address) {
         super(name, username, password, email, phone, permissions);
         this.address = address;
-        this.average_rating = 0.0f;
+        this.average_rating = 0;
         this.num_reviews = 0;
         this.status = RiderStatusEnum.UNAVAILABLE;
         this.rides = new ArrayList<>();
@@ -69,7 +69,7 @@ public class Rider extends Person {
     
     @Builder
     // Available
-    public Rider(String name, String username, String password, String email, int phone, List<GrantedAuthority> permissions, String address, float lat, float lon) {
+    public Rider(String name, String username, String password, String email, int phone, List<GrantedAuthority> permissions, String address, Double lat, Double lon) {
         super(name, username, password, email, phone, permissions);
         this.lat = lat;
         this.lon = lon;
