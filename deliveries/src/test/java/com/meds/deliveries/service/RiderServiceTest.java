@@ -67,7 +67,7 @@ public class RiderServiceTest {
 
         given(repository.findById(rider.getId())).willReturn(Optional.of(rider));
 
-        List<Ride> response = service.getAllRides(rider);
+        List<Ride> response = service.getAllRidesByRiderId(rider.getId());
 
         assertEquals(allRides, response);
     }

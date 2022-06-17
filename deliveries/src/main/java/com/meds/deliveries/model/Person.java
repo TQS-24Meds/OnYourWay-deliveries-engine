@@ -45,6 +45,7 @@ public class Person {
     private int phone;
 
     @NonNull
+    @ElementCollection
     private List<GrantedAuthority> permissions;
 
     // @OneToOne(mappedBy = "rider", cascade = CascadeType.ALL, orphanRemoval = true)
