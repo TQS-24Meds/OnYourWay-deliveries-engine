@@ -27,12 +27,6 @@ public class Rider extends Person {
     @Column(name = "id_rider")
     private int id;
 
-    // @NotNull
-    // @OneToOne(cascade = CascadeType.ALL)
-    // @JoinColumn(name = "id_person_rider", referencedColumnName = "id_person")
-    // @JsonIgnore
-    // private Person rider;
-
     @Column(name = "lat", nullable = false)
     private float lat;
 
@@ -58,8 +52,8 @@ public class Rider extends Person {
 
     @Builder
     // Unavailable
-    public Rider(String name, String username, String password, String email, int phone, List<GrantedAuthority> permissions, String address) {
-        super(name, username, password, email, phone, permissions);
+    public Rider(String name, String username, String password, String email, int phone, GrantedAuthority permission, String address) {
+        super(name, username, password, email, phone, permission);
         this.address = address;
         this.average_rating = 0.0f;
         this.num_reviews = 0;
@@ -69,8 +63,8 @@ public class Rider extends Person {
     
     @Builder
     // Available
-    public Rider(String name, String username, String password, String email, int phone, List<GrantedAuthority> permissions, String address, float lat, float lon) {
-        super(name, username, password, email, phone, permissions);
+    public Rider(String name, String username, String password, String email, int phone, GrantedAuthority permission, String address, float lat, float lon) {
+        super(name, username, password, email, phone, permission);
         this.lat = lat;
         this.lon = lon;
         this.address = address;

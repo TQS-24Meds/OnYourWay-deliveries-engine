@@ -1,17 +1,20 @@
-package com.meds.deliveries.auth;
+package com.meds.deliveries.controller;
 
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+import org.mockito.Mock;
+import org.mockito.Mockito;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.autoconfigure.data.mongo.AutoConfigureDataMongo;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.web.client.TestRestTemplate;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.crypto.password.PasswordEncoder;
+
+import com.meds.deliveries.dto.UserDTO;
 import com.meds.deliveries.exception.ErrorDetails;
-import com.meds.deliveries.model.Person;
 import com.meds.deliveries.model.Rider;
 import com.meds.deliveries.repository.PersonRepository;
 import com.meds.deliveries.repository.RiderRepository;
@@ -19,14 +22,15 @@ import com.meds.deliveries.request.LoginRequest;
 import com.meds.deliveries.request.MessageResponse;
 import com.meds.deliveries.security.auth.AuthTokenResponse;
 
-import java.util.Collections;
 import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
-@AutoConfigureDataMongo
 class AuthControllerTest {
+
+    @Mock(lenient=true)
+    private PasswordEncoder passwordEncoder;
 
     @Autowired
     private TestRestTemplate restTemplate;
@@ -37,9 +41,7 @@ class AuthControllerTest {
     @Autowired
     private RiderRepository riderRepository;
 
-    private Person person;
-
-    private Rider rider;
+    private UserDTO userDTO;
 
     @AfterEach
     public void tearDown() {
@@ -49,14 +51,14 @@ class AuthControllerTest {
 
     @BeforeEach
     void setUp() {
-        rider = new Rider("John Doe", "johndoe", "mypassword", "john@doe.com", 912345678, Collections.emptyList(), "My house");
-        person = new Person("Francis Jane", "francisjane", "jasonderulo", "francis@jane.com", 914914901, Collections.emptyList());
+        userDTO = new UserDTO("John Doe", "johndoe", "john@doe.com", "mypassword", 912345678, "My house");
+        Mockito.when(passwordEncoder.encode(userDTO.getPassword())).thenReturn("mypassword");
     }
 
     @Test
     void registerRider() {
 
-        ResponseEntity<MessageResponse> response = restTemplate.postForEntity("/api/auth/register", rider, MessageResponse.class);
+        ResponseEntity<MessageResponse> response = restTemplate.postForEntity("/api/auth/register", userDTO, MessageResponse.class);
 
         List<Rider> riders = riderRepository.findAll();
 
@@ -74,9 +76,9 @@ class AuthControllerTest {
     @DisplayName("Login with correct credentials")
     void loginUser() {
 
-        restTemplate.postForEntity("/api/auth/register", person, MessageResponse.class);
+        restTemplate.postForEntity("/api/auth/register", userDTO, MessageResponse.class);
 
-        LoginRequest loginRequest = new LoginRequest(person.getEmail(), person.getPassword());
+        LoginRequest loginRequest = new LoginRequest(userDTO.getEmail(), userDTO.getPassword());
 
         ResponseEntity<AuthTokenResponse> response = restTemplate.postForEntity("/api/auth/login", loginRequest, AuthTokenResponse.class);
         AuthTokenResponse authTokenResponse = response.getBody();
@@ -92,9 +94,9 @@ class AuthControllerTest {
     @DisplayName("Login with wrong credentials")
     void loginWithWrongCredentials() {
 
-        restTemplate.postForEntity("/api/auth/register", person, MessageResponse.class);
+        restTemplate.postForEntity("/api/auth/register", userDTO, MessageResponse.class);
 
-        LoginRequest loginRequest = new LoginRequest(person.getEmail(), "wrong_password");
+        LoginRequest loginRequest = new LoginRequest(userDTO.getEmail(), "wrong_password");
 
         ResponseEntity<ErrorDetails> response = restTemplate.postForEntity("/api/auth/login", loginRequest, ErrorDetails.class);
         ErrorDetails errorDetailsResponse = response.getBody();

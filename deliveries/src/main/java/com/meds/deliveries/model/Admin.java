@@ -35,8 +35,8 @@ public class Admin extends Person {
     // private Person admin;
 
     @Builder
-    public Admin(String name, String username, String password, String email, int phone, List<GrantedAuthority> permissions) {
-        super(name, username, password, email, phone, permissions);
+    public Admin(String name, String username, String password, String email, int phone, GrantedAuthority permission) {
+        super(name, username, password, email, phone, permission);
     }
     
 }

@@ -1,7 +1,8 @@
 package com.meds.deliveries.service;
 
+import com.meds.deliveries.dto.UserDTO;
 import com.meds.deliveries.enums.RiderStatusEnum;
-import com.meds.deliveries.exception.DuplicatedObjectException;
+import com.meds.deliveries.exception.ExistentUserException;
 import com.meds.deliveries.exception.InvalidLoginException;
 import com.meds.deliveries.exception.ResourceNotFoundException;
 import com.meds.deliveries.model.Ride;
@@ -11,11 +12,14 @@ import com.meds.deliveries.repository.RiderRepository;
 import lombok.extern.log4j.Log4j2;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.Map;
 import java.util.TreeMap;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -23,6 +27,7 @@ import org.springframework.stereotype.Service;
 public class RiderService {
 
     @Autowired RiderRepository repository;
+    @Autowired PasswordEncoder passwordEncoder;
     
     public List<Rider> getAllRiders() { return repository.findAll(); }
 
@@ -35,17 +40,11 @@ public class RiderService {
         return r.getRides();
     }
     
-    public Rider registerRider(Rider rider) throws DuplicatedObjectException {
-        if (repository.findByEmail(rider.getEmail()).isEmpty()) {
-            rider.setPassword(rider.getPassword());
-            repository.saveAndFlush(rider);
-
-            log.info("RIDER SERVICE: Rider saved successfully");
-            return rider;
-        }
-
-        log.error("RIDER SERVICE: Duplicated rider email, when saving rider");
-        throw new DuplicatedObjectException("Rider with this email already exists."); 
+    public Rider registerRider(UserDTO userDTO) {
+        Rider rider = new Rider(userDTO.getName(), userDTO.getUsername(), passwordEncoder.encode(userDTO.getPassword()), userDTO.getEmail(), userDTO.getPhone(), new SimpleGrantedAuthority("deliveries"), userDTO.getAddress());
+        if (repository.existsByUsername(rider.getUsername()))
+            throw new ExistentUserException("The provided username is already taken.");
+        return repository.save(rider);
     }
 
     public Rider updateLocation(float lat, float lon, Rider rider) throws ResourceNotFoundException {

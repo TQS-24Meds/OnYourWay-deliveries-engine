@@ -1,8 +1,5 @@
 package com.meds.deliveries.model;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import javax.persistence.*;
 import javax.validation.constraints.*;
 
@@ -45,9 +42,8 @@ public class Person {
     @Column(name = "phone", nullable = false)
     private int phone;
 
-    @NonNull
-    @Transient
-    private List<GrantedAuthority> permissions;
+    @Column(name = "role", nullable = false)
+    private GrantedAuthority permission;
 
     // @OneToOne(mappedBy = "rider", cascade = CascadeType.ALL, orphanRemoval = true)
     // @JsonIgnore
@@ -57,13 +53,13 @@ public class Person {
     // @JsonIgnore
     // private Admin admin;
 
-    public Person(String name, String username, String password, String email, int phone, List<GrantedAuthority> permissions) {
+    public Person(String name, String username, String password, String email, int phone, GrantedAuthority permission) {
         this.name = name;
         this.username = username;
         this.password = password;
         this.email = email;
         this.phone = phone;
-        this.permissions = new ArrayList<>();
+        this.permission = permission;
     }
 
 }
