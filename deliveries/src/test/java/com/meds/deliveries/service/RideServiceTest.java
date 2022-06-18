@@ -1,36 +1,35 @@
 package com.meds.deliveries.service;
 
 import static org.junit.Assert.*;
-import static org.mockito.Mockito.reset;
 import static org.mockito.BDDMockito.given;
 
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.Date;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
+import java.util.UUID;
 
-import org.apache.commons.compress.harmony.pack200.Pack200PackerAdapter;
 import org.junit.jupiter.api.*;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.*;
 import org.mockito.junit.jupiter.MockitoExtension;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.crypto.password.PasswordEncoder;
+
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 import static org.assertj.core.api.AssertionsForClassTypes.assertThatThrownBy;
 import com.meds.deliveries.enums.DeliveryStatusEnum;
-import com.meds.deliveries.enums.RiderStatusEnum;
 import com.meds.deliveries.exception.ResourceNotFoundException;
 import com.meds.deliveries.model.Ride;
 import com.meds.deliveries.model.Rider;
+import com.meds.deliveries.model.Store;
+import com.meds.deliveries.model.Admin;
+import com.meds.deliveries.model.Coordinates;
 import com.meds.deliveries.model.Package;
+import com.meds.deliveries.repository.AdminRepository;
 import com.meds.deliveries.repository.PackageRepository;
 import com.meds.deliveries.repository.RideRepository;
 import com.meds.deliveries.repository.RiderRepository;
+import com.meds.deliveries.repository.StoreRepository;
 
 @ExtendWith(MockitoExtension.class)
 public class RideServiceTest {
@@ -48,11 +47,21 @@ public class RideServiceTest {
 
     @Mock(lenient = true)
     private PackageRepository packageRepository;
-    private Package ride_package;
+    private Package ride_package;    @Mock
+    private AdminRepository adminRepository;
+    private Admin admin;
+
+    @Mock 
+    private StoreRepository storeRepository;
+    private Store store;
+    
+    
 
     @Mock(lenient = true)
     private RiderRepository riderRepository;
     private Rider rider;
+
+
 
 
     @BeforeEach
@@ -61,9 +70,13 @@ public class RideServiceTest {
                 "My house");
         Mockito.when(riderRepository.save(rider)).thenReturn(rider);
 
-        this.ride_package = new Package( "Client address", "Client name",
-                DeliveryStatusEnum.DELIVERED, 1, 1);
-
+      
+        this.admin = new Admin("Artur Romão", "arturomao", "12212", "artur@gmail.com", 96514778, Collections.emptyList());
+        
+        this.store = new Store("24 Meds", UUID.randomUUID(),  new Coordinates(87.2,87.1), admin);
+        
+        this.ride_package = new Package(
+                "Rua Dr. Mário Sacramento 12", "Joana Vedor", DeliveryStatusEnum.PENDENT, 1, store);
         this.ride = new Ride(ride_package);
 
 

@@ -1,7 +1,6 @@
 package com.meds.deliveries.repository;
 
 import java.util.List;
-import java.util.Optional;
 
 import com.meds.deliveries.enums.DeliveryStatusEnum;
 import com.meds.deliveries.model.Package;

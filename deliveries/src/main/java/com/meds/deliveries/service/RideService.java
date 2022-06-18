@@ -1,7 +1,6 @@
 package com.meds.deliveries.service;
 
 import java.util.Date;
-import java.util.HashMap;
 import java.util.List;
 
 import com.meds.deliveries.model.Ride;
@@ -27,6 +26,8 @@ public class RideService {
 
     @Autowired
     PackageRepository packageRepository;
+
+    
 
     public List<Ride> getAllRides() {
         return repository.findAll();
@@ -82,8 +83,6 @@ public class RideService {
         Ride r = p.getRide();
         r.setTime_end(date);
     }
-
-
 
     
 }

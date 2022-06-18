@@ -1,10 +1,8 @@
 package com.meds.deliveries.model;
 
 import java.sql.Timestamp;
-import java.util.ArrayList;
 import java.util.Date;
-import java.util.List;
-import java.util.Set;
+
 
 import javax.persistence.*;
 
@@ -61,8 +59,12 @@ public class Package {
     @Column(name = "rider_id", nullable = false)
     private int rider_id;
 
-    @Column(name = "store_id", nullable = false)
-    private int store_id;
+
+
+    @ManyToOne
+    @JoinColumn(name="id_store")
+    private Store store;
+
 
     @UpdateTimestamp
     @Column(name = "finalizedts")
@@ -70,12 +72,12 @@ public class Package {
 
     // Package pending
     //acho que o store id temos q alterar para store uuid
-    public Package(String client_addr, String client_name, DeliveryStatusEnum status, int order_id, int store_id) {
+    public Package(String client_addr, String client_name, DeliveryStatusEnum status, int order_id, Store store_id) {
         this.client_addr = client_addr;
         this.client_name = client_name;
         this.status = DeliveryStatusEnum.PENDENT;
         this.order_id = order_id;
-        this.store_id = store_id;
+        this.store = store_id;
         //this.packageLocation 
 
     }

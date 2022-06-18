@@ -1,7 +1,6 @@
 package com.meds.deliveries.service;
 
-import org.assertj.core.api.Assert;
-import org.assertj.core.api.ObjectAssert;
+
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -17,8 +16,7 @@ import com.meds.deliveries.model.Person;
 import com.meds.deliveries.repository.PersonRepository;
 
 import java.util.Collections;
-import java.util.DuplicateFormatFlagsException;
-import java.util.Optional;
+
 
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 import static org.assertj.core.api.AssertionsForClassTypes.assertThatThrownBy;

@@ -1,6 +1,5 @@
 package com.meds.deliveries.service;
 
-import com.meds.config.PasswordEncoderConfig;
 import com.meds.deliveries.enums.RiderStatusEnum;
 import com.meds.deliveries.exception.DuplicatedObjectException;
 import com.meds.deliveries.exception.InvalidLoginException;

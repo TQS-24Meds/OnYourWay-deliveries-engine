@@ -1,13 +1,10 @@
 package com.meds.deliveries.model;
-import java.util.ArrayList;
-import java.util.List;
+
 import java.util.Set;
 import java.util.UUID;
 
 import javax.persistence.*;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.meds.deliveries.enums.RiderStatusEnum;
 
 import lombok.*;
 
@@ -40,7 +37,9 @@ public class Store {
     @JoinColumn(name = "id_store")
     private Coordinates store_location;
     
-
+    @OneToMany(mappedBy = "store")
+    private Set<Package> packages;
+    
 
     public Store(String name, UUID storeuuid, Coordinates coords, Admin admin){
         this.name = name;

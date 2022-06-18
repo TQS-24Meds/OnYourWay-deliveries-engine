@@ -2,12 +2,10 @@ package com.meds.deliveries.service;
 
 import static org.junit.Assert.*;
 import static org.mockito.Mockito.reset;
-import static org.mockito.BDDMockito.given;
 
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.Date;
-import java.util.HashMap;
+
 import java.util.List;
 import java.util.Map;
 
@@ -19,13 +17,10 @@ import org.mockito.*;
 import org.mockito.junit.jupiter.MockitoExtension;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
-import com.meds.deliveries.enums.DeliveryStatusEnum;
 import com.meds.deliveries.enums.RiderStatusEnum;
-import com.meds.deliveries.model.Ride;
 import com.meds.deliveries.model.Rider;
 import com.meds.deliveries.model.Coordinates;
-import com.meds.deliveries.model.Package;
-import com.meds.deliveries.repository.RideRepository;
+
 import com.meds.deliveries.repository.RiderRepository;
 
 @ExtendWith(MockitoExtension.class)

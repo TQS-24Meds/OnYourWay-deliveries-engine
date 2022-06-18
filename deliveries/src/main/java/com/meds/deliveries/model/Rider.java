@@ -1,6 +1,5 @@
 package com.meds.deliveries.model;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.*;

@@ -3,21 +3,15 @@ package com.meds.deliveries.service;
 import static org.junit.Assert.*;
 import static org.mockito.Mockito.reset;
 import static org.mockito.Mockito.when;
-import static org.mockito.BDDMockito.given;
 
 import java.util.ArrayList;
-import java.util.Date;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
-import java.util.Optional;
+import java.util.UUID;
 
-import static org.assertj.core.api.Assertions.assertThat;
-
-import org.bouncycastle.crypto.util.Pack;
 import org.junit.jupiter.api.*;
 import org.junit.jupiter.api.extension.ExtendWith;
-import org.mockito.*;
 import org.mockito.junit.jupiter.MockitoExtension;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
@@ -25,24 +19,20 @@ import org.junit.jupiter.api.Test;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.Mockito;
-import org.mockito.junit.jupiter.MockitoExtension;
 import static org.junit.Assert.assertEquals;
 
-import java.util.Collections;
-
-import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
-import static org.assertj.core.api.AssertionsForClassTypes.assertThatThrownBy;
-import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.verify;
-import static org.mockito.Mockito.when;
+
 
 import com.meds.deliveries.enums.DeliveryStatusEnum;
-import com.meds.deliveries.enums.RiderStatusEnum;
-import com.meds.deliveries.model.Ride;
-import com.meds.deliveries.model.Rider;
+import com.meds.deliveries.model.Admin;
+import com.meds.deliveries.model.Coordinates;
 import com.meds.deliveries.model.Package;
+import com.meds.deliveries.model.Store;
+import com.meds.deliveries.repository.AdminRepository;
 import com.meds.deliveries.repository.PackageRepository;
 import com.meds.deliveries.repository.RiderRepository;
+import com.meds.deliveries.repository.StoreRepository;
 
 @ExtendWith(MockitoExtension.class)
 public class PackageServiceTest {
@@ -56,7 +46,14 @@ public class PackageServiceTest {
     private Package p2;
     HashMap<Package, DeliveryStatusEnum> package_status = new HashMap<>();
 
+    @Mock
+    private AdminRepository adminRepository;
+    private Admin admin;
 
+    @Mock 
+    private StoreRepository storeRepository;
+    private Store store;
+    
 
     @Mock
     private RiderRepository riderRepository;
@@ -68,14 +65,15 @@ public class PackageServiceTest {
     void setUp() {
         // this.rider = new Rider("John Doe", "johndoe", "mypassword", "john@doe.com",
         // 912345678, "My house");
-       /*  
-        this.p = new Package(new Coordinates(40.631284, -8.659886),
-                "Rua Dr. Mário Sacramento 12", "Joana Vedor", DeliveryStatusEnum.PENDENT, 1, 1);
-        this.p2= new Package(new Coordinates(41.63128,  8.659886),"Rua das Cores", "Mariana Rosa", DeliveryStatusEnum.ON_DELIVERY, 2, 1); */
+       
+        
+        this.admin = new Admin("Artur Romão", "arturomao", "12212", "artur@gmail.com", 96514778, Collections.emptyList());
+        
+        this.store = new Store("24 Meds", UUID.randomUUID(),  new Coordinates(87.2,87.1), admin);
         
         this.p = new Package(
-                "Rua Dr. Mário Sacramento 12", "Joana Vedor", DeliveryStatusEnum.PENDENT, 1, 1);
-        this.p2= new Package("Rua das Cores", "Mariana Rosa", DeliveryStatusEnum.ON_DELIVERY, 2, 1); 
+                "Rua Dr. Mário Sacramento 12", "Joana Vedor", DeliveryStatusEnum.PENDENT, 1, store);
+        this.p2= new Package("Rua das Cores", "Mariana Rosa", DeliveryStatusEnum.ON_DELIVERY, 2, store); 
 
         Mockito.when(repository.save(p)).thenReturn(p);
         Mockito.when(repository.findById(1)).thenReturn(p);
