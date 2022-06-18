@@ -105,4 +105,7 @@ public class RiderServiceTest {
 
     }
 
+    //test find rider
+    //test find unxistent rider
+
 }
