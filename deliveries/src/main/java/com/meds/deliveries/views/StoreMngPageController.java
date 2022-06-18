@@ -1,4 +1,4 @@
-package com.meds.deliveries.controller;
+package com.meds.deliveries.views;
 
 import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.ObjectFactory;
@@ -25,7 +25,7 @@ public class StoreMngPageController {
         AdminService adminsv;
     
     
-        @GetMapping("/n tem url")
+        @GetMapping("/stats")
         public ModelAndView riders(Model model) throws NumberFormatException, ResourceNotFoundException {
       
           ModelAndView modelAndView = new ModelAndView();

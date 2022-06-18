@@ -1,4 +1,4 @@
-package com.meds.deliveries.controller;
+package com.meds.deliveries.views;
 
 import java.util.Optional;
 
@@ -28,8 +28,7 @@ import com.meds.deliveries.service.RiderService;
 @Controller
 public class ProfController {
 
-    @Autowired
-    AdminService admnsv;
+
     @Autowired
     PersonService personsv;
     @Autowired
@@ -53,6 +52,7 @@ public class ProfController {
         model.addAttribute("name", admin.getName());
         model.addAttribute("username",admin.getUsername());
         model.addAttribute("phone",admin.getPhone() );
+        
         
         ModelAndView modelAndView = new ModelAndView();
         modelAndView.setViewName("profile");

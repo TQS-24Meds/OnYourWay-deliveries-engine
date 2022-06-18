@@ -1,5 +1,5 @@
-package com.meds.deliveries.controller;
-
+package com.meds.deliveries.views;
+//default look for a controller
 import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.ObjectFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,16 +13,11 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.meds.deliveries.exception.ResourceNotFoundException;
-import com.meds.deliveries.model.Admin;
-import com.meds.deliveries.service.AdminService;
 @Controller
 public class RegShopController {
 
-  
+/*   
         @Autowired ObjectFactory<HttpSession> httpSessionFactory;
-        @Autowired
-        AdminService adminsv;
     
     
         @GetMapping("/n tem url")
@@ -31,18 +26,14 @@ public class RegShopController {
           ModelAndView modelAndView = new ModelAndView();
       
           HttpSession session = httpSessionFactory.getObject();
-          String adminid = (String.valueOf(session.getAttribute("admin_id")));
-          Admin admin = adminsv.getAdminById(Integer.parseInt(adminid)).orElseThrow(() -> new ResourceNotFoundException("Admin not found for this id:" + adminid));
-      
-          model.addAttribute("name", admin.getName());
           
-            //add store list?
+          
       
           modelAndView.setViewName("registershop");
       
           return modelAndView;
         }
-      
+       */
     }
     
     
