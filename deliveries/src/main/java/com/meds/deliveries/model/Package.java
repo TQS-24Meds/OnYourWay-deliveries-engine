@@ -48,7 +48,6 @@ public class Package {
     private Ride ride;
 
  
-      
     @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "id_coordinates")
     private Coordinates packageFinalLocation;

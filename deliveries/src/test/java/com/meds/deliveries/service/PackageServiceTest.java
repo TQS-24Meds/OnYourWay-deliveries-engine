@@ -68,7 +68,7 @@ public class PackageServiceTest {
        
         
         this.admin = new Admin("Artur Romão", "arturomao", "12212", "artur@gmail.com", 96514778, Collections.emptyList());
-        
+
         this.store = new Store("24 Meds", UUID.randomUUID(),  new Coordinates(87.2,87.1), admin);
         
         this.p = new Package(
