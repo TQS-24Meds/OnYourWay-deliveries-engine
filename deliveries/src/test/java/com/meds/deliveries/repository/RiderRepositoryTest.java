@@ -1,4 +1,4 @@
-package com.meds.deliveries.repository;
+/* package com.meds.deliveries.repository;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,6 +14,7 @@ import com.meds.deliveries.model.Rider;
 
 import java.util.Collections;
 import java.util.List;
+import java.util.Optional;
 
 
 @DataJpaTest
@@ -62,3 +63,4 @@ class RiderRepositoryTest {
     }
 
 }
+ */

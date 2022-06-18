@@ -4,6 +4,7 @@ import com.meds.deliveries.enums.RiderStatusEnum;
 import com.meds.deliveries.exception.DuplicatedObjectException;
 import com.meds.deliveries.exception.InvalidLoginException;
 import com.meds.deliveries.exception.ResourceNotFoundException;
+import com.meds.deliveries.model.Coordinates;
 import com.meds.deliveries.model.Ride;
 import com.meds.deliveries.model.Rider;
 import com.meds.deliveries.repository.RiderRepository;
@@ -16,43 +17,55 @@ import java.util.Map;
 import java.util.TreeMap;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 @Service
 @Log4j2
 public class RiderService {
 
-    @Autowired
-    RiderRepository repository;
+    @Autowired RiderRepository repository;
 
-    List<Rider> getAllRiders() {
-        return repository.findAll();
+    @Autowired private PasswordEncoder passwordEncoder;
+    
+    
+    public List<Rider> getAllRiders() { return repository.findAll(); }
+
+    public Rider getRiderById(int rider_id) {
+        return repository.getById(rider_id);
     }
 
-    List<Ride> getAllRides(Rider rider) {
-        return repository.findById(rider.getId()).getRides();
-    }
 
-    Rider registerRider(Rider rider) throws DuplicatedObjectException {
-        if (repository.findByEmail(rider.getEmail()).isEmpty()) {
-            rider.setPassword(rider.getPassword());
-            repository.saveAndFlush(rider);
-
-            log.info("RIDER SERVICE: Rider saved successfully");
-            return rider;
+    public List<Ride> getAllRidesByRiderId(int rider_id){ 
+        if (!repository.existsById(rider_id)) {
+            throw new ResourceNotFoundException("There is no rider with this id:" + rider_id);
         }
 
-        log.error("RIDER SERVICE: Duplicated rider email, when saving rider");
-        throw new DuplicatedObjectException("Rider with this email already exists.");
+        Rider r = repository.findById(rider_id);
+        return r.getRides();
     }
 
-    Rider updateLocation(float lat, float lon, Rider rider) throws ResourceNotFoundException {
+    
 
-        rider.setLat(lat);
-        rider.setLon(lon);
+    public Rider registerRider(Rider rider) throws DuplicatedObjectException {
+        if (repository.existsByEmail(rider.getEmail())) {
+            throw new DuplicatedObjectException("The provided email is already being used!");
+        }
+
+        rider.setPassword(passwordEncoder.encode(rider.getPassword()));
+        //coordRepository.save(client.getRider_location());
+
+        return repository.save(rider);
+
+
+    }
+
+    public Rider updateLocation(Coordinates riderCoord, Rider rider) throws ResourceNotFoundException {
+        
+        rider.setRiderLocation(riderCoord);
         repository.save(rider);
 
-        if (rider.getLat() == lat && rider.getLon() == lon) {
+        if(rider.getRiderLocation() == riderCoord){
 
             log.info("RIDER SERVICE: Rider location updated successfully");
             return rider;
@@ -65,14 +78,13 @@ public class RiderService {
     }
 
     public List<Rider> getRidersByStatus(RiderStatusEnum status, List<Rider> riders) throws InvalidLoginException {
-
+        
         List<Rider> ridersWithStatus = new ArrayList<>();
+    
 
-        System.out.println("all riders service :" + riders);
+        System.out.println("all riders service :" + riders );
         for (Rider rider : riders) {
-            if (rider.getStatus() == status) {
-                ridersWithStatus.add(rider);
-            }
+            if (rider.getStatus() == status){ ridersWithStatus.add(rider);}
         }
 
         log.info("RIDER SERVICE: Retrieved riders with specific status with success");
@@ -80,7 +92,7 @@ public class RiderService {
     }
 
     public Map<String, Object> getRatingStatistics(Rider rider) throws InvalidLoginException {
-
+        
         Map<String, Object> resp = new TreeMap<>();
         resp.put("numReviews", rider.getNum_reviews());
         resp.put("avgReviews", rider.getAverage_rating());
@@ -89,27 +101,21 @@ public class RiderService {
         return resp;
     }
 
-    // update Rider Status
-
     public Rider updateRiderStatus(Rider rider) {
+        RiderStatusEnum status = rider.getStatus();
 
-        // unavailable
-        if (rider.getStatus() == RiderStatusEnum.AVAILABLE) {
-            rider.setStatus(RiderStatusEnum.UNAVAILABLE);
-            log.info("RIDER SERVICE: Rider Status set to unavailable");
+        switch (status){
+            case UNAVAILABLE:
+                rider.setStatus(RiderStatusEnum.AVAILABLE);
+                break;
+            case AVAILABLE:
+                rider.setStatus(RiderStatusEnum.UNAVAILABLE);
 
         }
-
-        // available
-        else if (rider.getStatus() == RiderStatusEnum.UNAVAILABLE) {
-            rider.setStatus(RiderStatusEnum.AVAILABLE);
-            log.info("RIDER SERVICE: Rider Status set to available");
-        }
-
         return rider;
 
     }
 
-    //Get Rider's location
+
 
 }

@@ -1,6 +1,5 @@
 package com.meds.deliveries.model;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.*;
@@ -33,11 +32,9 @@ public class Rider extends Person {
     // @JsonIgnore
     // private Person rider;
 
-    @Column(name = "lat", nullable = false)
-    private float lat;
-
-    @Column(name = "lon", nullable = false)
-    private float lon;
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "rider_location")
+    private Coordinates riderLocation;
 
     @Column(name = "address", nullable = false)
     private String address;
@@ -57,26 +54,14 @@ public class Rider extends Person {
     private List<Ride> rides;
 
     @Builder
-    // Unavailable
     public Rider(String name, String username, String password, String email, int phone, List<GrantedAuthority> permissions, String address) {
         super(name, username, password, email, phone, permissions);
         this.address = address;
-        this.average_rating = 0.0f;
+        this.average_rating = 0;
         this.num_reviews = 0;
-        this.status = RiderStatusEnum.UNAVAILABLE;
-        this.rides = new ArrayList<>();
     }
+
+
     
-    @Builder
-    // Available
-    public Rider(String name, String username, String password, String email, int phone, List<GrantedAuthority> permissions, String address, float lat, float lon) {
-        super(name, username, password, email, phone, permissions);
-        this.lat = lat;
-        this.lon = lon;
-        this.address = address;
-        this.average_rating = 0.0f;
-        this.num_reviews = 0;
-        this.status = RiderStatusEnum.AVAILABLE;
-        this.rides = new ArrayList<>();
-    }
+
 }

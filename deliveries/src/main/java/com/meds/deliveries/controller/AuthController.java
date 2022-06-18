@@ -13,12 +13,15 @@ import java.time.Instant;
 import java.util.Date;
 
 import com.meds.deliveries.exception.BadRequestException;
+import com.meds.deliveries.exception.DuplicatedObjectException;
 import com.meds.deliveries.model.Person;
+import com.meds.deliveries.model.Rider;
 import com.meds.deliveries.request.LoginRequest;
 import com.meds.deliveries.request.MessageResponse;
 import com.meds.deliveries.security.auth.AuthTokenResponse;
 import com.meds.deliveries.security.auth.JWTTokenUtils;
 import com.meds.deliveries.service.PersonService;
+import com.meds.deliveries.service.RiderService;
 import com.meds.deliveries.service.SpringUserDetailsService;
 
 @RestController
@@ -26,26 +29,28 @@ import com.meds.deliveries.service.SpringUserDetailsService;
 public class AuthController {
 
     private final PasswordEncoder passwordEncoder;
+    private final RiderService riderService;
     private final PersonService personService;
     private final SpringUserDetailsService springUserDetailsService;
     private final JWTTokenUtils jwtTokenUtils;
 
     @Autowired
-    public AuthController(PasswordEncoder passwordEncoder, PersonService personService, SpringUserDetailsService springUserDetailsService, JWTTokenUtils jwtTokenUtils) {
+    public AuthController(PasswordEncoder passwordEncoder, RiderService riderService, PersonService personService, SpringUserDetailsService springUserDetailsService, JWTTokenUtils jwtTokenUtils) {
         this.passwordEncoder = passwordEncoder;
+        this.riderService = riderService;
         this.personService = personService;
         this.springUserDetailsService = springUserDetailsService;
         this.jwtTokenUtils = jwtTokenUtils;
     }
 
     @PostMapping("/register")
-    public MessageResponse registerUser(@RequestBody Person person) {
+    public MessageResponse registerRider(@RequestBody Rider rider) throws DuplicatedObjectException {
 
         // Encode password
-        String userPassword = person.getPassword();
-        person.setPassword(passwordEncoder.encode(userPassword));
+        String riderPassword = rider.getPassword();
+        rider.setPassword(passwordEncoder.encode(riderPassword));
 
-        personService.savePerson(person);
+        riderService.registerRider(rider);
 
         return new MessageResponse(Date.from(Instant.now()), "The user was successfully registered!");
 

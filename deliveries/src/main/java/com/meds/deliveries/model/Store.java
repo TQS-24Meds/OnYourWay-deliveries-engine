@@ -1,12 +1,10 @@
 package com.meds.deliveries.model;
-import java.util.ArrayList;
-import java.util.List;
+
+import java.util.Set;
 import java.util.UUID;
 
 import javax.persistence.*;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.meds.deliveries.enums.RiderStatusEnum;
 
 import lombok.*;
 
@@ -27,8 +25,6 @@ public class Store {
 
     @Column(name="name", nullable = false)
     private String name;
-
-
     
     @Column(name="storeuuid", nullable = false)
     private UUID storeuiid;
@@ -37,7 +33,15 @@ public class Store {
     @JoinColumn(name = "id_admin", nullable = false)
     private Admin admin;
 
-    public Store(String name, UUID storeuuid, Admin admin){
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "id_store")
+    private Coordinates store_location;
+    
+    @OneToMany(mappedBy = "store")
+    private Set<Package> packages;
+    
+
+    public Store(String name, UUID storeuuid, Coordinates coords, Admin admin){
         this.name = name;
         this.admin = admin;
         this.storeuiid = storeuuid;
