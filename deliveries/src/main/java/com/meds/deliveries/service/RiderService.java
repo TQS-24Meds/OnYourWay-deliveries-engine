@@ -1,9 +1,11 @@
 package com.meds.deliveries.service;
 
+import com.meds.config.PasswordEncoderConfig;
 import com.meds.deliveries.enums.RiderStatusEnum;
 import com.meds.deliveries.exception.DuplicatedObjectException;
 import com.meds.deliveries.exception.InvalidLoginException;
 import com.meds.deliveries.exception.ResourceNotFoundException;
+import com.meds.deliveries.geocode.geocoding.Coordinates;
 import com.meds.deliveries.model.Ride;
 import com.meds.deliveries.model.Rider;
 import com.meds.deliveries.repository.RiderRepository;
@@ -16,6 +18,7 @@ import java.util.Map;
 import java.util.TreeMap;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -23,6 +26,9 @@ import org.springframework.stereotype.Service;
 public class RiderService {
 
     @Autowired RiderRepository repository;
+
+    @Autowired private PasswordEncoder passwordEncoder;
+    
     
     public List<Rider> getAllRiders() { return repository.findAll(); }
 
@@ -43,25 +49,24 @@ public class RiderService {
     
 
     public Rider registerRider(Rider rider) throws DuplicatedObjectException {
-        if (repository.existsByEmail(rider.getEmail()) == true) {
-            rider.setPassword(rider.getPassword());
-            repository.saveAndFlush(rider);
-
-            log.info("RIDER SERVICE: Rider saved successfully");
-            return rider;
+        if (repository.existsByEmail(rider.getEmail())) {
+            throw new DuplicatedObjectException("The provided email is already being used!");
         }
 
-        log.error("RIDER SERVICE: Duplicated rider email, when saving rider");
-        throw new DuplicatedObjectException("Rider with this email already exists."); 
+        rider.setPassword(passwordEncoder.encode(rider.getPassword()));
+        //coordRepository.save(client.getRider_location());
+
+        return repository.save(rider);
+
+
     }
 
-    public Rider updateLocation(Double lat, Double lon, Rider rider) throws ResourceNotFoundException {
+    public Rider updateLocation(Coordinates riderCoord, Rider rider) throws ResourceNotFoundException {
         
-        rider.setLat(lat);
-        rider.setLon(lon);
+        rider.setRiderLocation(riderCoord);
         repository.save(rider);
 
-        if(rider.getLat() == lat && rider.getLon() == lon){
+        if(rider.getRiderLocation() == riderCoord){
 
             log.info("RIDER SERVICE: Rider location updated successfully");
             return rider;

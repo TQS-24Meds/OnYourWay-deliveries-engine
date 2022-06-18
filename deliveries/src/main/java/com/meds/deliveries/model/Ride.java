@@ -7,6 +7,7 @@ import javax.persistence.*;
 import javax.validation.constraints.*;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.meds.deliveries.geocode.geocoding.Coordinates;
 
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
@@ -34,12 +35,13 @@ public class Ride {
     @JsonIgnore
     private Package ride_package;
 
-    //* HashMap<Latitude, Longitude>
+    @OneToOne
     @Column(name = "route_start", nullable = false)
-    private HashMap<Double, Double> route_start;
+    private Coordinates route_start;
 
+    @OneToOne
     @Column(name = "route_end", nullable = false)
-    private HashMap<Double, Double> route_end;
+    private Coordinates route_end;
 
     @CreationTimestamp
     @Column(name = "time_start")
@@ -54,21 +56,11 @@ public class Ride {
     @Max(value = 5, message = "Review should not be more than 5.")
     private int rating;
 
-    public Ride(Package ride_package, int rating) {
-        this.ride_package = ride_package;
-        this.route_start = new HashMap<Double, Double>();
-        this.route_end = new HashMap<Double, Double>();
-        this.time_start = new Date();
-        this.time_end = new Date();
-        this.rating = rating;
-    }
+    
 
     public Ride(Package ride_package) {
         this.ride_package = ride_package;
-        this.route_start = new HashMap<Double, Double>();
-        this.route_end = new HashMap<Double, Double>();
-        this.time_start = new Date();
-        this.time_end = new Date();
+
     }
 
 }

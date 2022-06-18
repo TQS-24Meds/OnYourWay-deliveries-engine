@@ -7,6 +7,7 @@ import javax.persistence.*;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.meds.deliveries.enums.RiderStatusEnum;
+import com.meds.deliveries.geocode.geocoding.Coordinates;
 
 import org.springframework.security.core.GrantedAuthority;
 
@@ -33,11 +34,9 @@ public class Rider extends Person {
     // @JsonIgnore
     // private Person rider;
 
-    @Column(name = "lat", nullable = false)
-    private Double lat;
-
-    @Column(name = "lon", nullable = false)
-    private Double lon;
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "rider_location")
+    private Coordinates riderLocation;
 
     @Column(name = "address", nullable = false)
     private String address;
@@ -67,16 +66,13 @@ public class Rider extends Person {
         this.rides = new ArrayList<>();
     }
     
-    @Builder
-    // Available
+/*     // Available
     public Rider(String name, String username, String password, String email, int phone, List<GrantedAuthority> permissions, String address, Double lat, Double lon) {
         super(name, username, password, email, phone, permissions);
-        this.lat = lat;
-        this.lon = lon;
         this.address = address;
         this.average_rating = 0.0f;
         this.num_reviews = 0;
         this.status = RiderStatusEnum.AVAILABLE;
         this.rides = new ArrayList<>();
-    }
+    } */
 }

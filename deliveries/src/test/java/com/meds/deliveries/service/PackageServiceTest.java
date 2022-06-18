@@ -38,6 +38,7 @@ import static org.mockito.Mockito.when;
 
 import com.meds.deliveries.enums.DeliveryStatusEnum;
 import com.meds.deliveries.enums.RiderStatusEnum;
+import com.meds.deliveries.geocode.geocoding.Coordinates;
 import com.meds.deliveries.model.Ride;
 import com.meds.deliveries.model.Rider;
 import com.meds.deliveries.model.Package;
@@ -68,17 +69,19 @@ public class PackageServiceTest {
     void setUp() {
         // this.rider = new Rider("John Doe", "johndoe", "mypassword", "john@doe.com",
         // 912345678, "My house");
-        this.p = new Package(40.631284, -8.659886,
+       /*  
+        this.p = new Package(new Coordinates(40.631284, -8.659886),
                 "Rua Dr. Mário Sacramento 12", "Joana Vedor", DeliveryStatusEnum.PENDENT, 1, 1);
-        this.p2= new Package(41.63128,  8.659886 ,"Rua das Cores", "Mariana Rosa", DeliveryStatusEnum.ON_DELIVERY, 2, 1);
-        repository.save(p);
-        repository.save(p2);
+        this.p2= new Package(new Coordinates(41.63128,  8.659886),"Rua das Cores", "Mariana Rosa", DeliveryStatusEnum.ON_DELIVERY, 2, 1); */
+        
+        this.p = new Package(
+                "Rua Dr. Mário Sacramento 12", "Joana Vedor", DeliveryStatusEnum.PENDENT, 1, 1);
+        this.p2= new Package("Rua das Cores", "Mariana Rosa", DeliveryStatusEnum.ON_DELIVERY, 2, 1); 
+
         Mockito.when(repository.save(p)).thenReturn(p);
         Mockito.when(repository.findById(1)).thenReturn(p);
         package_status.put(p,p.getStatus());
         package_status.put(p2,p2.getStatus());
-
-        
 
 
 

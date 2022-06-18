@@ -8,9 +8,10 @@ import com.meds.deliveries.model.Ride;
 import com.meds.deliveries.model.Rider;
 import com.meds.deliveries.enums.DeliveryStatusEnum;
 import com.meds.deliveries.model.Package;
-
+import com.meds.deliveries.repository.PackageRepository;
 import com.meds.deliveries.repository.RideRepository;
 import com.meds.deliveries.repository.RiderRepository;
+import com.meds.deliveries.exception.ResourceNotFoundException;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -24,12 +25,27 @@ public class RideService {
     @Autowired
     RiderRepository rider_repository;
 
+    @Autowired
+    PackageRepository packageRepository;
+
     public List<Ride> getAllRides() {
         return repository.findAll();
     }
 
+    public List<Ride> getAllRidesFromRider(Rider r) {
+
+        if (!rider_repository.existsById(r.getId())){
+            throw new ResourceNotFoundException(String.format("There are no rides for this rider %s, because he doesn't exist", r));
+        }
+   
+        return r.getRides();
+    }
+
     public Ride getRideById(int ride_id) {
-        return repository.getById(ride_id);
+        if (!repository.existsById(ride_id)){
+            throw new ResourceNotFoundException(String.format("There is no ride with this id %s", ride_id));
+        }
+        return repository.findById(ride_id);
     }
 
     // algoritmo para escolher uma rider
@@ -39,27 +55,21 @@ public class RideService {
         return rider_repository.getById(0);
     }
 
-    public Ride createRide(Package p) {
+    public Ride rideInit(Package p) {
 
         Ride ride = new Ride(p);
         Rider rider = new Rider();
 
         Date date = new Date();
-        Integer rider_id = p.getRider_id();
 
-        HashMap<Double, Double> client_addr = new HashMap<>();
-        HashMap<Double, Double> rider_addr = new HashMap<>();
-
-        client_addr.put(p.getClient_lat(), p.getClient_long());
-        rider_addr.put(rider.getLat(), rider.getLon());
 
         // ride.setRider(rider);
         p.setRide(ride);
         p.setStatus(DeliveryStatusEnum.ON_DELIVERY);
 
         ride.setTime_start(date);
-        ride.setRoute_start(rider_addr);
-        ride.setRoute_end(client_addr);
+        ride.setRoute_start(rider.getRiderLocation());
+        ride.setRoute_end(p.getPackageLocation());
         repository.save(ride);
 
         return ride;
