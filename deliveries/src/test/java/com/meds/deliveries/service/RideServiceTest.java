@@ -6,6 +6,7 @@ import static org.mockito.BDDMockito.given;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import java.util.Optional;
 import java.util.UUID;
 
 import org.junit.jupiter.api.*;
@@ -146,7 +147,7 @@ public class RideServiceTest {
 
         System.out.println("MAYBE" + riderFound.getRides());
 
-        given(riderRepository.findById(rider.getId())).willReturn(rider);
+        given(riderRepository.findById(rider.getId())).willReturn(Optional.of(rider));
         when(riderRepository.existsById(ride.getId())).thenReturn(true);
 
         assertThat(service.getAllRidesFromRider(rider))

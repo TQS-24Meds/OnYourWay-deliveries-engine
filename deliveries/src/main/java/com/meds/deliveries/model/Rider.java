@@ -56,6 +56,7 @@ public class Rider extends Person {
     @Builder
     public Rider(String name, String username, String password, String email, int phone, List<GrantedAuthority> permissions, String address) {
         super(name, username, password, email, phone, permissions);
+        this.status = RiderStatusEnum.UNAVAILABLE;
         this.address = address;
         this.average_rating = 0;
         this.num_reviews = 0;

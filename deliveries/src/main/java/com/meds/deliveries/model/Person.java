@@ -14,7 +14,6 @@ import lombok.*;
 //https://stackabuse.com/guide-to-jpa-with-hibernate-inheritance-mapping/ check this for info
 @Data
 @NoArgsConstructor
-@AllArgsConstructor
 @ToString
 @Entity
 @Inheritance(strategy = InheritanceType.JOINED)

@@ -41,7 +41,7 @@ public class RiderService {
             throw new ResourceNotFoundException("There is no rider with this id:" + rider_id);
         }
 
-        Rider r = repository.findById(rider_id);
+        Rider r = (Rider) repository.findById(rider_id).get();
         return r.getRides();
     }
 

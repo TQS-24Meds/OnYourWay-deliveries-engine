@@ -13,7 +13,6 @@ import lombok.*;
 @Getter
 @Setter
 @NoArgsConstructor
-@AllArgsConstructor
 @ToString
 @EqualsAndHashCode(callSuper = true)
 @Table(name = "admin")
@@ -26,7 +25,6 @@ public class Admin extends Person {
 
     @OneToMany(cascade = CascadeType.ALL ,mappedBy = "admin")
     private List<Store> stores;
-
     
     // @NotNull
     // @OneToOne(cascade = CascadeType.ALL)

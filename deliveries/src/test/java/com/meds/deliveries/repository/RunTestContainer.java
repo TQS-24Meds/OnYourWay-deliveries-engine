@@ -1,17 +1,14 @@
-package com.meds.deliveries;
-
-import org.junit.jupiter.api.Test;
-import org.springframework.boot.test.context.SpringBootTest;
+package com.meds.deliveries.repository;
 
 import org.springframework.test.context.DynamicPropertyRegistry;
 import org.springframework.test.context.DynamicPropertySource;
 import org.testcontainers.containers.MySQLContainer;
 import org.testcontainers.utility.DockerImageName;
 
-@SpringBootTest
-class DeliveriesApplicationTests {
 
-	static final MySQLContainer<?> container;
+public abstract class RunTestContainer {
+
+    static final MySQLContainer<?> container;
 
     static {
         container = 
@@ -30,9 +27,4 @@ class DeliveriesApplicationTests {
         registry.add("spring.datasource.username", container::getUsername);
         registry.add("spring.datasource.password", container::getPassword);
     }
-
-	@Test
-	void contextLoads() {
-	}
-
 }
