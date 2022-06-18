@@ -5,7 +5,7 @@ import com.meds.deliveries.enums.RiderStatusEnum;
 import com.meds.deliveries.exception.DuplicatedObjectException;
 import com.meds.deliveries.exception.InvalidLoginException;
 import com.meds.deliveries.exception.ResourceNotFoundException;
-import com.meds.deliveries.geocode.geocoding.Coordinates;
+import com.meds.deliveries.model.Coordinates;
 import com.meds.deliveries.model.Ride;
 import com.meds.deliveries.model.Rider;
 import com.meds.deliveries.repository.RiderRepository;

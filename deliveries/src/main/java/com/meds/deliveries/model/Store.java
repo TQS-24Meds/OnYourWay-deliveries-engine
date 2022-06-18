@@ -8,7 +8,6 @@ import javax.persistence.*;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.meds.deliveries.enums.RiderStatusEnum;
-import com.meds.deliveries.geocode.geocoding.Coordinates;
 
 import lombok.*;
 
@@ -37,8 +36,10 @@ public class Store {
     @JoinColumn(name = "id_admin", nullable = false)
     private Admin admin;
 
-    @OneToMany(mappedBy = "store")
-    private Set<Package> packages;
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "id_store")
+    private Coordinates store_location;
+    
 
 
     public Store(String name, UUID storeuuid, Coordinates coords, Admin admin){

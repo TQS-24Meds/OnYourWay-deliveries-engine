@@ -68,8 +68,8 @@ public class RideService {
         p.setStatus(DeliveryStatusEnum.ON_DELIVERY);
 
         ride.setTime_start(date);
-        ride.setRoute_start(rider.getRiderLocation());
-        ride.setRoute_end(p.getPackageLocation());
+        // ride.setRoute_start(rider.getRiderLocation());
+        // ride.setRoute_end(p.getPackageLocation());
         repository.save(ride);
 
         return ride;
@@ -85,4 +85,5 @@ public class RideService {
 
 
 
+    
 }

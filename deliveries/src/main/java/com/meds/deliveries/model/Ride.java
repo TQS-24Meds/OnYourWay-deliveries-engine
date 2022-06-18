@@ -2,12 +2,14 @@ package com.meds.deliveries.model;
 
 import java.util.Date;
 import java.util.HashMap;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
 
 import javax.persistence.*;
 import javax.validation.constraints.*;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.meds.deliveries.geocode.geocoding.Coordinates;
 
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
@@ -21,7 +23,7 @@ import lombok.*;
 @NoArgsConstructor
 @Table(name = "ride")
 public class Ride {
-    
+
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
     @Column(name = "id_ride")
@@ -35,14 +37,13 @@ public class Ride {
     @JsonIgnore
     private Package ride_package;
 
-    @OneToOne
-    @Column(name = "route_start", nullable = false)
-    private Coordinates route_start;
+    @Column(name = "route_start_lat")
+    private Double routeStartLat;
 
-    @OneToOne
-    @Column(name = "route_end", nullable = false)
-    private Coordinates route_end;
+    @Column(name = "route_start_long")
+    private Double routeStartLong;
 
+    
     @CreationTimestamp
     @Column(name = "time_start")
     private Date time_start;
@@ -56,10 +57,11 @@ public class Ride {
     @Max(value = 5, message = "Review should not be more than 5.")
     private int rating;
 
-    
-
     public Ride(Package ride_package) {
         this.ride_package = ride_package;
+        //this.route_start = new Coordinates
+        //this.route_end = ride_package.getPackageLocation();
+
 
     }
 

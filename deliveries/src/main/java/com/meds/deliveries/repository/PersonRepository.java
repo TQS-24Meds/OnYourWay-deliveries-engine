@@ -13,7 +13,7 @@ public interface PersonRepository extends JpaRepository<Person, Integer> {
     Person findByEmail(String email);
     Person findByPhone(int phone);
     Person findById(int id);
-    boolean existByUsername(String username);
+    boolean existsByUsername(String username);
     boolean existsByEmail(String email);
 
 }

@@ -38,7 +38,7 @@ public class PersonService {
     }
 
     public Person getPersonByUsername(String username) {
-        if (!repository.existByUsername(username)) throw new ResourceNotFoundException("Person not found for this username:" + username);
+        if (!repository.existsByUsername(username)) throw new ResourceNotFoundException("Person not found for this username:" + username);
         
         return repository.findByUsername(username);
     }
@@ -87,7 +87,7 @@ public class PersonService {
     }
 
     public void registerPerson(Person p) throws DuplicatedObjectException {
-        if (repository.existByUsername(p.getUsername()))
+        if (repository.existsByUsername(p.getUsername()))
             throw new DuplicatedObjectException("The provided username is already taken.");
         repository.save(p);    }
 }

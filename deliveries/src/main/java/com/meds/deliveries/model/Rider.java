@@ -7,7 +7,6 @@ import javax.persistence.*;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.meds.deliveries.enums.RiderStatusEnum;
-import com.meds.deliveries.geocode.geocoding.Coordinates;
 
 import org.springframework.security.core.GrantedAuthority;
 
@@ -56,23 +55,14 @@ public class Rider extends Person {
     private List<Ride> rides;
 
     @Builder
-    // Unavailable
     public Rider(String name, String username, String password, String email, int phone, List<GrantedAuthority> permissions, String address) {
         super(name, username, password, email, phone, permissions);
         this.address = address;
         this.average_rating = 0;
         this.num_reviews = 0;
-        this.status = RiderStatusEnum.UNAVAILABLE;
-        this.rides = new ArrayList<>();
     }
+
+
     
-/*     // Available
-    public Rider(String name, String username, String password, String email, int phone, List<GrantedAuthority> permissions, String address, Double lat, Double lon) {
-        super(name, username, password, email, phone, permissions);
-        this.address = address;
-        this.average_rating = 0.0f;
-        this.num_reviews = 0;
-        this.status = RiderStatusEnum.AVAILABLE;
-        this.rides = new ArrayList<>();
-    } */
+
 }

@@ -1,13 +1,10 @@
-package com.meds.deliveries.geocode.geocoding;
+package com.meds.deliveries.model;
 
 import javax.persistence.*;
 
-import org.bouncycastle.crypto.util.Pack;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.meds.deliveries.model.Package;
-import com.meds.deliveries.model.Rider;
 
 import lombok.*;
 
@@ -29,16 +26,16 @@ public class Coordinates {
     @Column(name = "lon", nullable = false)
     private double lon;
 
-    @OneToOne(mappedBy = "packageLocation")
-    private Package packageLocation;
+    @OneToOne(mappedBy = "store_location")
+    private Store storeLocation;
 
-    @OneToOne(mappedBy = "riderLocation")
-    private Rider riderLocation;
-
-
+      
+    @OneToOne(mappedBy = "packageFinalLocation")
+    private Package packageFinalLocation;
+  
 
     @Autowired
-    public Coordinates( double lat, double lon) {
+    public Coordinates(double lat, double lon) {
         this.lat = lat;
         this.lon = lon;
     }

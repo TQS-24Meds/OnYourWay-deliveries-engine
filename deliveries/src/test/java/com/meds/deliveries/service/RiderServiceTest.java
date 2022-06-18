@@ -21,9 +21,9 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 
 import com.meds.deliveries.enums.DeliveryStatusEnum;
 import com.meds.deliveries.enums.RiderStatusEnum;
-import com.meds.deliveries.geocode.geocoding.Coordinates;
 import com.meds.deliveries.model.Ride;
 import com.meds.deliveries.model.Rider;
+import com.meds.deliveries.model.Coordinates;
 import com.meds.deliveries.model.Package;
 import com.meds.deliveries.repository.RideRepository;
 import com.meds.deliveries.repository.RiderRepository;

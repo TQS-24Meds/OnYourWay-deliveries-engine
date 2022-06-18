@@ -50,27 +50,27 @@ public class PersonServiceTest {
     void findByUsername() {
 
         when(repository.findByUsername(person.getUsername())).thenReturn(person);
-        when(repository.existByUsername(person.getUsername())).thenReturn(true);
+        when(repository.existsByUsername(person.getUsername())).thenReturn(true);
 
         assertThat(service.getPersonByUsername(person.getUsername()))
                 .isNotNull()
                 .isEqualTo(person);
 
         verify(repository, Mockito.times(1)).findByUsername(Mockito.anyString());
-        verify(repository, Mockito.times(1)).existByUsername(Mockito.anyString());  
+        verify(repository, Mockito.times(1)).existsByUsername(Mockito.anyString());  
     }
 
     @Test
     @DisplayName("Find person by non-existent username.")
     void findByNonExistentUsername() {
         
-        when(repository.existByUsername(person.getUsername())).thenReturn(false);
+        when(repository.existsByUsername(person.getUsername())).thenReturn(false);
         assertThatThrownBy(() -> service.getPersonByUsername(person.getUsername()))
         .isInstanceOf(ResourceNotFoundException.class)
         .hasMessage("Person not found for this username:%s", person.getUsername());
 
         verify(repository, Mockito.times(0)).findByUsername(Mockito.anyString());
-        verify(repository, Mockito.times(1)).existByUsername(Mockito.anyString());
+        verify(repository, Mockito.times(1)).existsByUsername(Mockito.anyString());
 
     }
 
@@ -109,7 +109,7 @@ public class PersonServiceTest {
     @DisplayName("Register already existent person.")
     void registerExistentPerson() {
 
-        when(repository.existByUsername(person.getUsername())).thenReturn(true);
+        when(repository.existsByUsername(person.getUsername())).thenReturn(true);
 
         assertThrows(DuplicatedObjectException.class, () -> service.registerPerson(person));
 

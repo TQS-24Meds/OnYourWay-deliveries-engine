@@ -10,7 +10,6 @@ import javax.persistence.*;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.meds.deliveries.enums.DeliveryStatusEnum;
-import com.meds.deliveries.geocode.geocoding.Coordinates;
 
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
@@ -50,10 +49,11 @@ public class Package {
     @JsonIgnore
     private Ride ride;
 
-
+ 
+      
     @OneToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "package_coordinates")
-    private Coordinates packageLocation;
+    @JoinColumn(name = "id_coordinates")
+    private Coordinates packageFinalLocation;
 
     @Column(name = "order_id", nullable = false)
     private int order_id;

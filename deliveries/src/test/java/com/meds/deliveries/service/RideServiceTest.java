@@ -25,7 +25,6 @@ import static org.assertj.core.api.AssertionsForClassTypes.assertThatThrownBy;
 import com.meds.deliveries.enums.DeliveryStatusEnum;
 import com.meds.deliveries.enums.RiderStatusEnum;
 import com.meds.deliveries.exception.ResourceNotFoundException;
-import com.meds.deliveries.geocode.geocoding.Coordinates;
 import com.meds.deliveries.model.Ride;
 import com.meds.deliveries.model.Rider;
 import com.meds.deliveries.model.Package;
