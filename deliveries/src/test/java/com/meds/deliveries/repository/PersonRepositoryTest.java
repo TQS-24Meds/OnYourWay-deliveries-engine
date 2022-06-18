@@ -15,7 +15,7 @@ import java.util.Collections;
 
 @DataJpaTest
 @AutoConfigureTestDatabase(replace = AutoConfigureTestDatabase.Replace.NONE)
-public class PersonRepositoryTest {
+public class PersonRepositoryTest extends RunTestContainer {
     
     @Autowired private TestEntityManager entityManager;
 

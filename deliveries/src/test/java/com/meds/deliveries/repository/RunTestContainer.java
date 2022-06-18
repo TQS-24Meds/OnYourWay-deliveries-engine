@@ -13,7 +13,7 @@ public abstract class RunTestContainer {
     static {
         container = 
          new MySQLContainer<>(DockerImageName.parse("mysql:8.0"))
-          .withDatabaseName("24Meds")
+          .withDatabaseName("OnYourWay")
           .withUsername("user")
           .withPassword("user")
           .withReuse(true);

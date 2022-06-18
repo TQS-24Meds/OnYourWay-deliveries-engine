@@ -15,7 +15,7 @@ import com.meds.deliveries.model.Admin;
 
 @DataJpaTest
 @AutoConfigureTestDatabase(replace = AutoConfigureTestDatabase.Replace.NONE)
-class AdminRepositoryTest {
+class AdminRepositoryTest extends RunTestContainer {
 
     @Autowired private TestEntityManager entityManager;
 

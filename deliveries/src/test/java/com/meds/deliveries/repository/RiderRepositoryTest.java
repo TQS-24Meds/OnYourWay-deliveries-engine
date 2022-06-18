@@ -17,7 +17,7 @@ import java.util.List;
 
 @DataJpaTest
 @AutoConfigureTestDatabase(replace = AutoConfigureTestDatabase.Replace.NONE)
-class RiderRepositoryTest {
+class RiderRepositoryTest extends RunTestContainer {
 
     @Autowired private TestEntityManager entityManager;
 
