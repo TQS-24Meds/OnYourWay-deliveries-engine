@@ -3,6 +3,7 @@ package com.meds.deliveries.controller;
 import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.ObjectFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
 
 import java.util.List;
 
@@ -18,6 +19,7 @@ import com.meds.deliveries.model.Rider;
 import com.meds.deliveries.service.AdminService;
 import com.meds.deliveries.service.RiderService;
 
+@Controller
 public class RiderPageController {
     @Autowired ObjectFactory<HttpSession> httpSessionFactory;
     @Autowired AdminService adminsv;
@@ -25,7 +27,7 @@ public class RiderPageController {
 
 
     @GetMapping("/riders")
-    public ModelAndView internado(Model model) throws NumberFormatException, ResourceNotFoundException {
+    public ModelAndView riders(Model model) throws NumberFormatException, ResourceNotFoundException {
   
       ModelAndView modelAndView = new ModelAndView();
   
