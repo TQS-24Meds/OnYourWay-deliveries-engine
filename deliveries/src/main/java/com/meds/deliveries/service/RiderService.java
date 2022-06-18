@@ -5,6 +5,7 @@ import com.meds.deliveries.enums.RiderStatusEnum;
 import com.meds.deliveries.exception.ExistentUserException;
 import com.meds.deliveries.exception.InvalidLoginException;
 import com.meds.deliveries.exception.ResourceNotFoundException;
+import com.meds.deliveries.model.Coordinates;
 import com.meds.deliveries.model.Ride;
 import com.meds.deliveries.model.Rider;
 import com.meds.deliveries.repository.RiderRepository;
@@ -12,7 +13,6 @@ import com.meds.deliveries.repository.RiderRepository;
 import lombok.extern.log4j.Log4j2;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 import java.util.Map;
 import java.util.TreeMap;
@@ -35,10 +35,16 @@ public class RiderService {
         return repository.getById(rider_id);
     }
 
+
     public List<Ride> getAllRidesByRiderId(int rider_id){ 
-        Rider r = repository.findById(rider_id).orElseThrow(() -> new ResourceNotFoundException("There is no rider with this id"));
+        if (!repository.existsById(rider_id)) {
+            throw new ResourceNotFoundException("There is no rider with this id:" + rider_id);
+        }
+
+        Rider r = repository.findById(rider_id);
         return r.getRides();
     }
+
     
     public Rider registerRider(UserDTO userDTO) {
         Rider rider = new Rider(userDTO.getName(), userDTO.getUsername(), passwordEncoder.encode(userDTO.getPassword()), userDTO.getEmail(), userDTO.getPhone(), new SimpleGrantedAuthority("deliveries"), userDTO.getAddress());
@@ -47,13 +53,12 @@ public class RiderService {
         return repository.save(rider);
     }
 
-    public Rider updateLocation(float lat, float lon, Rider rider) throws ResourceNotFoundException {
+    public Rider updateLocation(Coordinates riderCoord, Rider rider) throws ResourceNotFoundException {
         
-        rider.setLat(lat);
-        rider.setLon(lon);
+        rider.setRiderLocation(riderCoord);
         repository.save(rider);
 
-        if(rider.getLat() == lat && rider.getLon() == lon){
+        if(rider.getRiderLocation() == riderCoord){
 
             log.info("RIDER SERVICE: Rider location updated successfully");
             return rider;
@@ -90,7 +95,18 @@ public class RiderService {
     }
 
     public Rider updateRiderStatus(Rider rider) {
-        return null;
+        RiderStatusEnum status = rider.getStatus();
+
+        switch (status){
+            case UNAVAILABLE:
+                rider.setStatus(RiderStatusEnum.AVAILABLE);
+                break;
+            case AVAILABLE:
+                rider.setStatus(RiderStatusEnum.UNAVAILABLE);
+
+        }
+        return rider;
+
     }
 
 }

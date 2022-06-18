@@ -38,7 +38,7 @@ public class PackageController {
         List<Package> packages = getAllPackages();
         List<Package> store_packages = new ArrayList<Package>();
         for (Package p : packages) {
-            if (p.getStore_id() == store_id) {
+            if (p.getStore().getId() == store_id) {
                 store_packages.add(p);
             }
         }

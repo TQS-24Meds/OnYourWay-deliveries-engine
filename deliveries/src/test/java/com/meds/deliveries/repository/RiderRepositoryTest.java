@@ -29,14 +29,14 @@ class RiderRepositoryTest {
         Rider rider = new Rider("John Doe", "johndoe", "mypassword", "john@doe.com", 912345678, Collections.emptyList(), "My house");
         entityManager.persistAndFlush(rider);
 
-        Optional<Rider> riderFound = repository.findById(rider.getId());
+        Rider riderFound = repository.findById(rider.getId());
         assertThat( riderFound, is(rider) );
     }
 
     @Test
     public void whenFindRiderByInvalidId_thenReturnNull() {
         int invalidId = -1;
-        Optional<Rider> riderFound = repository.findById(invalidId);
+        Rider riderFound = repository.findById(invalidId);
         assertThat( riderFound, is(nullValue()) );
     }
 
