@@ -17,30 +17,24 @@ public class PersonService {
     @Autowired
     private PersonRepository repository;
 
-    public Person savePerson(Person Person) {
-        return repository.save(Person);
-    }
-
-    public List<Person> savePersons(List<Person> Persons) {
-        return repository.saveAll(Persons);
-    }
-
-    public List<Person> getPersons() {
-        return repository.findAll();
+    public void registerPerson(Person p) throws DuplicatedObjectException {
+        if (repository.existsByUsername(p.getUsername()))
+            throw new DuplicatedObjectException("The provided username is already taken.");
+        repository.save(p);    
     }
 
     public Person getPersonById(int id) throws ResourceNotFoundException {
         if (!repository.existsById(id)) {
             throw new ResourceNotFoundException("Person not found for this id:" + id);
         }
-        return repository.findById(id);
+        return (Person) repository.findById(id).get();
 
     }
 
     public Person getPersonByUsername(String username) {
         if (!repository.existsByUsername(username)) throw new ResourceNotFoundException("Person not found for this username:" + username);
         
-        return repository.findByUsername(username);
+        return (Person) repository.findByUsername(username).get();
     }
 
 
@@ -48,7 +42,7 @@ public class PersonService {
         if (!repository.existsByEmail(email)) {
             throw new ResourceNotFoundException("Person not found for this email:" + email);
         }
-        return repository.findByEmail(email);
+        return (Person) repository.findByEmail(email).get();
     }
 
 
@@ -75,7 +69,7 @@ public class PersonService {
             throw new ResourceNotFoundException("Person not found for this id:" + id);
         }
 
-        Person existingPerson = repository.findById(id);
+        Person existingPerson = repository.findById(id).get();
 
         existingPerson.setName(person.getName());
         existingPerson.setEmail(person.getEmail());
@@ -85,9 +79,4 @@ public class PersonService {
 
         return repository.save(existingPerson);
     }
-
-    public void registerPerson(Person p) throws DuplicatedObjectException {
-        if (repository.existsByUsername(p.getUsername()))
-            throw new DuplicatedObjectException("The provided username is already taken.");
-        repository.save(p);    }
 }
