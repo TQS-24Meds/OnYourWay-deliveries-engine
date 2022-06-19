@@ -1,11 +1,10 @@
-/* package com.meds.deliveries.service;
+package com.meds.deliveries.service;
 
 import static org.junit.Assert.*;
 import static org.mockito.Mockito.reset;
 import static org.mockito.Mockito.when;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Optional;
@@ -61,8 +60,7 @@ public class PackageServiceTest {
     @BeforeEach
     void setUp() {
 
-        this.rider = new Rider("John Doe", "johndoe", "mypassword", "john@doe.com", 912345678, Collections.emptyList(),
-                "My house");
+        this.rider = new Rider("John Doe", "johndoe", "mypassword", "john@doe.com", 912345678, "deliveries", "My house");
         Mockito.when(riderRepository.save(rider)).thenReturn(rider);
 
         this.store = new Store("24 Meds", UUID.randomUUID(), new Coordinates(87.2, 87.1));
@@ -274,4 +272,3 @@ public class PackageServiceTest {
     // package picked verify delivery time
 
 }
- */
