@@ -8,6 +8,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Optional;
 import java.util.UUID;
 
 import org.junit.jupiter.api.*;
@@ -26,12 +27,10 @@ import static org.mockito.Mockito.verify;
 
 import com.meds.deliveries.enums.DeliveryStatusEnum;
 import com.meds.deliveries.exception.ResourceNotFoundException;
-import com.meds.deliveries.model.Admin;
 import com.meds.deliveries.model.Coordinates;
 import com.meds.deliveries.model.Package;
 import com.meds.deliveries.model.Rider;
 import com.meds.deliveries.model.Store;
-import com.meds.deliveries.repository.AdminRepository;
 import com.meds.deliveries.repository.PackageRepository;
 import com.meds.deliveries.repository.RiderRepository;
 import com.meds.deliveries.repository.StoreRepository;
@@ -47,10 +46,6 @@ public class PackageServiceTest {
     private Package p;
     private Package p2;
     HashMap<Package, DeliveryStatusEnum> package_status = new HashMap<>();
-
-    @Mock(lenient = true)
-    private AdminRepository adminRepository;
-    private Admin admin;
 
     @Mock(lenient = true)
     private StoreRepository storeRepository;
@@ -70,21 +65,17 @@ public class PackageServiceTest {
                 "My house");
         Mockito.when(riderRepository.save(rider)).thenReturn(rider);
 
-        this.admin = new Admin("Artur Romão", "arturomao", "12212", "artur@gmail.com", 96514778,
-                Collections.emptyList());
-        Mockito.when(adminRepository.save(admin)).thenReturn(admin);
-
-        this.store = new Store("24 Meds", UUID.randomUUID(), new Coordinates(87.2, 87.1), admin);
+        this.store = new Store("24 Meds", UUID.randomUUID(), new Coordinates(87.2, 87.1));
         Mockito.when(storeRepository.save(store)).thenReturn(store);
 
         this.p = new Package(
-                "Rua Dr. Mário Sacramento 12", "Joana Vedor", DeliveryStatusEnum.PENDENT, 1, store);
-        this.p2 = new Package("Rua das Cores", "Mariana Rosa", DeliveryStatusEnum.ON_DELIVERY, 2, store);
+                "Rua Dr. Mário Sacramento 12", "Joana Vedor", 1, store);
+        this.p2 = new Package("Rua das Cores", "Mariana Rosa", 2, store);
 
         Mockito.when(repository.save(p)).thenReturn(p);
         Mockito.when(repository.save(p2)).thenReturn(p2);
 
-        Mockito.when(repository.findById(1)).thenReturn(p);
+        Mockito.when(repository.findById(1)).thenReturn(Optional.of(p));
         package_status.put(p, p.getStatus());
         package_status.put(p2, p2.getStatus());
 
@@ -98,7 +89,7 @@ public class PackageServiceTest {
     @Test
     @DisplayName("Find package by ID")
     void whenSearchingForPackageId_returnRightPackage() {
-        when(repository.findById(p.getId())).thenReturn(p);
+        when(repository.findById(p.getId())).thenReturn(Optional.of(p));
         when(repository.existsById(p.getId())).thenReturn(true);
         System.out.println(p.getId());
 
@@ -209,7 +200,7 @@ public class PackageServiceTest {
     @Test
     @DisplayName("Get package status")
     void whenGettingAPackageStatus_returnRightStatus() {
-        Mockito.when(repository.findById(1)).thenReturn(p);
+        Mockito.when(repository.findById(1)).thenReturn(Optional.of(p));
         when(repository.existsById(p.getId())).thenReturn(true);
 
         System.out.println(p);
@@ -223,7 +214,7 @@ public class PackageServiceTest {
 
     @Test
     void testWhenPackageIsUpdated_packageStatusIsUpdated() {
-        Mockito.when(repository.findById(1)).thenReturn(p);
+        Mockito.when(repository.findById(1)).thenReturn(Optional.of(p));
         when(repository.existsById(p.getId())).thenReturn(true);
 
         DeliveryStatusEnum actual_state = p.getStatus();

@@ -72,7 +72,7 @@ public class PackageService {
         if (!repository.existsById(id)) {
             throw new ResourceNotFoundException("There are no packages with this ID:" + id);
         }
-        return repository.findById(id);
+        return repository.findById(id).get();
 
     }
 

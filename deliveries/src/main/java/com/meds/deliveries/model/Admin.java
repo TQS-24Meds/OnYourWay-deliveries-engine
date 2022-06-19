@@ -23,9 +23,6 @@ public class Admin extends Person {
     @Column(name = "id_admin")
     private int id;
 
-    @OneToMany(cascade = CascadeType.ALL ,mappedBy = "admin")
-    private List<Store> stores;
-    
     // @NotNull
     // @OneToOne(cascade = CascadeType.ALL)
     // @JoinColumn(name = "id_person_admin", referencedColumnName = "id_person") 

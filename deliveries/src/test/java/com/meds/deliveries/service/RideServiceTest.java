@@ -23,10 +23,8 @@ import com.meds.deliveries.exception.ResourceNotFoundException;
 import com.meds.deliveries.model.Ride;
 import com.meds.deliveries.model.Rider;
 import com.meds.deliveries.model.Store;
-import com.meds.deliveries.model.Admin;
 import com.meds.deliveries.model.Coordinates;
 import com.meds.deliveries.model.Package;
-import com.meds.deliveries.repository.AdminRepository;
 import com.meds.deliveries.repository.PackageRepository;
 import com.meds.deliveries.repository.RideRepository;
 import com.meds.deliveries.repository.RiderRepository;
@@ -48,9 +46,7 @@ public class RideServiceTest {
 
     @Mock(lenient = true)
     private PackageRepository packageRepository;
-    private Package ride_package;    @Mock
-    private AdminRepository adminRepository;
-    private Admin admin;
+    private Package ride_package;
 
     @Mock 
     private StoreRepository storeRepository;
@@ -70,14 +66,11 @@ public class RideServiceTest {
         this.rider = new Rider("John Doe", "johndoe", "mypassword", "john@doe.com", 912345678, Collections.emptyList(),
                 "My house");
         Mockito.when(riderRepository.save(rider)).thenReturn(rider);
-
-      
-        this.admin = new Admin("Artur Romão", "arturomao", "12212", "artur@gmail.com", 96514778, Collections.emptyList());
         
-        this.store = new Store("24 Meds", UUID.randomUUID(),  new Coordinates(87.2,87.1), admin);
+        this.store = new Store("24 Meds", UUID.randomUUID(),  new Coordinates(87.2,87.1));
         
         this.ride_package = new Package(
-                "Rua Dr. Mário Sacramento 12", "Joana Vedor", DeliveryStatusEnum.PENDENT, 1, store);
+                "Rua Dr. Mário Sacramento 12", "Joana Vedor", 1, store);
         this.ride = new Ride(ride_package);
 
 

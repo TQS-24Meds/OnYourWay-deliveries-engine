@@ -58,8 +58,6 @@ public class Package {
     @Column(name = "rider_id", nullable = false)
     private int rider_id;
 
-
-
     @ManyToOne
     @JoinColumn(name="id_store")
     private Store store;
@@ -71,12 +69,12 @@ public class Package {
 
     // Package pending
     //acho que o store id temos q alterar para store uuid
-    public Package(String client_addr, String client_name, DeliveryStatusEnum status, int order_id, Store store_id) {
+    public Package(String client_addr, String client_name, int order_id, Store store) {
         this.client_addr = client_addr;
         this.client_name = client_name;
         this.order_id = order_id;
-        this.store = store_id;
-        this.packageFinalLocation = store_id.getStore_location();
+        this.store = store;
+        this.packageFinalLocation = store.getStore_location();
         this.status = DeliveryStatusEnum.PENDENT;
         //this.packageLocation 
 
