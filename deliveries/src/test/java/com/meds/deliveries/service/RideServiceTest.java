@@ -5,13 +5,13 @@ import static org.mockito.BDDMockito.given;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 import java.util.UUID;
 
 import org.junit.jupiter.api.*;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.*;
 import org.mockito.junit.jupiter.MockitoExtension;
-import org.springframework.security.core.authority.SimpleGrantedAuthority;
 
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
@@ -22,10 +22,8 @@ import com.meds.deliveries.exception.ResourceNotFoundException;
 import com.meds.deliveries.model.Ride;
 import com.meds.deliveries.model.Rider;
 import com.meds.deliveries.model.Store;
-import com.meds.deliveries.model.Admin;
 import com.meds.deliveries.model.Coordinates;
 import com.meds.deliveries.model.Package;
-import com.meds.deliveries.repository.AdminRepository;
 import com.meds.deliveries.repository.PackageRepository;
 import com.meds.deliveries.repository.RideRepository;
 import com.meds.deliveries.repository.RiderRepository;
@@ -37,7 +35,7 @@ public class RideServiceTest {
     @InjectMocks
     private RideService service;
 
-    @InjectMocks
+    @Mock(lenient = true)
     private RiderService riderService;
 
     @Mock(lenient = true)
@@ -47,51 +45,34 @@ public class RideServiceTest {
 
     @Mock(lenient = true)
     private PackageRepository packageRepository;
-    private Package ride_package;    @Mock
-    private AdminRepository adminRepository;
-    private Admin admin;
+    private Package ride_package;
 
-    @Mock 
+    @Mock(lenient = true)
     private StoreRepository storeRepository;
     private Store store;
-    
-    
 
     @Mock(lenient = true)
     private RiderRepository riderRepository;
     private Rider rider;
 
-
-
-
     @BeforeEach
     void setUp() {
-        this.rider = new Rider("John Doe", "johndoe", "mypassword", "john@doe.com", 912345678, "deliveries",
-                "My house");
-        Mockito.when(riderRepository.save(rider)).thenReturn(rider);
-
-      
-        this.admin = new Admin("Artur Romão", "arturomao", "12212", "artur@gmail.com", 96514778, "management");
-        
+        this.rider = new Rider("John Doe", "johndoe", "mypassword", "john@doe.com", 912345678, "deliveries", "My house");
+                
         this.store = new Store("24 Meds", UUID.randomUUID(),  new Coordinates(87.2,87.1));
         
-        this.ride_package = new Package(
-                "Rua Dr. Mário Sacramento 12", "Joana Vedor", 1, store);
+        this.ride_package = new Package("Rua Dr. Mário Sacramento 12", "Joana Vedor", 1, store);
+        
         this.ride = new Ride(ride_package, rider);
-
-
+                    
         allRides.add(ride);
-
+        
         rider.setRides(allRides);
-        Mockito.when(packageRepository.save(ride_package)).thenReturn(ride_package);
+        Mockito.when(riderRepository.save(rider)).thenReturn(rider);
+        //Mockito.when(packageRepository.save(ride_package)).thenReturn(ride_package);
         Mockito.when(repository.findById(1)).thenReturn(ride);
-        Mockito.when(riderRepository.findById(1)).thenReturn(rider);
+        Mockito.when(riderRepository.findById(1)).thenReturn(Optional.of(rider));
         Mockito.when(repository.save(ride)).thenReturn(ride);
-
-        rider.setId(1);
-        ride.setId(1);
-
-
     }
 
     @Test
@@ -139,13 +120,12 @@ public class RideServiceTest {
     @DisplayName("Find rides from a rider.")
     void whenRequestRidesFromRider_thenGetRides() {
         
-        given(riderRepository.findById(rider.getId())).willReturn(rider);
+        given(riderRepository.findById(rider.getId())).willReturn(Optional.of(rider));
         when(riderRepository.existsById(ride.getId())).thenReturn(true);
 
         assertThat(service.getAllRidesFromRider(rider))
                 .isNotNull()
                 .isEqualTo(allRides);
-
     }
 
     @Test
@@ -155,7 +135,7 @@ public class RideServiceTest {
 
         assertThatThrownBy(() -> service.getAllRidesFromRider(rider))
                 .isInstanceOf(ResourceNotFoundException.class)
-                .hasMessage(String.format("There are no rides for this rider."));
+                .hasMessage("There are no rides for this rider!");
         
         
         verify(repository, Mockito.times(0)).findById(Mockito.anyInt());

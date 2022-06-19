@@ -132,6 +132,7 @@ public class RiderControllerTest {
     }
 
     /* @Test
+
     void getRiderSpecificPackage() {
         
         Store store = new Store("Farmácia Alexandrina", UUID.randomUUID(), new Coordinates(43.221, -37.821));

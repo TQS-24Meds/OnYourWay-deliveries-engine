@@ -22,7 +22,7 @@ public class RideService {
     RideRepository repository;
 
     @Autowired
-    RiderRepository rider_repository;
+    RiderRepository riderRepository;
 
     @Autowired
     PackageRepository packageRepository;
@@ -35,8 +35,8 @@ public class RideService {
 
     public List<Ride> getAllRidesFromRider(Rider r) {
 
-        if (!rider_repository.existsById(r.getId())){
-            throw new ResourceNotFoundException(String.format("There are no rides for this rider."));
+        if (!riderRepository.existsById(r.getId())){
+            throw new ResourceNotFoundException("There are no rides for this rider!");
         }
    
         return r.getRides();
@@ -53,7 +53,7 @@ public class RideService {
 
     public Rider chooseRider(Package p) {
         p.setStatus(DeliveryStatusEnum.ACCEPTED);
-        return rider_repository.findById(0);
+        return riderRepository.findById(0).get();
     }
 
     public Ride rideInit(Package p) {

@@ -1,66 +1,81 @@
-/* package com.meds.deliveries.repository;
+package com.meds.deliveries.repository;
 
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabase;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import org.springframework.boot.test.autoconfigure.orm.jpa.TestEntityManager;
 
-import static org.hamcrest.MatcherAssert.assertThat;
-import static org.hamcrest.core.Is.is;
-import static org.hamcrest.CoreMatchers.nullValue;
-
 import com.meds.deliveries.enums.RiderStatusEnum;
-import com.meds.deliveries.model.Rider;
+import com.meds.deliveries.model.*;
 
-import java.util.Collections;
+import static org.assertj.core.api.Assertions.assertThat;
+
 import java.util.List;
-import java.util.Optional;
-
 
 @DataJpaTest
-class RiderRepositoryTest {
+@AutoConfigureTestDatabase(replace = AutoConfigureTestDatabase.Replace.NONE)
+class RiderRepositoryTest extends RunTestContainer {
 
     @Autowired private TestEntityManager entityManager;
 
     @Autowired private RiderRepository repository;
 
+    Rider john;
+
+    @BeforeEach
+    void setUp() {
+        john = new Rider("John Doe", "johndoe", "johnpass", "john@doe.com", 911111111, "deliveries", "riders house");
+        entityManager.persistAndFlush(john);
+    }
+
     @Test
     public void whenFindRiderByValidId_thenReturnValidRider() {
-        Rider rider = new Rider("John Doe", "johndoe", "mypassword", "john@doe.com", 912345678, Collections.emptyList(), "My house");
-        entityManager.persistAndFlush(rider);
-
-        Rider riderFound = repository.findById(rider.getId());
-        assertThat( riderFound, is(rider) );
+        Rider riderFound = repository.findById(john.getId()).orElse(null);;
+        assertThat( riderFound ).isEqualTo( john );
     }
 
     @Test
     public void whenFindRiderByInvalidId_thenReturnNull() {
         int invalidId = -1;
-        Rider riderFound = repository.findById(invalidId);
-        assertThat( riderFound, is(nullValue()) );
+        Rider riderFound = repository.findById(invalidId).orElse(null);;
+        assertThat( riderFound ).isNull();
     }
 
     @Test
-    public void whenFindRidersByStatus_thenReturnValidRiders() {
-        Rider john = new Rider("John", "john", "mypassword", "john@user.com", 911111111, Collections.emptyList(), "John house");
-        Rider alice = new Rider("Alice", "alice", "mypassword", "alice@user.com", 922222222, Collections.emptyList(), "Alice house");
-        Rider alex = new Rider("Alex", "alex", "mypassword", "alex@user.com", 933333333, Collections.emptyList(), "Alex house");
-
-        alice.setStatus(RiderStatusEnum.AVAILABLE);
-        alex.setStatus(RiderStatusEnum.AVAILABLE);
-
-        entityManager.persist(john);
+    public void whenGetAllRiders_thenReturnAllRiders() {
+        Rider alice = new Rider("Alice", "alice", "mypassword", "alice@user.com", 922222222, "deliveries", "Alice house");
+        Rider alex = new Rider("Alex", "alex", "mypassword", "alex@user.com", 933333333, "deliveries", "Alex house");
+        
         entityManager.persist(alice);
         entityManager.persist(alex);
         entityManager.flush();
 
-        List<Rider> ridersFound = repository.findByStatus(RiderStatusEnum.AVAILABLE);
+        List<Rider> allRiders = repository.findAll();
 
-        assertThat( ridersFound.size(), is(2) );
-        assertThat( ridersFound.contains(john), is(false) );
-        assertThat( ridersFound.contains(alice), is(true) );
-        assertThat( ridersFound.contains(alex), is(true) );
+        assertThat( allRiders ).hasSize(3).extracting(Rider::getUsername).contains(john.getUsername(), alice.getUsername(), alex.getUsername());
+        assertThat( allRiders ).contains(john);
+        assertThat( allRiders ).contains(alice);
+        assertThat( allRiders ).contains(alex);
+    }
+
+    @Test
+    public void whenFindRidersByStatus_thenReturnValidRiders() {
+        Rider alice = new Rider("Alice", "alice", "mypassword", "alice@user.com", 922222222, "deliveries", "Alice house");
+        Rider alex = new Rider("Alex", "alex", "mypassword", "alex@user.com", 933333333, "deliveries", "Alex house");
+
+        alice.setStatus(RiderStatusEnum.UNAVAILABLE);
+
+        entityManager.persist(alice);
+        entityManager.persist(alex);
+        entityManager.flush();
+
+        List<Rider> availableRiders = repository.findByStatus(RiderStatusEnum.AVAILABLE);
+
+        assertThat( availableRiders ).hasSize(2);
+        assertThat( availableRiders ).contains(alex);
+        assertThat( availableRiders ).contains(john);
     }
 
 }
- */

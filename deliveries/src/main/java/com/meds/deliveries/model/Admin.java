@@ -2,8 +2,6 @@ package com.meds.deliveries.model;
 
 import javax.persistence.*;
 
-import org.springframework.security.core.GrantedAuthority;
-
 import lombok.*;
 
 @Data
@@ -11,7 +9,6 @@ import lombok.*;
 @Getter
 @Setter
 @NoArgsConstructor
-@AllArgsConstructor
 @ToString
 @EqualsAndHashCode(callSuper = true)
 @Table(name = "admin")

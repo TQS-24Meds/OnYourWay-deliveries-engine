@@ -18,7 +18,6 @@ import java.util.Map;
 import java.util.TreeMap;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
@@ -32,7 +31,7 @@ public class RiderService {
     public List<Rider> getAllRiders() { return repository.findAll(); }
 
     public Rider getRiderById(int rider_id) {
-        return repository.findById(rider_id);
+        return repository.findById(rider_id).get();
     }
 
 
@@ -41,8 +40,7 @@ public class RiderService {
             throw new ResourceNotFoundException("There is no rider with this id:" + rider_id);
         }
 
-        Rider r = repository.findById(rider_id);
-        return r.getRides();
+        return repository.findById(rider_id).get().getRides();
     }
 
     
@@ -108,5 +106,7 @@ public class RiderService {
         return rider;
 
     }
+
+
 
 }
