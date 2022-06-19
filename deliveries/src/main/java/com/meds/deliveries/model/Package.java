@@ -28,7 +28,6 @@ public class Package {
     @Column(name = "id_package_order")
     private int id;
 
-
     @Column(name = "client_addr", nullable = false)
     private String client_addr;    
 
@@ -46,7 +45,6 @@ public class Package {
     @OneToOne
     @JsonIgnore
     private Ride ride;
-      
     @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "id_coordinates")
     private Coordinates packageFinalLocation;
@@ -56,8 +54,6 @@ public class Package {
 
     @Column(name = "rider_id", nullable = false)
     private int rider_id;
-
-
 
     @ManyToOne
     @JoinColumn(name="id_store")
@@ -70,13 +66,13 @@ public class Package {
 
     // Package pending
     //acho que o store id temos q alterar para store uuid
-    public Package(String client_addr, String client_name, int order_id, Store store_id) {
+    public Package(String client_addr, String client_name, int order_id, Store store) {
         this.client_addr = client_addr;
         this.client_name = client_name;
-        this.order_id = order_id;
-        this.store = store_id;
-        this.packageFinalLocation = store_id.getStore_location();
         this.status = DeliveryStatusEnum.PENDENT;
+        this.order_id = order_id;
+        this.store = store;
+        this.packageFinalLocation = store.getStore_location();
         //this.packageLocation 
 
     }

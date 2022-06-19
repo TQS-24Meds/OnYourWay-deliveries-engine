@@ -46,7 +46,6 @@ public class PackageService {
         List<Package> packages_accepted = repository.findByStatus(DeliveryStatusEnum.ACCEPTED);
         return packages_accepted;
     }
-    
 
     // find all packages on delivery
     public List<Package> getPackagesOnDelivery() {
@@ -72,7 +71,7 @@ public class PackageService {
         if (!repository.existsById(id)) {
             throw new ResourceNotFoundException("There are no packages with this ID:" + id);
         }
-        return repository.findById(id);
+        return repository.findById(id).get();
 
     }
 
