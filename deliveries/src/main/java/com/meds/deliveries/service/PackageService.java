@@ -1,13 +1,18 @@
 package com.meds.deliveries.service;
 
 import com.meds.deliveries.enums.DeliveryStatusEnum;
+import com.meds.deliveries.exception.InvalidLoginException;
 import com.meds.deliveries.exception.ResourceNotFoundException;
 import com.meds.deliveries.model.Package;
 import com.meds.deliveries.model.Rider;
+import com.meds.deliveries.model.Store;
 import com.meds.deliveries.repository.PackageRepository;
 import com.meds.deliveries.repository.RiderRepository;
 
 import java.util.List;
+import java.util.Map;
+import java.util.Optional;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -19,7 +24,8 @@ public class PackageService {
 
     @Autowired
     RiderRepository riderRepository;
-
+    @Autowired
+    SpringUserDetailsService SpringUserDetailsService;
 
     // find all packages
     public List<Package> getAllPackages() {
@@ -112,5 +118,49 @@ public class PackageService {
 
         return p;
     }
+
+    public Package receiveNewOrder(String storeToken, Map<String, Object> data) throws  InvalidLoginException {
+/*         Store store = SpringUserDetailsService.getStoreFromToken(storeToken);
+        if (store == null) {
+            log.error("PURCHASE SERVICE: Invalid store token, when store tried to get new order");
+            throw new InvalidLoginException("There is no Store associated with this token");
+        } */
+
+        String error = "invalid data";
+
+        Object personName = Optional.ofNullable(data.get("personName")) .orElseThrow(() -> {
+            log.error("PURCHASE SERVICE: Invalid data, personName, when store tried to get new order");
+            return new InvalidValueException(error);
+        });
+
+        if (!(personName instanceof String)) {
+            log.error("PURCHASE SERVICE: Invalid data when store tried to get new order -> person name is not of type String");
+            throw new InvalidValueException(error);
+        }
+
+        Object address = Optional.ofNullable(data.get("address")).orElseThrow(() -> {
+            log.error("PURCHASE SERVICE: Invalid data, address, when store tried to get new order");
+            return new InvalidValueException(error);
+        });
+
+        Address addr = new Address();
+        try {
+            addr.setAddress(((Map<String, String>) address).get("address"));
+            addr.setCity(((Map<String, String>) address).get("city"));
+            addr.setCountry(((Map<String, String>) address).get("country"));
+            addr.setPostalCode(((Map<String, String>) address).get("postalCode"));
+        } catch (Exception ex) {
+            log.error("PURCHASE SERVICE: Invalid data, address, when store tried to get new order");
+            throw new InvalidValueException(error);
+        }
+
+        addressRepository.save(addr);
+        Purchase purchase = new Purchase(addr, store, (String) personName);
+        purchaseRepository.save(purchase);
+
+        log.info("PURCHASE SERVICE: Store successfully retrieved newest order");
+        return purchase;
+    }
+
 
 }
