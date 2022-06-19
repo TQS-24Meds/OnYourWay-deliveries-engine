@@ -22,9 +22,6 @@ public class Admin extends Person {
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
     @Column(name = "id_admin")
     private int id;
-
-    @OneToMany(cascade = CascadeType.ALL ,mappedBy = "admin")
-    private List<Store> stores;
     
     // @NotNull
     // @OneToOne(cascade = CascadeType.ALL)

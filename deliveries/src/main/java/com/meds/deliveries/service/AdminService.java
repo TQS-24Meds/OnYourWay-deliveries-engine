@@ -7,9 +7,7 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 import java.util.Optional;
 
-
 @Service
-
 public class AdminService {
     @Autowired AdminRepository repository;
     public List<Admin> getAllAdmins() { return repository.findAll(); }
@@ -35,11 +33,9 @@ public class AdminService {
         Admin existingAdmin = repository.findById(id).orElseThrow(() -> new ResourceNotFoundException("Admin not found for this id:" + id));
 
         existingAdmin.setName(admin.getName());
-        existingAdmin.setStores(admin.getStores());
         existingAdmin.setEmail(admin.getEmail());
         existingAdmin.setPhone(admin.getPhone());
         existingAdmin.setPassword(admin.getPassword());
-        existingAdmin.setStores(admin.getStores());
         return repository.save(existingAdmin);
     }
 

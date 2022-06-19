@@ -29,10 +29,6 @@ public class Store {
     @Column(name="storeuuid", nullable = false)
     private UUID storeuiid;
 
-    @ManyToOne
-    @JoinColumn(name = "id_admin", nullable = false)
-    private Admin admin;
-
     @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "id_store")
     private Coordinates store_location;
@@ -41,9 +37,8 @@ public class Store {
     private Set<Package> packages;
     
 
-    public Store(String name, UUID storeuuid, Coordinates coords, Admin admin){
+    public Store(String name, UUID storeuuid, Coordinates coords){
         this.name = name;
-        this.admin = admin;
         this.storeuiid = storeuuid;
     }
 
