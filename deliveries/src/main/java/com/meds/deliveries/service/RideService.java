@@ -34,6 +34,7 @@ public class RideService {
     }
 
     public List<Ride> getAllRidesFromRider(Rider r) {
+
         if (!riderRepository.existsById(r.getId())){
             throw new ResourceNotFoundException("There are no rides for this rider!");
         }

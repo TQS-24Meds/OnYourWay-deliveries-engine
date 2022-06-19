@@ -131,7 +131,8 @@ public class RiderControllerTest {
             assertThat(response.getBody().getAddress()).isEqualTo("My house");
     }
 
- /*    @Test
+    /* @Test
+
     void getRiderSpecificPackage() {
         
         Store store = new Store("Farmácia Alexandrina", UUID.randomUUID(), new Coordinates(43.221, -37.821));
@@ -161,7 +162,7 @@ public class RiderControllerTest {
             assertThat(response.getBody().getClient_name()).isEqualTo("Vasco Regal");
             assertThat(response.getBody().getClient_addr()).isEqualTo("My street");
     } */
-    
+
     /* @Test
     void getRiderListOfPackages() {
         Store store = new Store("Farmácia Alexandrina", UUID.randomUUID(), new Coordinates(43.221, -37.821));
