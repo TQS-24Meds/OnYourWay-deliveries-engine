@@ -28,7 +28,6 @@ public class Package {
     @Column(name = "id_package_order")
     private int id;
 
-
     @Column(name = "client_addr", nullable = false)
     private String client_addr;    
 
@@ -72,10 +71,10 @@ public class Package {
     public Package(String client_addr, String client_name, int order_id, Store store) {
         this.client_addr = client_addr;
         this.client_name = client_name;
+        this.status = DeliveryStatusEnum.PENDENT;
         this.order_id = order_id;
         this.store = store;
         this.packageFinalLocation = store.getStore_location();
-        this.status = DeliveryStatusEnum.PENDENT;
         //this.packageLocation 
 
     }

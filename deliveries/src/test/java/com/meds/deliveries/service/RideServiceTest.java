@@ -36,7 +36,7 @@ public class RideServiceTest {
     @InjectMocks
     private RideService service;
 
-    @InjectMocks
+    @Mock(lenient = true)
     private RiderService riderService;
 
     @Mock(lenient = true)
@@ -48,7 +48,7 @@ public class RideServiceTest {
     private PackageRepository packageRepository;
     private Package ride_package;
 
-    @Mock 
+    @Mock(lenient = true)
     private StoreRepository storeRepository;
     private Store store;
     
@@ -66,7 +66,7 @@ public class RideServiceTest {
         this.rider = new Rider("John Doe", "johndoe", "mypassword", "john@doe.com", 912345678, Collections.emptyList(),
                 "My house");
         Mockito.when(riderRepository.save(rider)).thenReturn(rider);
-        
+
         this.store = new Store("24 Meds", UUID.randomUUID(),  new Coordinates(87.2,87.1));
         
         this.ride_package = new Package(

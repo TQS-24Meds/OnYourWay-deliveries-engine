@@ -19,8 +19,6 @@ import com.meds.deliveries.model.Coordinates;
 import com.meds.deliveries.model.Package;
 import com.meds.deliveries.model.Store;
 
-
-
 @DataJpaTest
 @AutoConfigureTestDatabase(replace = AutoConfigureTestDatabase.Replace.NONE)
 public class PackageRepositoryTest extends RunTestContainer {

@@ -71,6 +71,7 @@ public class PackageServiceTest {
         this.p = new Package(
                 "Rua Dr. Mário Sacramento 12", "Joana Vedor", 1, store);
         this.p2 = new Package("Rua das Cores", "Mariana Rosa", 2, store);
+        this.p2.setStatus(DeliveryStatusEnum.ON_DELIVERY);
 
         Mockito.when(repository.save(p)).thenReturn(p);
         Mockito.when(repository.save(p2)).thenReturn(p2);

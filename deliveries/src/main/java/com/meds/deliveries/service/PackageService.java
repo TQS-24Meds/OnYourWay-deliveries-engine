@@ -46,7 +46,6 @@ public class PackageService {
         List<Package> packages_accepted = repository.findByStatus(DeliveryStatusEnum.ACCEPTED);
         return packages_accepted;
     }
-    
 
     // find all packages on delivery
     public List<Package> getPackagesOnDelivery() {
