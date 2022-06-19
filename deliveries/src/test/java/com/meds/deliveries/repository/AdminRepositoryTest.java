@@ -9,8 +9,6 @@ import org.springframework.boot.test.autoconfigure.orm.jpa.TestEntityManager;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-import java.util.Collections;
-
 import com.meds.deliveries.model.Admin;
 
 @DataJpaTest
@@ -25,7 +23,7 @@ class AdminRepositoryTest extends RunTestContainer {
 
     @BeforeEach
     void setUp() {
-        admin = new Admin("John Doe", "johndoe", "johnpass", "john@doe.com", 911111111, Collections.emptyList());
+        admin = new Admin("John Doe", "johndoe", "johnpass", "john@doe.com", 911111111, "management");
         entityManager.persistAndFlush(admin);
     }
 

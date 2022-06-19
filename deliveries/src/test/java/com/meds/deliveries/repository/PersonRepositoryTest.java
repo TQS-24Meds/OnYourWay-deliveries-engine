@@ -11,8 +11,6 @@ import com.meds.deliveries.model.*;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-import java.util.Collections;
-
 @DataJpaTest
 @AutoConfigureTestDatabase(replace = AutoConfigureTestDatabase.Replace.NONE)
 public class PersonRepositoryTest extends RunTestContainer {
@@ -25,7 +23,7 @@ public class PersonRepositoryTest extends RunTestContainer {
 
     @BeforeEach
     void setUp() {
-        john = new Person("John Doe", "johndoe", "johnpass", "john@doe.com", 911111111, Collections.emptyList());
+        john = new Person("John Doe", "johndoe", "johnpass", "john@doe.com", 911111111, "");
         entityManager.persistAndFlush(john);
     }
 

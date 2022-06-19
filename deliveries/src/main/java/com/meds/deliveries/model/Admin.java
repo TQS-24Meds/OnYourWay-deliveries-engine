@@ -2,8 +2,6 @@ package com.meds.deliveries.model;
 
 import javax.persistence.*;
 
-import org.springframework.security.core.GrantedAuthority;
-
 import lombok.*;
 
 @Data

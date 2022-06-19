@@ -7,8 +7,6 @@ import javax.persistence.*;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.meds.deliveries.enums.RiderStatusEnum;
 
-import org.springframework.security.core.GrantedAuthority;
-
 import lombok.*;
 
 @Data

@@ -12,7 +12,6 @@ import com.meds.deliveries.model.*;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-import java.util.Collections;
 import java.util.List;
 
 @DataJpaTest
@@ -27,7 +26,7 @@ class RiderRepositoryTest extends RunTestContainer {
 
     @BeforeEach
     void setUp() {
-        john = new Rider("John Doe", "johndoe", "johnpass", "john@doe.com", 911111111, Collections.emptyList(), "riders house");
+        john = new Rider("John Doe", "johndoe", "johnpass", "john@doe.com", 911111111, "deliveries", "riders house");
         entityManager.persistAndFlush(john);
     }
 
@@ -46,8 +45,8 @@ class RiderRepositoryTest extends RunTestContainer {
 
     @Test
     public void whenGetAllRiders_thenReturnAllRiders() {
-        Rider alice = new Rider("Alice", "alice", "mypassword", "alice@user.com", 922222222, Collections.emptyList(), "Alice house");
-        Rider alex = new Rider("Alex", "alex", "mypassword", "alex@user.com", 933333333, Collections.emptyList(), "Alex house");
+        Rider alice = new Rider("Alice", "alice", "mypassword", "alice@user.com", 922222222, "deliveries", "Alice house");
+        Rider alex = new Rider("Alex", "alex", "mypassword", "alex@user.com", 933333333, "deliveries", "Alex house");
         
         entityManager.persist(alice);
         entityManager.persist(alex);
@@ -63,8 +62,8 @@ class RiderRepositoryTest extends RunTestContainer {
 
     @Test
     public void whenFindRidersByStatus_thenReturnValidRiders() {
-        Rider alice = new Rider("Alice", "alice", "mypassword", "alice@user.com", 922222222, Collections.emptyList(), "Alice house");
-        Rider alex = new Rider("Alex", "alex", "mypassword", "alex@user.com", 933333333, Collections.emptyList(), "Alex house");
+        Rider alice = new Rider("Alice", "alice", "mypassword", "alice@user.com", 922222222, "deliveries", "Alice house");
+        Rider alex = new Rider("Alex", "alex", "mypassword", "alex@user.com", 933333333, "deliveries", "Alex house");
 
         alice.setStatus(RiderStatusEnum.AVAILABLE);
 

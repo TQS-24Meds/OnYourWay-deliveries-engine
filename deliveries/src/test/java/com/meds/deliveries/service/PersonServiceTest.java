@@ -10,13 +10,11 @@ import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.mockito.junit.jupiter.MockitoExtension;
 import org.springframework.data.rest.webmvc.ResourceNotFoundException;
-import org.springframework.security.core.authority.SimpleGrantedAuthority;
 
 import com.meds.deliveries.exception.DuplicatedObjectException;
 import com.meds.deliveries.model.Person;
 import com.meds.deliveries.repository.PersonRepository;
 
-import java.util.Collections;
 import java.util.Optional;
 
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
