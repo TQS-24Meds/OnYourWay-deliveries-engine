@@ -8,21 +8,26 @@ import org.springframework.test.context.DynamicPropertySource;
 import org.testcontainers.containers.MySQLContainer;
 import org.testcontainers.utility.DockerImageName;
 
+import lombok.extern.log4j.Log4j2;
+
+@Log4j2
 @SpringBootTest
 class DeliveriesApplicationTests {
 
-	static final MySQLContainer<?> container;
-
-    static {
-        container = 
+  static final MySQLContainer<?> container =
          new MySQLContainer<>(DockerImageName.parse("mysql:8.0"))
           .withDatabaseName("OnYourWay")
           .withUsername("user")
           .withPassword("user")
           .withReuse(true);
-    
-        container.start();
-      }
+  static {
+      container.start();
+      // make sure that containers will be stop in fast way (Ryuk can be slow)
+      Runtime.getRuntime().addShutdownHook(new Thread(() -> {
+        log.info("DockerContainers stop");
+        container.stop();
+    }));
+  }
     
     @DynamicPropertySource
     static void properties(DynamicPropertyRegistry registry) {

@@ -3,22 +3,20 @@ package com.meds.deliveries.repository;
 import org.springframework.test.context.DynamicPropertyRegistry;
 import org.springframework.test.context.DynamicPropertySource;
 import org.testcontainers.containers.MySQLContainer;
-import org.testcontainers.junit.jupiter.Container;
-import org.testcontainers.junit.jupiter.Testcontainers;
 import org.testcontainers.utility.DockerImageName;
 
 import lombok.extern.log4j.Log4j2;
 
 @Log4j2
-@Testcontainers
 public abstract class RunTestContainer {
   
-  @Container
+  //@Container
   static final MySQLContainer<?> container =
          new MySQLContainer<>(DockerImageName.parse("mysql:8.0"))
           .withDatabaseName("OnYourWay")
           .withUsername("user")
-          .withPassword("user");
+          .withPassword("user")
+          .withReuse(true);
   static {
       container.start();
       // make sure that containers will be stop in fast way (Ryuk can be slow)

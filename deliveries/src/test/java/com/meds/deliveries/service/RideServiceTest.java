@@ -51,41 +51,29 @@ public class RideServiceTest {
     @Mock(lenient = true)
     private StoreRepository storeRepository;
     private Store store;
-    
-    
 
     @Mock(lenient = true)
     private RiderRepository riderRepository;
     private Rider rider;
 
-
-
-
     @BeforeEach
     void setUp() {
-        this.rider = new Rider("John Doe", "johndoe", "mypassword", "john@doe.com", 912345678, Collections.emptyList(),
-                "My house");
-        Mockito.when(riderRepository.save(rider)).thenReturn(rider);
-
+        this.rider = new Rider("John Doe", "johndoe", "mypassword", "john@doe.com", 912345678, Collections.emptyList(), "My house");
+                
         this.store = new Store("24 Meds", UUID.randomUUID(),  new Coordinates(87.2,87.1));
         
-        this.ride_package = new Package(
-                "Rua Dr. Mário Sacramento 12", "Joana Vedor", 1, store);
+        this.ride_package = new Package("Rua Dr. Mário Sacramento 12", "Joana Vedor", 1, store);
+        
         this.ride = new Ride(ride_package);
-
-
+                    
         allRides.add(ride);
-
+        
         rider.setRides(allRides);
-        Mockito.when(packageRepository.save(ride_package)).thenReturn(ride_package);
-        Mockito.when(repository.getById(1)).thenReturn(ride);
-        Mockito.when(riderRepository.getById(1)).thenReturn(rider);
+        Mockito.when(riderRepository.save(rider)).thenReturn(rider);
+        //Mockito.when(packageRepository.save(ride_package)).thenReturn(ride_package);
+        Mockito.when(repository.findById(1)).thenReturn(ride);
+        Mockito.when(riderRepository.findById(1)).thenReturn(Optional.of(rider));
         Mockito.when(repository.save(ride)).thenReturn(ride);
-
-        rider.setId(1);
-        ride.setId(1);
-
-
     }
 
     @Test
@@ -133,20 +121,12 @@ public class RideServiceTest {
     @DisplayName("Find rides from a rider.")
     void whenRequestRidesFromRider_thenGetRides() {
         
-        //get servico rider get id rider
-        System.out.println(rider.getId());
-        Rider riderFound = riderService.getRiderById(rider.getId());
-
-
-        System.out.println("MAYBE" + riderFound.getRides());
-
         given(riderRepository.findById(rider.getId())).willReturn(Optional.of(rider));
         when(riderRepository.existsById(ride.getId())).thenReturn(true);
 
         assertThat(service.getAllRidesFromRider(rider))
                 .isNotNull()
                 .isEqualTo(allRides);
-
     }
 
     @Test

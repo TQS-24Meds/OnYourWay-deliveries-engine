@@ -32,7 +32,7 @@ public class RiderService {
     public List<Rider> getAllRiders() { return repository.findAll(); }
 
     public Rider getRiderById(int rider_id) {
-        return repository.getById(rider_id);
+        return repository.findById(rider_id).get();
     }
 
 
@@ -41,8 +41,7 @@ public class RiderService {
             throw new ResourceNotFoundException("There is no rider with this id:" + rider_id);
         }
 
-        Rider r = (Rider) repository.findById(rider_id).get();
-        return r.getRides();
+        return repository.findById(rider_id).get().getRides();
     }
 
     
