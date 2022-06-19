@@ -10,6 +10,7 @@ import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.mockito.junit.jupiter.MockitoExtension;
 import org.springframework.data.rest.webmvc.ResourceNotFoundException;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
 
 import com.meds.deliveries.exception.DuplicatedObjectException;
 import com.meds.deliveries.model.Person;
@@ -39,8 +40,7 @@ public class PersonServiceTest {
 
     @BeforeEach
     void setUp() {
-        person = new Person("Bernardo Farias", "bernas", "supersecure", "bernoso@gmail.com", 965174856, Collections.emptyList());
-
+        person = new Person("Bernardo Farias", "bernas", "supersecure", "bernoso@gmail.com", 965174856, "deliveries");
     }
 
     @Test

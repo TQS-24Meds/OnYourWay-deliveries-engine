@@ -12,10 +12,9 @@ import org.springframework.web.bind.annotation.RestController;
 import java.time.Instant;
 import java.util.Date;
 
+import com.meds.deliveries.dto.UserDTO;
 import com.meds.deliveries.exception.BadRequestException;
-import com.meds.deliveries.exception.DuplicatedObjectException;
 import com.meds.deliveries.model.Person;
-import com.meds.deliveries.model.Rider;
 import com.meds.deliveries.request.LoginRequest;
 import com.meds.deliveries.request.MessageResponse;
 import com.meds.deliveries.security.auth.AuthTokenResponse;
@@ -44,14 +43,9 @@ public class AuthController {
     }
 
     @PostMapping("/register")
-    public MessageResponse registerRider(@RequestBody Rider rider) throws DuplicatedObjectException {
+    public MessageResponse registerRider(@RequestBody UserDTO userDTO) {
 
-        // Encode password
-        String riderPassword = rider.getPassword();
-        rider.setPassword(passwordEncoder.encode(riderPassword));
-
-        riderService.registerRider(rider);
-
+        riderService.registerRider(userDTO);
         return new MessageResponse(Date.from(Instant.now()), "The user was successfully registered!");
 
     }

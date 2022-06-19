@@ -42,11 +42,9 @@ public class Package {
     @Enumerated(EnumType.STRING)
     private DeliveryStatusEnum status;
 
-    @OneToOne(cascade = CascadeType.ALL)
+    @OneToOne
     @JsonIgnore
     private Ride ride;
-
- 
     @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "id_coordinates")
     private Coordinates packageFinalLocation;
