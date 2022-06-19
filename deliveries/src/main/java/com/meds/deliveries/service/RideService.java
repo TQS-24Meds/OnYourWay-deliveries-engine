@@ -34,10 +34,8 @@ public class RideService {
     }
 
     public List<Ride> getAllRidesFromRider(Rider r) {
-
-        System.out.println("c" + r);
         if (!riderRepository.existsById(r.getId())){
-            throw new ResourceNotFoundException(String.format("There are no rides for this rider %s, because he doesn't exist", r));
+            throw new ResourceNotFoundException("There are no rides for this rider!");
         }
    
         return r.getRides();

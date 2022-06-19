@@ -202,8 +202,6 @@ public class PackageServiceTest {
         Mockito.when(repository.findById(1)).thenReturn(Optional.of(p));
         when(repository.existsById(p.getId())).thenReturn(true);
 
-        System.out.println(p);
-        System.out.println(p.getId());
         assertThat(service.getPackageStatus(p))
                 .isNotNull()
                 .isEqualTo(p.getStatus());

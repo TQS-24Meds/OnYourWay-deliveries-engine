@@ -65,7 +65,7 @@ class RiderRepositoryTest extends RunTestContainer {
         Rider alice = new Rider("Alice", "alice", "mypassword", "alice@user.com", 922222222, "deliveries", "Alice house");
         Rider alex = new Rider("Alex", "alex", "mypassword", "alex@user.com", 933333333, "deliveries", "Alex house");
 
-        alice.setStatus(RiderStatusEnum.AVAILABLE);
+        alice.setStatus(RiderStatusEnum.UNAVAILABLE);
 
         entityManager.persist(alice);
         entityManager.persist(alex);
@@ -73,8 +73,9 @@ class RiderRepositoryTest extends RunTestContainer {
 
         List<Rider> availableRiders = repository.findByStatus(RiderStatusEnum.AVAILABLE);
 
-        assertThat( availableRiders ).hasSize(1);
-        assertThat( availableRiders ).contains(alice);
+        assertThat( availableRiders ).hasSize(2);
+        assertThat( availableRiders ).contains(alex);
+        assertThat( availableRiders ).contains(john);
     }
 
 }

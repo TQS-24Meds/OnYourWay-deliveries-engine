@@ -14,12 +14,9 @@ import org.springframework.stereotype.Service;
 @Service
 public class PackageService {
 
-    @Autowired
-    PackageRepository repository;
+    @Autowired PackageRepository repository;
 
-    @Autowired
-    RiderRepository riderRepository;
-
+    @Autowired RiderRepository riderRepository;
 
     // find all packages
     public List<Package> getAllPackages() {

@@ -1,4 +1,4 @@
-package com.meds.deliveries.controller;
+/* package com.meds.deliveries.controller;
 
 import org.springframework.boot.test.context.SpringBootTest;
 
@@ -6,3 +6,4 @@ import org.springframework.boot.test.context.SpringBootTest;
 public class RideControllerTest {
     
 }
+ */
