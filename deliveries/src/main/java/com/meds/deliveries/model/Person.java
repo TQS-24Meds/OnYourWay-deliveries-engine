@@ -5,8 +5,6 @@ import javax.validation.constraints.*;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
-import org.springframework.security.core.GrantedAuthority;
-
 import lombok.*;
 
 //https://stackabuse.com/guide-to-jpa-with-hibernate-inheritance-mapping/ check this for info
@@ -43,7 +41,7 @@ public class Person {
     private int phone;
 
     @Column(name = "role", nullable = false)
-    private GrantedAuthority permission;
+    private String permission;
 
     // @OneToOne(mappedBy = "rider", cascade = CascadeType.ALL, orphanRemoval = true)
     // @JsonIgnore
@@ -53,7 +51,7 @@ public class Person {
     // @JsonIgnore
     // private Admin admin;
 
-    public Person(String name, String username, String password, String email, int phone, GrantedAuthority permission) {
+    public Person(String name, String username, String password, String email, int phone, String permission) {
         this.name = name;
         this.username = username;
         this.password = password;

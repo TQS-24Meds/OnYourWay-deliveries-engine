@@ -43,11 +43,9 @@ public class Package {
     @Enumerated(EnumType.STRING)
     private DeliveryStatusEnum status;
 
-    @OneToOne(cascade = CascadeType.ALL)
+    @OneToOne
     @JsonIgnore
     private Ride ride;
-
- 
       
     @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "id_coordinates")
@@ -72,7 +70,7 @@ public class Package {
 
     // Package pending
     //acho que o store id temos q alterar para store uuid
-    public Package(String client_addr, String client_name, DeliveryStatusEnum status, int order_id, Store store_id) {
+    public Package(String client_addr, String client_name, int order_id, Store store_id) {
         this.client_addr = client_addr;
         this.client_name = client_name;
         this.status = DeliveryStatusEnum.PENDENT;

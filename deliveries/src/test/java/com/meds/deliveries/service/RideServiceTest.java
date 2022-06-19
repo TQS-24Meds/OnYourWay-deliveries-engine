@@ -4,7 +4,6 @@ import static org.junit.Assert.*;
 import static org.mockito.BDDMockito.given;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 import java.util.UUID;
 
@@ -12,6 +11,7 @@ import org.junit.jupiter.api.*;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.*;
 import org.mockito.junit.jupiter.MockitoExtension;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
 
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
@@ -66,26 +66,26 @@ public class RideServiceTest {
 
     @BeforeEach
     void setUp() {
-        this.rider = new Rider("John Doe", "johndoe", "mypassword", "john@doe.com", 912345678, Collections.emptyList(),
+        this.rider = new Rider("John Doe", "johndoe", "mypassword", "john@doe.com", 912345678, "deliveries",
                 "My house");
         Mockito.when(riderRepository.save(rider)).thenReturn(rider);
 
       
-        this.admin = new Admin("Artur Romão", "arturomao", "12212", "artur@gmail.com", 96514778, Collections.emptyList());
+        this.admin = new Admin("Artur Romão", "arturomao", "12212", "artur@gmail.com", 96514778, "management");
         
-        this.store = new Store("24 Meds", UUID.randomUUID(),  new Coordinates(87.2,87.1), admin);
+        this.store = new Store("24 Meds", UUID.randomUUID(),  new Coordinates(87.2,87.1));
         
         this.ride_package = new Package(
-                "Rua Dr. Mário Sacramento 12", "Joana Vedor", DeliveryStatusEnum.PENDENT, 1, store);
-        this.ride = new Ride(ride_package);
+                "Rua Dr. Mário Sacramento 12", "Joana Vedor", 1, store);
+        this.ride = new Ride(ride_package, rider);
 
 
         allRides.add(ride);
 
         rider.setRides(allRides);
         Mockito.when(packageRepository.save(ride_package)).thenReturn(ride_package);
-        Mockito.when(repository.getById(1)).thenReturn(ride);
-        Mockito.when(riderRepository.getById(1)).thenReturn(rider);
+        Mockito.when(repository.findById(1)).thenReturn(ride);
+        Mockito.when(riderRepository.findById(1)).thenReturn(rider);
         Mockito.when(repository.save(ride)).thenReturn(ride);
 
         rider.setId(1);

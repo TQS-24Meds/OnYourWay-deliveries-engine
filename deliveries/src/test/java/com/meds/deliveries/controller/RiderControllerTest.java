@@ -2,24 +2,25 @@ package com.meds.deliveries.controller;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.UUID;
 
 import com.meds.deliveries.dto.UserDTO;
-import com.meds.deliveries.enums.DeliveryStatusEnum;
 import com.meds.deliveries.model.Rider;
+import com.meds.deliveries.model.Store;
+import com.meds.deliveries.model.Coordinates;
 import com.meds.deliveries.model.Package;
 import com.meds.deliveries.model.Ride;
+import com.meds.deliveries.repository.PackageRepository;
 import com.meds.deliveries.repository.RideRepository;
 import com.meds.deliveries.repository.RiderRepository;
+import com.meds.deliveries.repository.StoreRepository;
 import com.meds.deliveries.request.LoginRequest;
 import com.meds.deliveries.request.MessageResponse;
 import com.meds.deliveries.security.auth.AuthTokenResponse;
-import com.meds.deliveries.service.SpringUserDetailsService;
 
 import org.junit.jupiter.api.AfterEach;
-import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.TestInstance;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.web.client.TestRestTemplate;
@@ -29,14 +30,11 @@ import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpMethod;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.core.GrantedAuthority;
-import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
-@TestInstance(TestInstance.Lifecycle.PER_CLASS)
 public class RiderControllerTest {
     
     @Autowired
@@ -47,6 +45,12 @@ public class RiderControllerTest {
 
     @Autowired
     private RideRepository rideRepository;
+
+    @Autowired
+    private StoreRepository storeRepository;
+
+    @Autowired
+    private PackageRepository packageRepository;
 
     @Autowired
     private PasswordEncoder passwordEncoder;
@@ -65,11 +69,13 @@ public class RiderControllerTest {
 
     @AfterEach
     public void tearDown() {
+        packageRepository.deleteAll();
+        storeRepository.deleteAll();
         riderRepository.deleteAll();
+        rideRepository.deleteAll();
     }
 
-    @BeforeAll
-    void beforeAll() {
+    public HttpEntity<String> getJwtEntity() {
         restTemplate.postForEntity("/api/auth/register", new UserDTO("Artur", "artur01", "artur.romao@ua.pt", "artur123", 914914901, "My house"), MessageResponse.class);
         LoginRequest loginRequest = new LoginRequest("artur.romao@ua.pt", "artur123");
         ResponseEntity<AuthTokenResponse> loginResponse = restTemplate.postForEntity("/api/auth/login", loginRequest, AuthTokenResponse.class);
@@ -78,42 +84,40 @@ public class RiderControllerTest {
         String token = "Bearer " + authTokenResponse.getToken();
         headers = new HttpHeaders();
         headers.set("Authorization", token);
-        jwtEntity = new HttpEntity<String>(headers);
+        return jwtEntity = new HttpEntity<String>(headers);
     }
 
     @BeforeEach
     void setUp() {
         url = "/api";
-        rider = new Rider("John Doe", "johndoe", passwordEncoder.encode("12345678"), "john@doe.com", 912345678, new SimpleGrantedAuthority("deliveries"), "My house");
-        rider_package = new Package("41.3221", "-37.2213", "My street", "John Doe", 1, 1);
-        ride = new Ride(rider_package, 5);
-        rideRepository.save(ride);
-        List<Ride> rides = new ArrayList<Ride>();
-        rides.add(ride);
-        rider.setRides(rides);
+        
+        rider = new Rider("John Doe", "johndoe", passwordEncoder.encode("12345678"), "john@doe.com", 912345678, "deliveries", "My house");
         riderRepository.save(rider);
-        System.out.println("RATA: " + rider.getId());
+        
+        jwtEntity = getJwtEntity();
     }
 
-/*     @Test
+    @Test
     void getAllRiders() {
         url += "/riders";
+
         ResponseEntity<List<Rider>> response = restTemplate
             .exchange(url, HttpMethod.GET, jwtEntity, new ParameterizedTypeReference<List<Rider>>() {
             });
 
             assertThat(response.getStatusCode()).isEqualTo(HttpStatus.OK);
-            assertThat(response.getBody()).extracting(Rider::getName).hasSize(1).doesNotContainNull();
-            assertThat(response.getBody()).extracting(Rider::getName).containsOnly("John Doe");
-            assertThat(response.getBody()).extracting(Rider::getUsername).containsOnly("johndoe");
-            assertThat(response.getBody()).extracting(Rider::getEmail).containsOnly("john@doe.com");
-            assertThat(response.getBody()).extracting(Rider::getPermission).containsOnly(rider.getPermission());
-            assertThat(response.getBody()).extracting(Rider::getAddress).containsOnly("My house");
+            assertThat(response.getBody()).extracting(Rider::getName).hasSize(2).doesNotContainNull();
+            assertThat(response.getBody()).extracting(Rider::getName).containsOnly("Artur", "John Doe");
+            assertThat(response.getBody()).extracting(Rider::getUsername).containsOnly("artur01", "johndoe");
+            assertThat(response.getBody()).extracting(Rider::getEmail).containsOnly("artur.romao@ua.pt", "john@doe.com");
+            assertThat(response.getBody()).extracting(Rider::getPermission).containsOnly("deliveries", rider.getPermission());
+            assertThat(response.getBody()).extracting(Rider::getAddress).containsOnly("My house", "My house");
     }
 
     @Test
     void getRiderDetails() {
         url += "/rider/" + String.valueOf(rider.getId());
+
         ResponseEntity<Rider> response = restTemplate
             .exchange(url, HttpMethod.GET, jwtEntity, new ParameterizedTypeReference<Rider>() {
             });
@@ -125,10 +129,26 @@ public class RiderControllerTest {
             assertThat(response.getBody().getEmail()).isEqualTo("john@doe.com");
             assertThat(response.getBody().getPermission()).isEqualTo(rider.getPermission());
             assertThat(response.getBody().getAddress()).isEqualTo("My house");
-    } */
+    }
 
     @Test
     void getRiderSpecificPackage() {
+        
+        Store store = new Store("Farmácia Alexandrina", UUID.randomUUID(), new Coordinates(43.221, -37.821));
+        storeRepository.save(store);
+
+        rider_package = new Package("My street", "Vasco Regal", 1, store);
+        packageRepository.save(rider_package);
+
+        ride = new Ride(rider_package, rider);
+        rideRepository.save(ride);
+
+        List<Ride> rides = new ArrayList<Ride>();
+        rides.add(ride);
+        rider.setRides(rides);
+        riderRepository.save(rider);
+
+
         url += "/rider/" + String.valueOf(rider.getId()) + "/package/" + String.valueOf(rider_package.getId());
         ResponseEntity<Package> response = restTemplate
             .exchange(url, HttpMethod.GET, jwtEntity, new ParameterizedTypeReference<Package>() {
@@ -138,12 +158,22 @@ public class RiderControllerTest {
             assertThat(response.getBody()).isNotNull();
             assertThat(response.getBody().getId()).isEqualTo(rider_package.getId());
             assertThat(response.getBody().getStatus()).isEqualTo(rider_package.getStatus());
-            assertThat(response.getBody().getClient_name()).isEqualTo("John Doe");
+            assertThat(response.getBody().getClient_name()).isEqualTo("Vasco Regal");
             assertThat(response.getBody().getClient_addr()).isEqualTo("My street");
     }
 
-    @Test
+    /* @Test
     void getRiderListOfPackages() {
+        Store store = new Store("Farmácia Alexandrina", UUID.randomUUID(), new Coordinates(43.221, -37.821));
+        storeRepository.save(store);
+        rider_package = new Package("My street", "Vasco Regal", 1, store);
+        ride = new Ride(rider_package, rider);
+        rideRepository.save(ride);
+        List<Ride> rides = new ArrayList<Ride>();
+        rides.add(ride);
+        rider.setRides(rides);
+        riderRepository.save(rider);
+
         url += "/rider/" + String.valueOf(rider.getId()) + "/packages";
         ResponseEntity<List<Package>> response = restTemplate
             .exchange(url, HttpMethod.GET, jwtEntity, new ParameterizedTypeReference<List<Package>>() {
@@ -156,6 +186,16 @@ public class RiderControllerTest {
             assertThat(response.getBody()).extracting(Package::getClient_name).containsOnly("John Doe");
             assertThat(response.getBody()).extracting(Package::getOrder_id).containsOnly(1);
             assertThat(response.getBody()).extracting(Package::getRider_id).containsOnly(1);
-            assertThat(response.getBody()).extracting(Package::getStore_id).containsOnly(1);
-    }
+    } */
+
+    /* @Test
+    void getSpecificRideByRiderId() {
+
+    } */
+
+    /* @Test
+    void getRiderListOfRides() {
+
+    } */
+
 }

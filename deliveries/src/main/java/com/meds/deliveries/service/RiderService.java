@@ -32,7 +32,7 @@ public class RiderService {
     public List<Rider> getAllRiders() { return repository.findAll(); }
 
     public Rider getRiderById(int rider_id) {
-        return repository.getById(rider_id);
+        return repository.findById(rider_id);
     }
 
 
@@ -47,7 +47,7 @@ public class RiderService {
 
     
     public Rider registerRider(UserDTO userDTO) {
-        Rider rider = new Rider(userDTO.getName(), userDTO.getUsername(), passwordEncoder.encode(userDTO.getPassword()), userDTO.getEmail(), userDTO.getPhone(), new SimpleGrantedAuthority("deliveries"), userDTO.getAddress());
+        Rider rider = new Rider(userDTO.getName(), userDTO.getUsername(), passwordEncoder.encode(userDTO.getPassword()), userDTO.getEmail(), userDTO.getPhone(), "deliveries", userDTO.getAddress());
         if (repository.existsByUsername(rider.getUsername()))
             throw new ExistentUserException("The provided username is already taken.");
         return repository.save(rider);

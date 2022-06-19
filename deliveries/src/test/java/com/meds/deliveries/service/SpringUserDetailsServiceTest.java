@@ -32,7 +32,7 @@ class SpringUserDetailsServiceTest {
 
     @BeforeEach
     void setUp() {
-        person = new Person("Artur", "artur01", "artur123", "artur@ua.pt", 910471747, new SimpleGrantedAuthority("deliveries"));
+        person = new Person("Artur", "artur01", "artur123", "artur@ua.pt", 910471747, "deliveries");
         userDetails = new org.springframework.security.core.userdetails.User("artur01", "artur123", Collections.emptyList());
     }
 

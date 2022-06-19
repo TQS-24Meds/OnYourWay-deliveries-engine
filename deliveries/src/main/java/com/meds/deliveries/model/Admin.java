@@ -1,7 +1,5 @@
 package com.meds.deliveries.model;
 
-import java.util.List;
-
 import javax.persistence.*;
 
 import org.springframework.security.core.GrantedAuthority;
@@ -24,18 +22,8 @@ public class Admin extends Person {
     @Column(name = "id_admin")
     private int id;
 
-    @OneToMany(cascade = CascadeType.ALL ,mappedBy = "admin")
-    private List<Store> stores;
-
-    
-    // @NotNull
-    // @OneToOne(cascade = CascadeType.ALL)
-    // @JoinColumn(name = "id_person_admin", referencedColumnName = "id_person") 
-    // @JsonIgnore
-    // private Person admin;
-
     @Builder
-    public Admin(String name, String username, String password, String email, int phone, GrantedAuthority permission) {
+    public Admin(String name, String username, String password, String email, int phone, String permission) {
         super(name, username, password, email, phone, permission);
     }
     
