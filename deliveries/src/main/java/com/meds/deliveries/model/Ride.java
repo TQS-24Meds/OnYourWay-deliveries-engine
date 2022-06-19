@@ -29,7 +29,7 @@ public class Ride {
     @JoinColumn(name = "id_rider", nullable = false)
     private Rider rider;
 
-    @OneToOne(mappedBy = "ride", cascade = CascadeType.ALL, orphanRemoval = true)
+    @OneToOne(mappedBy = "ride", orphanRemoval = true)
     @JsonIgnore
     private Package ride_package;
 
@@ -53,8 +53,9 @@ public class Ride {
     @Max(value = 5, message = "Review should not be more than 5.")
     private int rating;
 
-    public Ride(Package ride_package) {
+    public Ride(Package ride_package, Rider rider) {
         this.ride_package = ride_package;
+        this.rider = rider;
         //this.route_start = new Coordinates
         //this.route_end = ride_package.getPackageLocation();
 

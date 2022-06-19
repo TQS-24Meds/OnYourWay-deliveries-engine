@@ -4,7 +4,6 @@ import static org.junit.Assert.*;
 import static org.mockito.BDDMockito.given;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
@@ -58,13 +57,13 @@ public class RideServiceTest {
 
     @BeforeEach
     void setUp() {
-        this.rider = new Rider("John Doe", "johndoe", "mypassword", "john@doe.com", 912345678, Collections.emptyList(), "My house");
+        this.rider = new Rider("John Doe", "johndoe", "mypassword", "john@doe.com", 912345678, "deliveries", "My house");
                 
         this.store = new Store("24 Meds", UUID.randomUUID(),  new Coordinates(87.2,87.1));
         
         this.ride_package = new Package("Rua Dr. Mário Sacramento 12", "Joana Vedor", 1, store);
         
-        this.ride = new Ride(ride_package);
+        this.ride = new Ride(ride_package, rider);
                     
         allRides.add(ride);
         

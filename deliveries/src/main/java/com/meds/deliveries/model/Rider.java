@@ -26,12 +26,6 @@ public class Rider extends Person {
     @Column(name = "id_rider")
     private int id;
 
-    // @NotNull
-    // @OneToOne(cascade = CascadeType.ALL)
-    // @JoinColumn(name = "id_person_rider", referencedColumnName = "id_person")
-    // @JsonIgnore
-    // private Person rider;
-
     @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "rider_location")
     private Coordinates riderLocation;
@@ -47,6 +41,7 @@ public class Rider extends Person {
 
     @Column(name = "status", nullable = false)
     @Enumerated(EnumType.STRING)
+    @JsonIgnore
     private RiderStatusEnum status;
 
     @OneToMany(cascade = CascadeType.ALL ,mappedBy = "rider")
@@ -54,15 +49,12 @@ public class Rider extends Person {
     private List<Ride> rides;
 
     @Builder
-    public Rider(String name, String username, String password, String email, int phone, List<GrantedAuthority> permissions, String address) {
-        super(name, username, password, email, phone, permissions);
-        this.status = RiderStatusEnum.UNAVAILABLE;
+    public Rider(String name, String username, String password, String email, int phone, String permission, String address) {
+        super(name, username, password, email, phone, permission);
+        this.status = RiderStatusEnum.AVAILABLE;
         this.address = address;
         this.average_rating = 0;
         this.num_reviews = 0;
     }
-
-
     
-
 }

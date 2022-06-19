@@ -59,8 +59,8 @@ public class RideService {
 
     public Ride rideInit(Package p) {
 
-        Ride ride = new Ride(p);
         Rider rider = new Rider();
+        Ride ride = new Ride(p, rider);
 
         Date date = new Date();
 
