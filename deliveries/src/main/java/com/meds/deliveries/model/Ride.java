@@ -1,7 +1,6 @@
 package com.meds.deliveries.model;
 
 import java.util.Date;
-import java.util.HashMap;
 
 import javax.persistence.*;
 import javax.validation.constraints.*;
@@ -18,9 +17,10 @@ import lombok.*;
 @Getter
 @Setter
 @NoArgsConstructor
+@ToString
 @Table(name = "ride")
 public class Ride {
-    
+
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
     @Column(name = "id_ride")
@@ -30,16 +30,15 @@ public class Ride {
     @JoinColumn(name = "id_rider", nullable = false)
     private Rider rider;
 
-    @OneToOne(mappedBy = "ride", cascade = CascadeType.ALL, orphanRemoval = true)
+    @OneToOne(mappedBy = "ride", orphanRemoval = true)
     @JsonIgnore
     private Package ride_package;
 
-    //* HashMap<Latitude, Longitude>
-    @Column(name = "route_start", nullable = false)
-    private HashMap<Float, Float> route_start;
+    @Column(name = "route_start_lat")
+    private Double routeStartLat;
 
-    @Column(name = "route_end", nullable = false)
-    private HashMap<Float, Float> route_end;
+    @Column(name = "route_start_long")
+    private Double routeStartLong;
 
     @CreationTimestamp
     @Column(name = "time_start")
@@ -54,13 +53,13 @@ public class Ride {
     @Max(value = 5, message = "Review should not be more than 5.")
     private int rating;
 
-    public Ride(Package ride_package, int rating) {
+    public Ride(Package ride_package, Rider rider) {
         this.ride_package = ride_package;
-        this.route_start = new HashMap<Float, Float>();
-        this.route_end = new HashMap<Float, Float>();
-        this.time_start = new Date();
-        this.time_end = new Date();
-        this.rating = rating;
+        this.rider = rider;
+        //this.route_start = new Coordinates
+        //this.route_end = ride_package.getPackageLocation();
+
+
     }
 
 }

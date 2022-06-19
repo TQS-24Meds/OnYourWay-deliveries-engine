@@ -1,73 +1,69 @@
 package com.meds.deliveries.repository;
 
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabase;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import org.springframework.boot.test.autoconfigure.orm.jpa.TestEntityManager;
 
-import static org.hamcrest.MatcherAssert.assertThat;
-import static org.hamcrest.core.Is.is;
+import com.meds.deliveries.model.*;
 
-import java.util.Collections;
-import java.util.Optional;
-
-import com.meds.deliveries.model.Person;
-
-import static org.hamcrest.CoreMatchers.nullValue;
+import static org.assertj.core.api.Assertions.assertThat;
 
 @DataJpaTest
-public class PersonRepositoryTest {
+@AutoConfigureTestDatabase(replace = AutoConfigureTestDatabase.Replace.NONE)
+public class PersonRepositoryTest extends RunTestContainer {
     
     @Autowired private TestEntityManager entityManager;
 
     @Autowired private PersonRepository repository;
 
+    Person john;
+
+    @BeforeEach
+    void setUp() {
+        john = new Person("John Doe", "johndoe", "johnpass", "john@doe.com", 911111111, "");
+        entityManager.persistAndFlush(john);
+    }
+
     @Test
     public void whenFindPersonByExistingId_thenReturnPerson() {
-        Person john = new Person("John Doe", "johndoe", "mypassword", "john@doe.com", 912345678, Collections.emptyList());
-        entityManager.persistAndFlush(john);
-
-        Optional<Person> found = repository.findById(john.getId());
-        assertThat( found, is(john) );
+        Person personFound = repository.findById(john.getId()).orElse(null);;
+        assertThat( personFound ).isEqualTo( john );
     }
 
     @Test
     public void whenFindPersonByInvalidId_thenReturnNull() {
         int invalidId = -1;
-        Optional<Person> found = repository.findById(invalidId);
-        assertThat( found, is(nullValue()) );
+        Person personFound = repository.findById(invalidId).orElse(null);;
+        assertThat( personFound ).isNull();
     }
 
     @Test
     public void whenFindPersonByValidUsername_thenReturnValidPerson() {
-        Person john = new Person("John Doe", "johndoe", "mypassword", "john@doe.com", 912345678, Collections.emptyList());
-        entityManager.persistAndFlush(john);
-
-        Optional<Person> found = repository.findByUsername(john.getUsername());
-        found.ifPresent(person -> assertThat( person, is(john) ) );
+        Person personFound = repository.findByUsername(john.getUsername()).orElse(null);;
+        assertThat( personFound ).isEqualTo( john );
     }
 
     @Test
     public void whenFindPersonByInvalidUsername_thenReturnNull() {
         String invalidUsername = "anndoe";
-        Optional<Person> found = repository.findByUsername(invalidUsername);
-        assertThat( found.isPresent(), is(false) );
+        Person personFound = repository.findByUsername(invalidUsername).orElse(null);;
+        assertThat( personFound ).isNull();
     }
 
     @Test
-    public void whenFindByValidPhoneNumber_thenReturnValidPerson() {
-        Person john = new Person("John Doe", "johndoe", "mypassword", "john@doe.com", 912345678, Collections.emptyList());
-        entityManager.persistAndFlush(john);
-
-        Optional<Person> found = repository.findByPhone(john.getPhone());
-        assertThat( found, is(john) );
+    public void whenFindByValidPhone_thenReturnValidPerson() {
+        Person personFound = repository.findByPhone(john.getPhone()).orElse(null);;
+        assertThat( personFound ).isEqualTo( john );
     }
 
     @Test
-    public void whenFindPersonByInvalidPhoneNumber() {
+    public void whenFindPersonByInvalidPhone() {
         int invalidPhone = 1234;
-        Optional<Person> found = repository.findByPhone(invalidPhone);
-        assertThat( found, is(nullValue()) );
+        Person personFound = repository.findByPhone(invalidPhone).orElse(null);;
+        assertThat( personFound ).isNull();
     }
 
 }

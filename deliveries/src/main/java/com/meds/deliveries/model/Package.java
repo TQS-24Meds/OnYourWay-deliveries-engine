@@ -3,6 +3,7 @@ package com.meds.deliveries.model;
 import java.sql.Timestamp;
 import java.util.Date;
 
+
 import javax.persistence.*;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
@@ -27,12 +28,6 @@ public class Package {
     @Column(name = "id_package_order")
     private int id;
 
-    @Column(name = "client_lat", nullable = false)
-    private String client_lat; 
-
-    @Column(name = "client_long", nullable = false)
-    private String client_long; 
-
     @Column(name = "client_addr", nullable = false)
     private String client_addr;    
 
@@ -47,9 +42,12 @@ public class Package {
     @Enumerated(EnumType.STRING)
     private DeliveryStatusEnum status;
 
-    @OneToOne(cascade = CascadeType.ALL)
+    @OneToOne
     @JsonIgnore
     private Ride ride;
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "id_coordinates")
+    private Coordinates packageFinalLocation;
 
     @Column(name = "order_id", nullable = false)
     private int order_id;
@@ -57,35 +55,27 @@ public class Package {
     @Column(name = "rider_id", nullable = false)
     private int rider_id;
 
-    @Column(name = "store_id", nullable = false)
-    private int store_id;
+    @ManyToOne
+    @JoinColumn(name="id_store")
+    private Store store;
+
 
     @UpdateTimestamp
     @Column(name = "finalizedts")
     private Timestamp finalizedts;
 
     // Package pending
-    public Package(String client_lat, String client_long, String client_addr, String client_name, DeliveryStatusEnum status, int order_id, int store_id) {
-        this.client_lat = client_lat;
-        this.client_long = client_long;
+    //acho que o store id temos q alterar para store uuid
+    public Package(String client_addr, String client_name, int order_id, Store store) {
         this.client_addr = client_addr;
         this.client_name = client_name;
         this.status = DeliveryStatusEnum.PENDENT;
         this.order_id = order_id;
-        this.store_id = store_id;
+        this.store = store;
+        this.packageFinalLocation = store.getStore_location();
+        //this.packageLocation 
+
     }
 
-    // Package accepted
-    public Package(String client_lat, String client_long, String client_addr, String client_name, DeliveryStatusEnum status, Ride ride, int order_id, int rider_id, int store_id) {
-        this.client_lat = client_lat;
-        this.client_long = client_long;
-        this.client_addr = client_addr;
-        this.client_name = client_name;
-        this.status = DeliveryStatusEnum.ACCEPTED;
-        this.ride = new Ride();
-        this.order_id = order_id;
-        this.store_id = store_id;
-        this.rider_id = rider_id;
-    }
 
 }

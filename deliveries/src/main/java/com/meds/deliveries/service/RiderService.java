@@ -1,9 +1,11 @@
 package com.meds.deliveries.service;
 
+import com.meds.deliveries.dto.UserDTO;
 import com.meds.deliveries.enums.RiderStatusEnum;
-import com.meds.deliveries.exception.DuplicatedObjectException;
+import com.meds.deliveries.exception.ExistentUserException;
 import com.meds.deliveries.exception.InvalidLoginException;
 import com.meds.deliveries.exception.ResourceNotFoundException;
+import com.meds.deliveries.model.Coordinates;
 import com.meds.deliveries.model.Ride;
 import com.meds.deliveries.model.Rider;
 import com.meds.deliveries.repository.RiderRepository;
@@ -16,6 +18,7 @@ import java.util.Map;
 import java.util.TreeMap;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -23,38 +26,37 @@ import org.springframework.stereotype.Service;
 public class RiderService {
 
     @Autowired RiderRepository repository;
+    @Autowired PasswordEncoder passwordEncoder;
     
     public List<Rider> getAllRiders() { return repository.findAll(); }
 
     public Rider getRiderById(int rider_id) {
-        return repository.getById(rider_id);
+        return repository.findById(rider_id).get();
     }
+
 
     public List<Ride> getAllRidesByRiderId(int rider_id){ 
-        Rider r = repository.findById(rider_id).orElseThrow(() -> new ResourceNotFoundException("There is no rider with this id"));
-        return r.getRides();
-    }
-    
-    public Rider registerRider(Rider rider) throws DuplicatedObjectException {
-        if (repository.findByEmail(rider.getEmail()).isEmpty()) {
-            rider.setPassword(rider.getPassword());
-            repository.saveAndFlush(rider);
-
-            log.info("RIDER SERVICE: Rider saved successfully");
-            return rider;
+        if (!repository.existsById(rider_id)) {
+            throw new ResourceNotFoundException("There is no rider with this id:" + rider_id);
         }
 
-        log.error("RIDER SERVICE: Duplicated rider email, when saving rider");
-        throw new DuplicatedObjectException("Rider with this email already exists."); 
+        return repository.findById(rider_id).get().getRides();
     }
 
-    public Rider updateLocation(float lat, float lon, Rider rider) throws ResourceNotFoundException {
+    
+    public Rider registerRider(UserDTO userDTO) {
+        Rider rider = new Rider(userDTO.getName(), userDTO.getUsername(), passwordEncoder.encode(userDTO.getPassword()), userDTO.getEmail(), userDTO.getPhone(), "deliveries", userDTO.getAddress());
+        if (repository.existsByUsername(rider.getUsername()))
+            throw new ExistentUserException("The provided username is already taken.");
+        return repository.save(rider);
+    }
+
+    public Rider updateLocation(Coordinates riderCoord, Rider rider) throws ResourceNotFoundException {
         
-        rider.setLat(lat);
-        rider.setLon(lon);
+        rider.setRiderLocation(riderCoord);
         repository.save(rider);
 
-        if(rider.getLat() == lat && rider.getLon() == lon){
+        if(rider.getRiderLocation() == riderCoord){
 
             log.info("RIDER SERVICE: Rider location updated successfully");
             return rider;
@@ -91,7 +93,20 @@ public class RiderService {
     }
 
     public Rider updateRiderStatus(Rider rider) {
-        return null;
+        RiderStatusEnum status = rider.getStatus();
+
+        switch (status){
+            case UNAVAILABLE:
+                rider.setStatus(RiderStatusEnum.AVAILABLE);
+                break;
+            case AVAILABLE:
+                rider.setStatus(RiderStatusEnum.UNAVAILABLE);
+
+        }
+        return rider;
+
     }
+
+
 
 }

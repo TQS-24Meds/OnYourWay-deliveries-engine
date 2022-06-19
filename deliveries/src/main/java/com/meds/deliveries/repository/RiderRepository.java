@@ -15,4 +15,7 @@ public interface RiderRepository extends JpaRepository<Rider, Integer> {
     Optional<Rider> findByEmail(String email);
     Optional<Rider> findByUsername(String username);
     List<Rider> findByStatus(RiderStatusEnum status);
+    boolean existsById(int id);
+    boolean existsByEmail(String email);
+    boolean existsByUsername(String username);
 }

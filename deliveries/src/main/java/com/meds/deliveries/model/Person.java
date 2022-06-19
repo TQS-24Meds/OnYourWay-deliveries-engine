@@ -1,20 +1,15 @@
 package com.meds.deliveries.model;
 
-import java.util.List;
-
 import javax.persistence.*;
 import javax.validation.constraints.*;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-
-import org.springframework.security.core.GrantedAuthority;
 
 import lombok.*;
 
 //https://stackabuse.com/guide-to-jpa-with-hibernate-inheritance-mapping/ check this for info
 @Data
 @NoArgsConstructor
-@AllArgsConstructor
 @ToString
 @Entity
 @Inheritance(strategy = InheritanceType.JOINED)
@@ -44,9 +39,8 @@ public class Person {
     @Column(name = "phone", nullable = false)
     private int phone;
 
-    @NonNull
-    @ElementCollection
-    private List<GrantedAuthority> permissions;
+    @Column(name = "role", nullable = false)
+    private String permission;
 
     // @OneToOne(mappedBy = "rider", cascade = CascadeType.ALL, orphanRemoval = true)
     // @JsonIgnore
@@ -56,13 +50,13 @@ public class Person {
     // @JsonIgnore
     // private Admin admin;
 
-    public Person(String name, String username, String password, String email, int phone, List<GrantedAuthority> permissions) {
+    public Person(String name, String username, String password, String email, int phone, String permission) {
         this.name = name;
         this.username = username;
         this.password = password;
         this.email = email;
         this.phone = phone;
-        this.permissions = permissions;
+        this.permission = permission;
     }
 
 }

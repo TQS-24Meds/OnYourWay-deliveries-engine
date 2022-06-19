@@ -5,8 +5,9 @@ import lombok.Getter;
 
 import java.util.Date;
 
-@AllArgsConstructor
+
 @Getter
+@AllArgsConstructor
 public class ErrorDetails {
 
     private Date timestamp;
