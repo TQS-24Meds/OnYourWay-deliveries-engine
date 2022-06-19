@@ -16,6 +16,7 @@ import java.util.Collections;
 import java.util.List;
 
 @DataJpaTest
+@Testcontainers
 public class RideRepositoryTest extends RunTestContainer {
 
     @Autowired private TestEntityManager entityManager;

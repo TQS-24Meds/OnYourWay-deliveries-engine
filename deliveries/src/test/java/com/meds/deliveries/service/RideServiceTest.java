@@ -67,7 +67,6 @@ public class RideServiceTest {
                 "My house");
         Mockito.when(riderRepository.save(rider)).thenReturn(rider);
 
-
         this.store = new Store("24 Meds", UUID.randomUUID(),  new Coordinates(87.2,87.1));
         
         this.ride_package = new Package(

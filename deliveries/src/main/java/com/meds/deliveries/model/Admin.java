@@ -22,12 +22,6 @@ public class Admin extends Person {
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
     @Column(name = "id_admin")
     private int id;
-    
-    // @NotNull
-    // @OneToOne(cascade = CascadeType.ALL)
-    // @JoinColumn(name = "id_person_admin", referencedColumnName = "id_person") 
-    // @JsonIgnore
-    // private Person admin;
 
     @Builder
     public Admin(String name, String username, String password, String email, int phone, List<GrantedAuthority> permissions) {

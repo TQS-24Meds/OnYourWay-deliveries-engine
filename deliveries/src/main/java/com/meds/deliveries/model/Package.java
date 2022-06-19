@@ -57,7 +57,6 @@ public class Package {
     @Column(name = "rider_id", nullable = false)
     private int rider_id;
 
-
     @ManyToOne
     @JoinColumn(name="id_store")
     private Store store;
