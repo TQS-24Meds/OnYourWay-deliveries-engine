@@ -73,9 +73,10 @@ public class Package {
     public Package(String client_addr, String client_name, int order_id, Store store_id) {
         this.client_addr = client_addr;
         this.client_name = client_name;
-        this.status = DeliveryStatusEnum.PENDENT;
         this.order_id = order_id;
         this.store = store_id;
+        this.packageFinalLocation = store_id.getStore_location();
+        this.status = DeliveryStatusEnum.PENDENT;
         //this.packageLocation 
 
     }
