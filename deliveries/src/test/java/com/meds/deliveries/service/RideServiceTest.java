@@ -139,13 +139,6 @@ public class RideServiceTest {
     @DisplayName("Find rides from a rider.")
     void whenRequestRidesFromRider_thenGetRides() {
         
-        //get servico rider get id rider
-        System.out.println(rider.getId());
-        Rider riderFound = riderService.getRiderById(rider.getId());
-
-
-        System.out.println("MAYBE" + riderFound.getRides());
-
         given(riderRepository.findById(rider.getId())).willReturn(rider);
         when(riderRepository.existsById(ride.getId())).thenReturn(true);
 
@@ -162,7 +155,7 @@ public class RideServiceTest {
 
         assertThatThrownBy(() -> service.getAllRidesFromRider(rider))
                 .isInstanceOf(ResourceNotFoundException.class)
-                .hasMessage(String.format("There are no rides for this rider %s, because he doesn't exist", rider));
+                .hasMessage(String.format("There are no rides for this rider."));
         
         
         verify(repository, Mockito.times(0)).findById(Mockito.anyInt());
