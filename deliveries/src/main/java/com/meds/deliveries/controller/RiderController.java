@@ -23,6 +23,7 @@ public class RiderController {
     public RiderController(RiderService riderService) {
         this.riderService = riderService;
     }
+    
 
     @GetMapping("/riders")
     public List<Rider> getAllRiders() {

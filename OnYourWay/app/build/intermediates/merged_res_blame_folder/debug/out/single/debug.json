@@ -1,0 +1,242 @@
+[
+    {
+        "merged": "/home/xuldir/.gradle/daemon/7.3.3/com.example.onyourway.app-merged_res-49:/drawable_ic_baseline_map_24.xml.flat",
+        "source": "/home/xuldir/.gradle/daemon/7.3.3/com.example.onyourway.app-main-51:/drawable/ic_baseline_map_24.xml"
+    },
+    {
+        "merged": "/home/xuldir/.gradle/daemon/7.3.3/com.example.onyourway.app-merged_res-49:/drawable-xhdpi_arrow.png.flat",
+        "source": "/home/xuldir/.gradle/daemon/7.3.3/com.example.onyourway.app-main-51:/drawable-xhdpi/arrow.png"
+    },
+    {
+        "merged": "/home/xuldir/.gradle/daemon/7.3.3/com.example.onyourway.app-merged_res-49:/mipmap-xxhdpi_ic_launcher_round.webp.flat",
+        "source": "/home/xuldir/.gradle/daemon/7.3.3/com.example.onyourway.app-main-51:/mipmap-xxhdpi/ic_launcher_round.webp"
+    },
+    {
+        "merged": "/home/xuldir/.gradle/daemon/7.3.3/com.example.onyourway.app-merged_res-49:/drawable_qr_scanner.xml.flat",
+        "source": "/home/xuldir/.gradle/daemon/7.3.3/com.example.onyourway.app-main-51:/drawable/qr_scanner.xml"
+    },
+    {
+        "merged": "/home/xuldir/.gradle/daemon/7.3.3/com.example.onyourway.app-merged_res-49:/drawable-hdpi_nesgo.png.flat",
+        "source": "/home/xuldir/.gradle/daemon/7.3.3/com.example.onyourway.app-main-51:/drawable-hdpi/nesgo.png"
+    },
+    {
+        "merged": "/home/xuldir/.gradle/daemon/7.3.3/com.example.onyourway.app-merged_res-49:/drawable_gradientback.xml.flat",
+        "source": "/home/xuldir/.gradle/daemon/7.3.3/com.example.onyourway.app-main-51:/drawable/gradientback.xml"
+    },
+    {
+        "merged": "/home/xuldir/.gradle/daemon/7.3.3/com.example.onyourway.app-merged_res-49:/mipmap-mdpi_ic_launcher.webp.flat",
+        "source": "/home/xuldir/.gradle/daemon/7.3.3/com.example.onyourway.app-main-51:/mipmap-mdpi/ic_launcher.webp"
+    },
+    {
+        "merged": "/home/xuldir/.gradle/daemon/7.3.3/com.example.onyourway.app-merged_res-49:/layout_fragment_maps.xml.flat",
+        "source": "/home/xuldir/.gradle/daemon/7.3.3/com.example.onyourway.app-main-51:/layout/fragment_maps.xml"
+    },
+    {
+        "merged": "/home/xuldir/.gradle/daemon/7.3.3/com.example.onyourway.app-merged_res-49:/layout_fragment_qr_code.xml.flat",
+        "source": "/home/xuldir/.gradle/daemon/7.3.3/com.example.onyourway.app-main-51:/layout/fragment_qr_code.xml"
+    },
+    {
+        "merged": "/home/xuldir/.gradle/daemon/7.3.3/com.example.onyourway.app-merged_res-49:/drawable-hdpi_arrow.png.flat",
+        "source": "/home/xuldir/.gradle/daemon/7.3.3/com.example.onyourway.app-main-51:/drawable-hdpi/arrow.png"
+    },
+    {
+        "merged": "/home/xuldir/.gradle/daemon/7.3.3/com.example.onyourway.app-merged_res-49:/drawable-xhdpi_nesgo.png.flat",
+        "source": "/home/xuldir/.gradle/daemon/7.3.3/com.example.onyourway.app-main-51:/drawable-xhdpi/nesgo.png"
+    },
+    {
+        "merged": "/home/xuldir/.gradle/daemon/7.3.3/com.example.onyourway.app-merged_res-49:/drawable_ic_baseline_group_add_24.xml.flat",
+        "source": "/home/xuldir/.gradle/daemon/7.3.3/com.example.onyourway.app-main-51:/drawable/ic_baseline_group_add_24.xml"
+    },
+    {
+        "merged": "/home/xuldir/.gradle/daemon/7.3.3/com.example.onyourway.app-merged_res-49:/layout_fragment_deliveries.xml.flat",
+        "source": "/home/xuldir/.gradle/daemon/7.3.3/com.example.onyourway.app-main-51:/layout/fragment_deliveries.xml"
+    },
+    {
+        "merged": "/home/xuldir/.gradle/daemon/7.3.3/com.example.onyourway.app-merged_res-49:/drawable_ic_baseline_home_24.xml.flat",
+        "source": "/home/xuldir/.gradle/daemon/7.3.3/com.example.onyourway.app-main-51:/drawable/ic_baseline_home_24.xml"
+    },
+    {
+        "merged": "/home/xuldir/.gradle/daemon/7.3.3/com.example.onyourway.app-merged_res-49:/drawable_ic_launcher_background.xml.flat",
+        "source": "/home/xuldir/.gradle/daemon/7.3.3/com.example.onyourway.app-main-51:/drawable/ic_launcher_background.xml"
+    },
+    {
+        "merged": "/home/xuldir/.gradle/daemon/7.3.3/com.example.onyourway.app-merged_res-49:/drawable-xxhdpi_deliveriesicon.png.flat",
+        "source": "/home/xuldir/.gradle/daemon/7.3.3/com.example.onyourway.app-main-51:/drawable-xxhdpi/deliveriesicon.png"
+    },
+    {
+        "merged": "/home/xuldir/.gradle/daemon/7.3.3/com.example.onyourway.app-merged_res-49:/menu_menu.xml.flat",
+        "source": "/home/xuldir/.gradle/daemon/7.3.3/com.example.onyourway.app-main-51:/menu/menu.xml"
+    },
+    {
+        "merged": "/home/xuldir/.gradle/daemon/7.3.3/com.example.onyourway.app-merged_res-49:/drawable_custom_btn.xml.flat",
+        "source": "/home/xuldir/.gradle/daemon/7.3.3/com.example.onyourway.app-main-51:/drawable/custom_btn.xml"
+    },
+    {
+        "merged": "/home/xuldir/.gradle/daemon/7.3.3/com.example.onyourway.app-merged_res-49:/drawable-mdpi_arrow.png.flat",
+        "source": "/home/xuldir/.gradle/daemon/7.3.3/com.example.onyourway.app-main-51:/drawable-mdpi/arrow.png"
+    },
+    {
+        "merged": "/home/xuldir/.gradle/daemon/7.3.3/com.example.onyourway.app-merged_res-49:/drawable_ic_arrow_right.xml.flat",
+        "source": "/home/xuldir/.gradle/daemon/7.3.3/com.example.onyourway.app-main-51:/drawable/ic_arrow_right.xml"
+    },
+    {
+        "merged": "/home/xuldir/.gradle/daemon/7.3.3/com.example.onyourway.app-merged_res-49:/navigation_navigation.xml.flat",
+        "source": "/home/xuldir/.gradle/daemon/7.3.3/com.example.onyourway.app-main-51:/navigation/navigation.xml"
+    },
+    {
+        "merged": "/home/xuldir/.gradle/daemon/7.3.3/com.example.onyourway.app-merged_res-49:/mipmap-hdpi_ic_launcher_round.webp.flat",
+        "source": "/home/xuldir/.gradle/daemon/7.3.3/com.example.onyourway.app-main-51:/mipmap-hdpi/ic_launcher_round.webp"
+    },
+    {
+        "merged": "/home/xuldir/.gradle/daemon/7.3.3/com.example.onyourway.app-merged_res-49:/drawable-anydpi_deliveriesicon.xml.flat",
+        "source": "/home/xuldir/.gradle/daemon/7.3.3/com.example.onyourway.app-main-51:/drawable-anydpi/deliveriesicon.xml"
+    },
+    {
+        "merged": "/home/xuldir/.gradle/daemon/7.3.3/com.example.onyourway.app-merged_res-49:/mipmap-xxxhdpi_ic_launcher_round.webp.flat",
+        "source": "/home/xuldir/.gradle/daemon/7.3.3/com.example.onyourway.app-main-51:/mipmap-xxxhdpi/ic_launcher_round.webp"
+    },
+    {
+        "merged": "/home/xuldir/.gradle/daemon/7.3.3/com.example.onyourway.app-merged_res-49:/mipmap-anydpi-v26_ic_launcher.xml.flat",
+        "source": "/home/xuldir/.gradle/daemon/7.3.3/com.example.onyourway.app-main-51:/mipmap-anydpi-v26/ic_launcher.xml"
+    },
+    {
+        "merged": "/home/xuldir/.gradle/daemon/7.3.3/com.example.onyourway.app-merged_res-49:/drawable_ic_baseline_assignment_24.xml.flat",
+        "source": "/home/xuldir/.gradle/daemon/7.3.3/com.example.onyourway.app-main-51:/drawable/ic_baseline_assignment_24.xml"
+    },
+    {
+        "merged": "/home/xuldir/.gradle/daemon/7.3.3/com.example.onyourway.app-merged_res-49:/drawable-xhdpi_deliveriesicon.png.flat",
+        "source": "/home/xuldir/.gradle/daemon/7.3.3/com.example.onyourway.app-main-51:/drawable-xhdpi/deliveriesicon.png"
+    },
+    {
+        "merged": "/home/xuldir/.gradle/daemon/7.3.3/com.example.onyourway.app-merged_res-49:/layout_fragment_answer_request.xml.flat",
+        "source": "/home/xuldir/.gradle/daemon/7.3.3/com.example.onyourway.app-main-51:/layout/fragment_answer_request.xml"
+    },
+    {
+        "merged": "/home/xuldir/.gradle/daemon/7.3.3/com.example.onyourway.app-merged_res-49:/layout_activity_main.xml.flat",
+        "source": "/home/xuldir/.gradle/daemon/7.3.3/com.example.onyourway.app-main-51:/layout/activity_main.xml"
+    },
+    {
+        "merged": "/home/xuldir/.gradle/daemon/7.3.3/com.example.onyourway.app-merged_res-49:/mipmap-anydpi-v26_ic_launcher_round.xml.flat",
+        "source": "/home/xuldir/.gradle/daemon/7.3.3/com.example.onyourway.app-main-51:/mipmap-anydpi-v26/ic_launcher_round.xml"
+    },
+    {
+        "merged": "/home/xuldir/.gradle/daemon/7.3.3/com.example.onyourway.app-merged_res-49:/drawable_et_custom.xml.flat",
+        "source": "/home/xuldir/.gradle/daemon/7.3.3/com.example.onyourway.app-main-51:/drawable/et_custom.xml"
+    },
+    {
+        "merged": "/home/xuldir/.gradle/daemon/7.3.3/com.example.onyourway.app-merged_res-49:/drawable_ic_baseline_person_24.xml.flat",
+        "source": "/home/xuldir/.gradle/daemon/7.3.3/com.example.onyourway.app-main-51:/drawable/ic_baseline_person_24.xml"
+    },
+    {
+        "merged": "/home/xuldir/.gradle/daemon/7.3.3/com.example.onyourway.app-merged_res-49:/drawable_rectangle.xml.flat",
+        "source": "/home/xuldir/.gradle/daemon/7.3.3/com.example.onyourway.app-main-51:/drawable/rectangle.xml"
+    },
+    {
+        "merged": "/home/xuldir/.gradle/daemon/7.3.3/com.example.onyourway.app-merged_res-49:/mipmap-xhdpi_ic_launcher_round.webp.flat",
+        "source": "/home/xuldir/.gradle/daemon/7.3.3/com.example.onyourway.app-main-51:/mipmap-xhdpi/ic_launcher_round.webp"
+    },
+    {
+        "merged": "/home/xuldir/.gradle/daemon/7.3.3/com.example.onyourway.app-merged_res-49:/drawable-xxhdpi_nesgo.png.flat",
+        "source": "/home/xuldir/.gradle/daemon/7.3.3/com.example.onyourway.app-main-51:/drawable-xxhdpi/nesgo.png"
+    },
+    {
+        "merged": "/home/xuldir/.gradle/daemon/7.3.3/com.example.onyourway.app-merged_res-49:/layout_layout_listitem.xml.flat",
+        "source": "/home/xuldir/.gradle/daemon/7.3.3/com.example.onyourway.app-main-51:/layout/layout_listitem.xml"
+    },
+    {
+        "merged": "/home/xuldir/.gradle/daemon/7.3.3/com.example.onyourway.app-merged_res-49:/drawable-xxhdpi_arrow.png.flat",
+        "source": "/home/xuldir/.gradle/daemon/7.3.3/com.example.onyourway.app-main-51:/drawable-xxhdpi/arrow.png"
+    },
+    {
+        "merged": "/home/xuldir/.gradle/daemon/7.3.3/com.example.onyourway.app-merged_res-49:/drawable_reqicon.xml.flat",
+        "source": "/home/xuldir/.gradle/daemon/7.3.3/com.example.onyourway.app-main-51:/drawable/reqicon.xml"
+    },
+    {
+        "merged": "com.example.onyourway.app-merged_res-49:/layout_fragment_main_page.xml.flat",
+        "source": "com.example.onyourway.app-main-51:/layout/fragment_main_page.xml"
+    },
+    {
+        "merged": "/home/xuldir/.gradle/daemon/7.3.3/com.example.onyourway.app-merged_res-49:/drawable-anydpi-v24_ic_launcher_foreground.xml.flat",
+        "source": "/home/xuldir/.gradle/daemon/7.3.3/com.example.onyourway.app-pngs-44:/drawable-anydpi-v24/ic_launcher_foreground.xml"
+    },
+    {
+        "merged": "/home/xuldir/.gradle/daemon/7.3.3/com.example.onyourway.app-merged_res-49:/drawable-mdpi_deliveriesicon.png.flat",
+        "source": "/home/xuldir/.gradle/daemon/7.3.3/com.example.onyourway.app-main-51:/drawable-mdpi/deliveriesicon.png"
+    },
+    {
+        "merged": "/home/xuldir/.gradle/daemon/7.3.3/com.example.onyourway.app-merged_res-49:/layout_fragment_profile.xml.flat",
+        "source": "/home/xuldir/.gradle/daemon/7.3.3/com.example.onyourway.app-main-51:/layout/fragment_profile.xml"
+    },
+    {
+        "merged": "/home/xuldir/.gradle/daemon/7.3.3/com.example.onyourway.app-merged_res-49:/mipmap-xxxhdpi_ic_launcher.webp.flat",
+        "source": "/home/xuldir/.gradle/daemon/7.3.3/com.example.onyourway.app-main-51:/mipmap-xxxhdpi/ic_launcher.webp"
+    },
+    {
+        "merged": "/home/xuldir/.gradle/daemon/7.3.3/com.example.onyourway.app-merged_res-49:/drawable-v24_ic_arrow_left.xml.flat",
+        "source": "/home/xuldir/.gradle/daemon/7.3.3/com.example.onyourway.app-main-51:/drawable-v24/ic_arrow_left.xml"
+    },
+    {
+        "merged": "/home/xuldir/.gradle/daemon/7.3.3/com.example.onyourway.app-merged_res-49:/drawable-xxxhdpi_arrow.png.flat",
+        "source": "/home/xuldir/.gradle/daemon/7.3.3/com.example.onyourway.app-main-51:/drawable-xxxhdpi/arrow.png"
+    },
+    {
+        "merged": "/home/xuldir/.gradle/daemon/7.3.3/com.example.onyourway.app-merged_res-49:/drawable-hdpi_deliveriesicon.png.flat",
+        "source": "/home/xuldir/.gradle/daemon/7.3.3/com.example.onyourway.app-main-51:/drawable-hdpi/deliveriesicon.png"
+    },
+    {
+        "merged": "/home/xuldir/.gradle/daemon/7.3.3/com.example.onyourway.app-merged_res-49:/mipmap-mdpi_ic_launcher_round.webp.flat",
+        "source": "/home/xuldir/.gradle/daemon/7.3.3/com.example.onyourway.app-main-51:/mipmap-mdpi/ic_launcher_round.webp"
+    },
+    {
+        "merged": "/home/xuldir/.gradle/daemon/7.3.3/com.example.onyourway.app-merged_res-49:/xml_data_extraction_rules.xml.flat",
+        "source": "/home/xuldir/.gradle/daemon/7.3.3/com.example.onyourway.app-main-51:/xml/data_extraction_rules.xml"
+    },
+    {
+        "merged": "/home/xuldir/.gradle/daemon/7.3.3/com.example.onyourway.app-merged_res-49:/drawable-mdpi_nesgo.png.flat",
+        "source": "/home/xuldir/.gradle/daemon/7.3.3/com.example.onyourway.app-main-51:/drawable-mdpi/nesgo.png"
+    },
+    {
+        "merged": "/home/xuldir/.gradle/daemon/7.3.3/com.example.onyourway.app-merged_res-49:/mipmap-xxhdpi_ic_launcher.webp.flat",
+        "source": "/home/xuldir/.gradle/daemon/7.3.3/com.example.onyourway.app-main-51:/mipmap-xxhdpi/ic_launcher.webp"
+    },
+    {
+        "merged": "/home/xuldir/.gradle/daemon/7.3.3/com.example.onyourway.app-merged_res-49:/layout_fragment_main_page.xml.flat",
+        "source": "/home/xuldir/.gradle/daemon/7.3.3/com.example.onyourway.app-main-51:/layout/fragment_main_page.xml"
+    },
+    {
+        "merged": "/home/xuldir/.gradle/daemon/7.3.3/com.example.onyourway.app-merged_res-49:/layout_fragment_requests.xml.flat",
+        "source": "/home/xuldir/.gradle/daemon/7.3.3/com.example.onyourway.app-main-51:/layout/fragment_requests.xml"
+    },
+    {
+        "merged": "/home/xuldir/.gradle/daemon/7.3.3/com.example.onyourway.app-merged_res-49:/layout_fragment_login_frag.xml.flat",
+        "source": "/home/xuldir/.gradle/daemon/7.3.3/com.example.onyourway.app-main-51:/layout/fragment_login_frag.xml"
+    },
+    {
+        "merged": "/home/xuldir/.gradle/daemon/7.3.3/com.example.onyourway.app-merged_res-49:/xml_backup_rules.xml.flat",
+        "source": "/home/xuldir/.gradle/daemon/7.3.3/com.example.onyourway.app-main-51:/xml/backup_rules.xml"
+    },
+    {
+        "merged": "/home/xuldir/.gradle/daemon/7.3.3/com.example.onyourway.app-merged_res-49:/layout_nav_header.xml.flat",
+        "source": "/home/xuldir/.gradle/daemon/7.3.3/com.example.onyourway.app-main-51:/layout/nav_header.xml"
+    },
+    {
+        "merged": "/home/xuldir/.gradle/daemon/7.3.3/com.example.onyourway.app-merged_res-49:/layout_fragment_package_products.xml.flat",
+        "source": "/home/xuldir/.gradle/daemon/7.3.3/com.example.onyourway.app-main-51:/layout/fragment_package_products.xml"
+    },
+    {
+        "merged": "/home/xuldir/.gradle/daemon/7.3.3/com.example.onyourway.app-merged_res-49:/drawable-xxxhdpi_nesgo.png.flat",
+        "source": "/home/xuldir/.gradle/daemon/7.3.3/com.example.onyourway.app-main-51:/drawable-xxxhdpi/nesgo.png"
+    },
+    {
+        "merged": "/home/xuldir/.gradle/daemon/7.3.3/com.example.onyourway.app-merged_res-49:/layout_fragment_sign_up.xml.flat",
+        "source": "/home/xuldir/.gradle/daemon/7.3.3/com.example.onyourway.app-main-51:/layout/fragment_sign_up.xml"
+    },
+    {
+        "merged": "/home/xuldir/.gradle/daemon/7.3.3/com.example.onyourway.app-merged_res-49:/mipmap-hdpi_ic_launcher.webp.flat",
+        "source": "/home/xuldir/.gradle/daemon/7.3.3/com.example.onyourway.app-main-51:/mipmap-hdpi/ic_launcher.webp"
+    },
+    {
+        "merged": "/home/xuldir/.gradle/daemon/7.3.3/com.example.onyourway.app-merged_res-49:/mipmap-xhdpi_ic_launcher.webp.flat",
+        "source": "/home/xuldir/.gradle/daemon/7.3.3/com.example.onyourway.app-main-51:/mipmap-xhdpi/ic_launcher.webp"
+    }
+]

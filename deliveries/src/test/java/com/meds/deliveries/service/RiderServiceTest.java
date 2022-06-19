@@ -61,6 +61,7 @@ public class RiderServiceTest {
 
     }
 
+        List<Ride> response = service.getAllRidesByRiderId(rider.getId());
 
 
     @Test 

@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+                                                       
+                                                  
+                                                             
+
+
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" android:tag="layout/fragment_main_page_0" xmlns:android="http://schemas.android.com/apk/res/android" xmlns:app="http://schemas.android.com/apk/res-auto" xmlns:tools="http://schemas.android.com/tools" tools:context="com.example.android.navigation.main_page">
+
+        <Button
+            android:id="@+id/qrcodebtn"
+            android:layout_width="411dp"
+            android:layout_height="92dp"
+            android:background="@drawable/rectangle"
+
+            android:drawableEnd="@drawable/arrow"
+            android:text="@string/qrcode"
+            android:textAlignment="center"
+            android:textColor="#000000"
+            android:textSize="20sp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="1.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/madedeliveriesbtn"
+            app:layout_constraintVertical_bias="0.0" />
+
+        <Button
+            android:id="@+id/madedeliveriesbtn"
+            android:layout_width="411dp"
+            android:layout_height="92dp"
+            android:background="@drawable/rectangle"
+
+            android:drawableEnd="@drawable/arrow"
+            android:text="@string/deliveries"
+            android:textAlignment="center"
+            android:textColor="#000000"
+            android:textSize="20sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="1.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/reqbuttn" />
+
+        <Button
+            android:id="@+id/reqbuttn"
+            android:layout_width="411dp"
+
+            android:layout_height="92dp"
+            android:layout_marginTop="100dp"
+            android:background="@drawable/rectangle"
+            android:drawableEnd="@drawable/arrow"
+            android:hapticFeedbackEnabled="false"
+            android:text="@string/new_request"
+            android:textAlignment="center"
+            android:textColor="#000000"
+            android:textSize="20sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="1.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/ridername" />
+
+        <TextView
+            android:id="@+id/ridername"
+            android:layout_width="175dp"
+            android:layout_height="81dp"
+            android:layout_marginTop="15dp"
+            android:text="@string/empty"
+            android:textAlignment="center"
+            android:textSize="48sp"
+
+            android:textStyle="bold"
+            app:layout_constraintBottom_toTopOf="@+id/reqbuttn"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/staticwelcome"
+            app:layout_constraintVertical_bias="0.0" />
+
+        <TextView
+            android:id="@+id/staticwelcome"
+            android:layout_width="291dp"
+
+            android:layout_height="137dp"
+            android:layout_marginTop="@dimen/top_margin"
+            android:text="@string/welcome"
+            android:textAlignment="center"
+            android:textSize="54sp"
+            android:typeface="normal"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+         
