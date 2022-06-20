@@ -2,6 +2,7 @@ package com.meds.deliveries.controller;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 import com.meds.deliveries.model.*;
 import com.meds.deliveries.model.Package;
@@ -31,7 +32,7 @@ public class RiderController {
     }
 
     @GetMapping("/rider/{rider_id}")
-    public Rider getRiderDetails(@PathVariable(value = "rider_id") int rider_id) {
+    public Optional<Rider> getRiderDetails(@PathVariable(value = "rider_id") int rider_id) {
         return riderService.getRiderById(rider_id);
     }
 

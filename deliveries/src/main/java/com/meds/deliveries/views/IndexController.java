@@ -17,8 +17,11 @@ import com.meds.deliveries.model.Rider;
 import com.meds.deliveries.service.AdminService;
 import com.meds.deliveries.service.RiderService;
 
+import lombok.extern.log4j.Log4j2;
 
 @Controller
+@Log4j2
+
 public class IndexController {
 
     @Autowired
@@ -30,7 +33,9 @@ public class IndexController {
     @GetMapping("/")
     public ModelAndView index(Model model) throws NumberFormatException, ResourceNotFoundException {
       HttpSession session = httpSessionFactory.getObject();
-      String adminid = (String.valueOf(session.getAttribute("id_admin")));
+      String adminid = (String.valueOf(session.getAttribute("admin_id")));
+      log.info(adminid);
+
       Admin admin = adminsv.getAdminById(Integer.parseInt(adminid)).orElseThrow(() -> new ResourceNotFoundException("Admin not found for this id:" + adminid));
   
 
