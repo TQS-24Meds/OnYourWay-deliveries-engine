@@ -10,6 +10,7 @@ import lombok.*;
 @Entity
 @Getter
 @Setter
+@NoArgsConstructor
 @ToString
 @Table(name = "coordinates")
 public class Coordinates {
@@ -38,4 +39,5 @@ public class Coordinates {
         this.lat = lat;
         this.lon = lon;
     }
+    //public Coordinates(){}
 }

@@ -57,9 +57,5 @@ public class IGenApiImpl implements IGenApi{
     }
     //asd
 
-    @Bean
-    public RestTemplate restTemplate(){
-       return new RestTemplateBuilder().build();
-    }
 
 }
