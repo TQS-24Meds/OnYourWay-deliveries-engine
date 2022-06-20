@@ -34,7 +34,6 @@ public class IndexController {
       Admin admin = adminsv.getAdminById(Integer.parseInt(adminid)).orElseThrow(() -> new ResourceNotFoundException("Admin not found for this id:" + adminid));
   
 
-      model.addAttribute("stores",admin.getStores() );
       model.addAttribute("email", admin.getEmail());
       model.addAttribute("name", admin.getName());      
   

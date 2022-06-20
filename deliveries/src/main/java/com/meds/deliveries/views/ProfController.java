@@ -47,7 +47,6 @@ public class ProfController {
         
 
         model.addAttribute("admin_id", admin.getId());
-        model.addAttribute("stores",admin.getStores() );
         model.addAttribute("email", admin.getEmail());
         model.addAttribute("name", admin.getName());
         model.addAttribute("username",admin.getUsername());
