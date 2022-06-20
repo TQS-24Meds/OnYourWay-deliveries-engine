@@ -55,6 +55,7 @@ public class IGenApiImpl implements IGenApi{
                 HttpStatus.class);
 
     }
+    //asd
 
     @Bean
     public RestTemplate restTemplate(){
