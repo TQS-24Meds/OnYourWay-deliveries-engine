@@ -119,14 +119,14 @@ public class PackageService {
         return p;
     }
 
-    public Package receiveNewOrder(String storeToken, Map<String, Object> data) throws  InvalidLoginException {
+    //public Package receiveNewOrder(String storeToken, Map<String, Object> data) throws  InvalidLoginException {
 /*         Store store = SpringUserDetailsService.getStoreFromToken(storeToken);
         if (store == null) {
             log.error("PURCHASE SERVICE: Invalid store token, when store tried to get new order");
             throw new InvalidLoginException("There is no Store associated with this token");
         } */
 
-        String error = "invalid data";
+        /* String error = "invalid data";
 
         Object personName = Optional.ofNullable(data.get("personName")) .orElseThrow(() -> {
             log.error("PURCHASE SERVICE: Invalid data, personName, when store tried to get new order");
@@ -160,7 +160,7 @@ public class PackageService {
 
         log.info("PURCHASE SERVICE: Store successfully retrieved newest order");
         return purchase;
-    }
+    } */
 
 
 }
