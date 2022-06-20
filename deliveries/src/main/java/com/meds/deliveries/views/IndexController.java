@@ -27,7 +27,7 @@ public class IndexController {
     @Autowired 
     AdminService adminsv;
 
-    @GetMapping("/index")
+    @GetMapping("/")
     public ModelAndView index(Model model) throws NumberFormatException, ResourceNotFoundException {
       HttpSession session = httpSessionFactory.getObject();
       String adminid = (String.valueOf(session.getAttribute("id_admin")));
