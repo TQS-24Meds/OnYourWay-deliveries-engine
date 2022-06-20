@@ -135,7 +135,7 @@ public class RideServiceTest {
 
         assertThatThrownBy(() -> service.getAllRidesFromRider(rider))
                 .isInstanceOf(ResourceNotFoundException.class)
-                .hasMessage("There are no rides for this rider!");
+                .hasMessage("There are no rides for this rider, because he doesn't exist");
         
         
         verify(repository, Mockito.times(0)).findById(Mockito.anyInt());

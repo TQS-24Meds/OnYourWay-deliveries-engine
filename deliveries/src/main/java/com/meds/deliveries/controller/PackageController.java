@@ -2,15 +2,25 @@ package com.meds.deliveries.controller;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
+import java.util.TreeMap;
+
+import javax.servlet.http.HttpServletRequest;
 
 import com.meds.deliveries.service.PackageService;
+import com.meds.deliveries.exception.InvalidLoginException;
 import com.meds.deliveries.model.Package;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.http.HttpStatus;
+
 
 @RestController
 @RequestMapping("/api")
@@ -44,4 +54,12 @@ public class PackageController {
         }
         return store_packages;
     }
+/*     @PostMapping("/order")
+    public ResponseEntity<Object> receivePurchase(HttpServletRequest request, @RequestBody Map<String,  Object> data) throws  InvalidLoginException {
+        String token = request.getHeader("Authorization");
+        Purchase newPurchase = purchaseService.receiveNewOrder(token, data);
+        Map<String, Object> resp = new TreeMap<>();
+        resp.put("orderId", newPurchase.getId());
+        return new ResponseEntity<>(resp, HttpStatus.OK);
+    } */
 }
