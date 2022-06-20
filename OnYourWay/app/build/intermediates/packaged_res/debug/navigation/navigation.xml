@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/navigation"
+    app:startDestination="@id/login_frag">
+    <fragment
+        android:id="@+id/login_frag"
+        android:name="com.example.onyourway.LoginFrag"
+        android:label="fragment_login_frag"
+        tools:layout="@layout/fragment_login_frag"
+
+        >
+        <action
+            android:id="@+id/login_to_main"
+            app:destination="@id/mainPage2" />
+        <action
+            android:id="@+id/action_login_frag_to_signUp"
+            app:destination="@id/signUp" />
+    </fragment>
+    <fragment
+        android:id="@+id/mainPage2"
+        android:name="com.example.onyourway.MainPage"
+        android:label="MainPage"
+        tools:layout="@layout/fragment_main_page"
+        >
+        <action
+            android:id="@+id/main_accept_request"
+            app:destination="@id/answerRequest" />
+        <action
+            android:id="@+id/main_rider_deliveries"
+            app:destination="@id/deliveries" />
+        <action
+            android:id="@+id/main_riderQR"
+            app:destination="@id/qrCode" />
+    </fragment>
+    <fragment
+        android:id="@+id/signUp"
+        android:name="com.example.onyourway.SignUp"
+        android:label="fragment_sign_up"
+        tools:layout="@layout/fragment_sign_up" >
+        <action
+            android:id="@+id/action_signUp_to_login_frag"
+            app:destination="@id/login_frag" />
+    </fragment>
+    <fragment
+        android:id="@+id/answerRequest"
+        android:name="com.example.onyourway.AnswerRequest"
+        android:label="fragment_answer_request"
+        tools:layout="@layout/fragment_answer_request" >
+        <action
+            android:id="@+id/action_answerRequest_to_packageProducts"
+            app:destination="@id/packageProducts" />
+        <action
+            android:id="@+id/action_answerRequest_to_mapsFragment"
+            app:destination="@id/mapsFragment" />
+        <action
+            android:id="@+id/action_answerRequest_to_mainPage2"
+            app:destination="@id/mainPage2" />
+        <action
+            android:id="@+id/action_answerRequest_to_requests"
+            app:destination="@id/requests" />
+    </fragment>
+    <fragment
+        android:id="@+id/deliveries"
+        android:name="com.example.onyourway.Deliveries"
+        android:label="fragment_deliveries"
+        tools:layout="@layout/fragment_deliveries" />
+    <fragment
+        android:id="@+id/qrCode"
+        android:name="com.example.onyourway.QrCode"
+        android:label="fragment_qr_code"
+        tools:layout="@layout/fragment_qr_code" />
+    <fragment
+        android:id="@+id/mapsFragment"
+        android:name="com.example.onyourway.MapsFragment"
+        android:label="fragment_maps"
+        tools:layout="@layout/fragment_maps" />
+    <fragment
+        android:id="@+id/packageProducts"
+        android:name="com.example.onyourway.PackageProducts"
+        android:label="fragment_package_products"
+        tools:layout="@layout/fragment_package_products" />
+    <fragment
+        android:id="@+id/requests"
+        android:name="com.example.onyourway.Requests"
+        android:label="Requests" >
+        <action
+            android:id="@+id/action_requests_to_mapsFragment"
+            app:destination="@id/mapsFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/profile"
+        android:name="com.example.onyourway.profile"
+        android:label="fragment_profile"
+        tools:layout="@layout/fragment_profile" />
+</navigation>

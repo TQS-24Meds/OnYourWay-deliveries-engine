@@ -24,6 +24,7 @@ public class PackageService {
 
     @Autowired
     RiderRepository riderRepository;
+  
     @Autowired
     SpringUserDetailsService SpringUserDetailsService;
 

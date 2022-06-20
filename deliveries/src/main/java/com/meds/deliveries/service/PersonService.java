@@ -2,6 +2,9 @@ package com.meds.deliveries.service;
 
 import com.meds.deliveries.model.Person;
 import com.meds.deliveries.repository.PersonRepository;
+
+import lombok.NonNull;
+
 import com.meds.deliveries.exception.*;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,8 +16,8 @@ import java.util.Map;
 
 @Service
 public class PersonService {
-    @Autowired
-    private PersonRepository repository;
+    
+    @Autowired PersonRepository repository;
 
     public void registerPerson(Person p) throws DuplicatedObjectException {
         if (repository.existsByUsername(p.getUsername()))
@@ -30,21 +33,20 @@ public class PersonService {
 
     }
 
+    @NonNull
     public Person getPersonByUsername(String username) {
         if (!repository.existsByUsername(username)) throw new ResourceNotFoundException("Person not found for this username:" + username);
         
         return (Person) repository.findByUsername(username).get();
     }
 
-
+    @NonNull
     public Person getPersonByEmail(String email) {
         if (!repository.existsByEmail(email)) {
             throw new ResourceNotFoundException("Person not found for this email:" + email);
         }
         return (Person) repository.findByEmail(email).get();
     }
-
-
 
     public Map<String, Boolean> deletePerson(Person Person) throws ResourceNotFoundException {
 

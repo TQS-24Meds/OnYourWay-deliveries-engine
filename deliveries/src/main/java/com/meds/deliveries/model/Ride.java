@@ -17,6 +17,7 @@ import lombok.*;
 @Getter
 @Setter
 @NoArgsConstructor
+@ToString
 @Table(name = "ride")
 public class Ride {
 
@@ -39,7 +40,6 @@ public class Ride {
     @Column(name = "route_start_long")
     private Double routeStartLong;
 
-    
     @CreationTimestamp
     @Column(name = "time_start")
     private Date time_start;

@@ -2,9 +2,6 @@ package com.meds.deliveries.model;
 
 import javax.persistence.*;
 
-import org.springframework.beans.factory.annotation.Autowired;
-
-
 import lombok.*;
 
 @Entity
@@ -33,8 +30,6 @@ public class Coordinates {
     @OneToOne(mappedBy = "packageFinalLocation")
     private Package packageFinalLocation;
   
-
-    @Autowired
     public Coordinates(double lat, double lon) {
         this.lat = lat;
         this.lon = lon;
