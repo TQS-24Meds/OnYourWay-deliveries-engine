@@ -21,6 +21,10 @@ public class AdminService {
     public Optional<Admin> getAdminById(int id) {
         return repository.findById(id);
     }
+    
+    public Optional<Admin> getAdminByEmail(String email) {
+        return repository.findByEmail(email);
+    }
 
     public Admin saveAdmin(Admin admin){
         return repository.save(admin);
@@ -38,6 +42,9 @@ public class AdminService {
         existingAdmin.setPassword(admin.getPassword());
         return repository.save(existingAdmin);
     }
+
+
+
 
 
 }
