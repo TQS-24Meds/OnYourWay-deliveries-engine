@@ -10,6 +10,8 @@ import com.meds.deliveries.repository.PackageRepository;
 import com.meds.deliveries.repository.RiderRepository;
 import com.meds.deliveries.repository.StoreRepository;
 
+import lombok.extern.log4j.Log4j2;
+
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
@@ -18,6 +20,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 @Service
+@Log4j2
 public class PackageService {
 
     @Autowired
@@ -126,8 +129,8 @@ public class PackageService {
         
         String client_addr = Optional.ofNullable(data.get("address")).toString() ;
         String client_name = Optional.ofNullable(data.get("name")).toString() ;
-        String order_id = Optional.ofNullable(data.get("order_id"))).toString();
-        Store store = storeRP.findById(Integer.parseInt(Optional.ofNullable(data.get("storeid")).orElseThrow(()-> new ResourceNotFoundException("Store not found"))));
+        int order_id = Integer.parseInt((String)(data.get("order_id")));
+        Store store = storeRP.findById(Integer.parseInt((String) (data.get("storeid")))).get();
 
         Package pac = new Package(client_addr, client_name, order_id, store);
         repository.save(pac);
