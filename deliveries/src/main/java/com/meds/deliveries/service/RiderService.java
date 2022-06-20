@@ -16,6 +16,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import java.util.TreeMap;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -30,8 +31,8 @@ public class RiderService {
     
     public List<Rider> getAllRiders() { return repository.findAll(); }
 
-    public Rider getRiderById(int rider_id) {
-        return repository.findById(rider_id).get();
+    public Optional<Rider> getRiderById(int rider_id) {
+        return repository.findById(rider_id);
     }
 
 

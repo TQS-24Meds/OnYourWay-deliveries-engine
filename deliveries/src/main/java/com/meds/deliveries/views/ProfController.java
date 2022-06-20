@@ -21,6 +21,7 @@ import org.springframework.web.servlet.view.RedirectView;
 import com.meds.deliveries.exception.ResourceNotFoundException;
 import com.meds.deliveries.model.Admin;
 import com.meds.deliveries.model.Rider;
+import com.meds.deliveries.request.LoginRequest;
 import com.meds.deliveries.service.AdminService;
 import com.meds.deliveries.service.PersonService;
 import com.meds.deliveries.service.RiderService;
@@ -32,32 +33,24 @@ public class ProfController {
     @Autowired
     PersonService personsv;
     @Autowired
-    AdminService adminsv;
+    RiderService ridersv;
 
 
     @Autowired 
     ObjectFactory<HttpSession> httpSessionFactory;
     
-    @GetMapping("/profile")
-    public ModelAndView profile(Model model) throws NumberFormatException, ResourceNotFoundException {
-
-        HttpSession session = httpSessionFactory.getObject();
-        String adminid = (String.valueOf(session.getAttribute("admin_id")));
-        Admin admin = adminsv.getAdminById(Integer.parseInt(adminid)).orElseThrow(() -> new ResourceNotFoundException("Admin not found for this id:" + adminid));
-        
-
-        model.addAttribute("admin_id", admin.getId());
-        model.addAttribute("email", admin.getEmail());
-        model.addAttribute("name", admin.getName());
-        model.addAttribute("username",admin.getUsername());
-        model.addAttribute("phone",admin.getPhone() );
-        
-        
+    @GetMapping("/profile/{rider_id}")
+    public ModelAndView profile(@PathVariable(value="rider_id") int rider_id, Model model) throws NumberFormatException, ResourceNotFoundException { 
         ModelAndView modelAndView = new ModelAndView();
+        Rider rider = ridersv.getRiderById(rider_id).orElseThrow(()->  new ResourceNotFoundException("Rider not found for this id:" + rider_id));
+
+        model.addAttribute("rider_id", rider.getId());
+        model.addAttribute("email", rider.getEmail());
+        model.addAttribute("name", rider.getName());
+        model.addAttribute("username",rider.getUsername());
+        model.addAttribute("phone",rider.getPhone() );
+        
         modelAndView.setViewName("profile");
-        return modelAndView;
-}
-
-
-
-}
+        return modelAndView;}
+    
+    }

@@ -23,8 +23,11 @@ import com.meds.deliveries.request.LoginRequest;
 import com.meds.deliveries.security.auth.AuthTokenResponse;
 import com.meds.deliveries.service.AdminService;
 
+import lombok.extern.log4j.Log4j2;
 
 @Controller
+@Log4j2
+
 public class IndexController {
 
     @Autowired

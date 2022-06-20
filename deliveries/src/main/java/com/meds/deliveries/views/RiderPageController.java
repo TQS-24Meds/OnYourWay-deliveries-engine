@@ -32,15 +32,13 @@ public class RiderPageController {
       ModelAndView modelAndView = new ModelAndView();
   
       HttpSession session = httpSessionFactory.getObject();
-      String adminid = (String.valueOf(session.getAttribute("admin_id")));
-      Admin admin = adminsv.getAdminById(Integer.parseInt(adminid)).orElseThrow(() -> new ResourceNotFoundException("Admin not found for this id:" + adminid));
+      
   
-      model.addAttribute("name", admin.getName());
-     /*  
+      
       List<Rider> riderList = ridersv.getAllRiders();
   
   
-      modelAndView.addObject("riderlist", riderList); */
+      modelAndView.addObject("listRiders", riderList); 
       modelAndView.setViewName("riders");
   
       return modelAndView;
