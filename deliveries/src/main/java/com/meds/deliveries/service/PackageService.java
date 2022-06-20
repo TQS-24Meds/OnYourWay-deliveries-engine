@@ -122,19 +122,18 @@ public class PackageService {
         return p;
     }
 
-     public Package receiveNewOrder(String storeToken, Map<String, Object> data) throws  InvalidLoginException {
+    /*  public Package receiveNewOrder(String storeToken, Map<String, Object> data) throws  InvalidLoginException {
         
         String client_addr = Optional.ofNullable(data.get("address")).toString() ;
         String client_name = Optional.ofNullable(data.get("name")).toString() ;
-        String order_id = Optional.ofNullable(data.get("order_id"))).toString();
-        Store store = storeRP.findById(Integer.parseInt(Optional.ofNullable(data.get("storeid")).orElseThrow(()-> new ResourceNotFoundException("Store not found"))));
-
+        int order_id = Optional.ofNullable(data.get("order_id")).toString();
+        Store store = storeRP.findById(Integer.parseInt((String) (data.get("storeid")))).get();
         Package pac = new Package(client_addr, client_name, order_id, store);
         repository.save(pac);
 
         log.info("Store successfully retrieved newest order");
         return pac;
-    }
+    } */
  
 
 }
