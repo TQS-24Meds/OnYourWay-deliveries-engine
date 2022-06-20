@@ -54,7 +54,7 @@ public class PackageController {
         }
         return store_packages;
     }
-    /* @PostMapping("/order")
+/*     @PostMapping("/order")
     public ResponseEntity<Object> receivePurchase(HttpServletRequest request, @RequestBody Map<String,  Object> data) throws  InvalidLoginException {
         String token = request.getHeader("Authorization");
         Purchase newPurchase = purchaseService.receiveNewOrder(token, data);
