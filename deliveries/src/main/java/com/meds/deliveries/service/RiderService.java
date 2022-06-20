@@ -46,7 +46,7 @@ public class RiderService {
 
     
     public Rider registerRider(UserDTO userDTO) {
-        Rider rider = new Rider(userDTO.getName(), userDTO.getUsername(), passwordEncoder.encode(userDTO.getPassword()), userDTO.getEmail(), userDTO.getPhone(), "deliveries", userDTO.getAddress());
+        Rider rider = new Rider(userDTO.getName(), userDTO.getUsername(), userDTO.getPassword(), userDTO.getEmail(), userDTO.getPhone(), "deliveries", userDTO.getAddress());
         if (repository.existsByUsername(rider.getUsername()))
             throw new ExistentUserException("The provided username is already taken.");
         return repository.save(rider);

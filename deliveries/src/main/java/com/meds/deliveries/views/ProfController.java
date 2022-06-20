@@ -39,7 +39,7 @@ public class ProfController {
     @Autowired 
     ObjectFactory<HttpSession> httpSessionFactory;
     
-    @GetMapping("/profile/{rider_id}")
+    @GetMapping("/rider/{rider_id}")
     public ModelAndView profile(@PathVariable(value="rider_id") int rider_id, Model model) throws NumberFormatException, ResourceNotFoundException { 
         ModelAndView modelAndView = new ModelAndView();
         Rider rider = ridersv.getRiderById(rider_id).orElseThrow(()->  new ResourceNotFoundException("Rider not found for this id:" + rider_id));
@@ -49,8 +49,13 @@ public class ProfController {
         model.addAttribute("name", rider.getName());
         model.addAttribute("username",rider.getUsername());
         model.addAttribute("phone",rider.getPhone() );
+        model.addAttribute("status",rider.getStatus() );
+        model.addAttribute("rating",rider.getAverage_rating() );
+        model.addAttribute("address",rider.getAddress() );
+        
         
         modelAndView.setViewName("profile");
-        return modelAndView;}
-    
+        return modelAndView;
     }
+    
+}

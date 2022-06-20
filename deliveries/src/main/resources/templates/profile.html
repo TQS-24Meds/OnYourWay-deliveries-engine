@@ -6,11 +6,12 @@
   <title>OnYourWay</title>
 
   <!-- Google Font: Source Sans Pro -->
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
+  <link rel="stylesheet" th:href="@{https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback}">
   <!-- Font Awesome -->
-  <link rel="stylesheet" href="../static/plugins/fontawesome-free/css/all.min.css">
+  <link rel="stylesheet" th:href="@{/plugins/fontawesome-free/css/all.min.css}">
   <!-- Theme style -->
-  <link rel="stylesheet" href="../static/css/adminlte.min.css">
+  
+  <link rel="stylesheet" th:href="@{/css/adminlte.min.css}">
 </head>
 <body class="hold-transition sidebar-mini">
 <div class="wrapper">
@@ -24,7 +25,7 @@
     </ul>
     <ul class="navbar-nav ml-auto">
       <li class="nav-item">
-        <a class="nav-link" role="button" href="index.html"><i class="fas fa-door-open"></i></a>
+        <a class="nav-link" role="button" href="index"><i class="fas fa-door-open"></i></a>
       </li>
     </ul>
   </nav>
@@ -33,8 +34,7 @@
   <!-- Main Sidebar Container -->
   <aside class="main-sidebar sidebar-dark-primary elevation-4">
     <!-- Brand Logo -->
-    <a href="index.html" class="brand-link">
-      <img src="../static/img/AdminLTELogo.png" alt="AdminLTE Logo" class="brand-image img-circle elevation-3" style="opacity: .8">
+    <a href="../index" class="brand-link">
       <span class="brand-text">OnYourWay</span>
     </a>
 
@@ -46,7 +46,7 @@
       <nav class="mt-2">
         <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
           <li class="nav-item">
-            <a href="index.html" class="nav-link">
+            <a href="../index" class="nav-link">
               <i class="nav-icon fas fa-chart-bar"></i>
               <p>
                 Dashboard
@@ -54,13 +54,14 @@
             </a>
           </li>
           <li class="nav-item">
-            <a href="riders.html" class="nav-link">
+            <a href="../riders" class="nav-link">
               <i class="nav-icon fas fa-motorcycle"></i>            
               <p>
                 Riders 
               </p>
             </a>
           </li>
+
         </ul>
       </nav>
       <!-- /.sidebar-menu -->
@@ -92,32 +93,32 @@
               <div class="card-body box-profile">
                 <div class="text-center">
                   <img class="profile-user-img img-fluid img-circle"
-                       src="../static/img/user4-128x128.jpg"
+                       th:src="@{/img/user4-128x128.jpg}"
                        alt="User profile picture">
                 </div>
 
-                <h3 class="profile-username text-center">Nina Mcintire</h3>
+                <h3 class="profile-username text-center" th:text="${username}"></h3>
 
 
                 <ul class="list-group list-group-unbordered mb-3">
                   <li class="list-group-item">
-                    <b>Name</b> <a class="float-right">Nina Mcintire</a>
+                    <b>Name</b> <a class="float-right"th:text="${name}"></a>
                   </li>
                   <li class="list-group-item">
-                    <b>Username</b> <a class="float-right">nina12</a>
+                    <b>Username</b> <a class="float-right" th:text="${username}"></a>
                   </li>
                   <li class="list-group-item">
-                    <b>Address</b> <a class="float-right">Rua das Cores, nº 12</a>
+                    <b>Address</b> <a class="float-right"th:text="${address}"></a>
                   </li>
                   <li class="list-group-item">
-                    <b>Review</b> <a class="float-right">4.5</a>
+                    <b>Review</b> <a class="float-right"th:text="${rating}"></a>
                   </li>
                   <li class="list-group-item">
-                    <b>Email</b> <a class="float-right">nina@gmail.com</a>
+                    <b>Email</b> <a class="float-right"th:text="${email}"></a>
                   </li>
                 
                   <li class="list-group-item">
-                    <b>Status</b> <a class="float-right">Offline</a>
+                    <b>Status</b> <a class="float-right"th:text="${status}"></a>
                   </li>
                 </ul>
 
@@ -153,11 +154,11 @@
 <!-- ./wrapper -->
 
 <!-- jQuery -->
-<script src="../static/plugins/jquery/jquery.min.js"></script>
+<script th:src="@{static/plugins/jquery/jquery.min.js}"></script>
 <!-- Bootstrap 4 -->
-<script src="../static/plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
+<script th:src="@{plugins/bootstrap/js/bootstrap.bundle.min.js}"></script>
 <!-- AdminLTE App -->
-<script src="../static/js/adminlte.min.js"></script>
-
+<script th:src="@{static/js/adminlte.min.js}"></script>
+<script th:src="@{https://code.iconify.design/2/2.2.1/iconify.min.js}"></script>
 </body>
 </html>

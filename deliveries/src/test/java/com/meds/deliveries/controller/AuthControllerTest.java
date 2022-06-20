@@ -28,9 +28,6 @@ import static org.assertj.core.api.Assertions.assertThat;
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 class AuthControllerTest {
 
-    @Mock(lenient=true)
-    private PasswordEncoder passwordEncoder;
-
     @Autowired
     private TestRestTemplate restTemplate;
 
@@ -51,7 +48,6 @@ class AuthControllerTest {
     @BeforeEach
     void setUp() {
         userDTO = new UserDTO("John Doe", "johndoe", "john@doe.com", "mypassword", 912345678, "My house");
-        Mockito.when(passwordEncoder.encode(userDTO.getPassword())).thenReturn("mypassword");
     }
 
     @Test

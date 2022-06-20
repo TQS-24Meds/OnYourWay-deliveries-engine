@@ -37,7 +37,7 @@
   <!-- Main Sidebar Container -->
   <aside class="main-sidebar sidebar-dark-primary elevation-4">
     <!-- Brand Logo -->
-    <a href="../../index.html" class="brand-link">
+    <a href="index" class="brand-link">
       <!--<img src="../static/dist/img/AdminLTELogo.png" alt="AdminLTE Logo" class="brand-image img-circle elevation-3" style="opacity: .8">-->
       <span class="brand-text">OnYourWay</span>
     </a>
@@ -50,7 +50,7 @@
       <nav class="mt-2">
         <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
           <li class="nav-item">
-            <a href="index.html" class="nav-link">
+            <a href="index" class="nav-link">
               <i class="nav-icon fas fa-chart-bar"></i>
               <p>
                 Dashboard
@@ -58,13 +58,14 @@
             </a>
           </li>
           <li class="nav-item">
-            <a href="riders.html" class="nav-link">
+            <a href="riders" class="nav-link">
               <i class="nav-icon fas fa-motorcycle"></i>            
               <p>
                 Riders 
               </p>
             </a>
           </li>
+         
         </ul>
       </nav>
       <!-- /.sidebar-menu -->
@@ -138,11 +139,12 @@
                 <td> [[${rider.username}]]</td>
                 <td> [[${rider.status}]]</td>
                 <td> [[${rider.address}]]</td>
-                <td> [[${rider.review}]]</td>
-                             <td><a href="profile.html" class="nav-link"> 
+                <td> [[${rider.num_reviews}]]</td>
+                             <td>
+                            <a th:href="@{/rider/{id}(id=${rider.id})}">
                         <i class="fa fa-plus" style="font-size:20px"></i>
                     </a>
-                  </tr>
+              </tr>
                 </tbody>
               </table>
             </div>
@@ -185,6 +187,7 @@
 <script th:src="@{plugins/summernote/summernote-bs4.min.js}"></script>
 <script th:src="@{plugins/overlayScrollbars/js/jquery.overlayScrollbars.min.js}"></script>
 <script th:src="@{js/adminlte.js}"></script>
+<script th:src="@{https://code.iconify.design/2/2.2.1/iconify.min.js}"></script>
 
 </body>
 </html>

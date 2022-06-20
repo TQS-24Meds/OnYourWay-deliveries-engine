@@ -19,7 +19,10 @@ import com.meds.deliveries.model.Rider;
 import com.meds.deliveries.service.AdminService;
 import com.meds.deliveries.service.RiderService;
 
+import lombok.extern.log4j.Log4j2;
+
 @Controller
+@Log4j2
 public class RiderPageController {
     @Autowired ObjectFactory<HttpSession> httpSessionFactory;
     @Autowired AdminService adminsv;
@@ -35,6 +38,7 @@ public class RiderPageController {
       
   
       
+      log.info("DEBUGRIDER");
       List<Rider> riderList = ridersv.getAllRiders();
   
   

@@ -26,19 +26,16 @@ public class StoreMngPageController {
     
     
         @GetMapping("/stats")
-        public ModelAndView riders(Model model) throws NumberFormatException, ResourceNotFoundException {
+        public ModelAndView viewstats(Model model) throws ResourceNotFoundException {
       
           ModelAndView modelAndView = new ModelAndView();
       
           HttpSession session = httpSessionFactory.getObject();
-          String adminid = (String.valueOf(session.getAttribute("admin_id")));
-          Admin admin = adminsv.getAdminById(Integer.parseInt(adminid)).orElseThrow(() -> new ResourceNotFoundException("Admin not found for this id:" + adminid));
       
-          model.addAttribute("name", admin.getName());
           
             //add store list?
       
-          modelAndView.setViewName("storemanager");
+          modelAndView.setViewName("stats");
       
           return modelAndView;
         }

@@ -23,10 +23,13 @@ import com.meds.deliveries.service.PersonService;
 import com.meds.deliveries.service.RiderService;
 import com.meds.deliveries.service.SpringUserDetailsService;
 
+import lombok.extern.log4j.Log4j2;
+
 @RestController
+@Log4j2
 @RequestMapping("/api/auth")
 public class AuthController {
-
+    
     private final PasswordEncoder passwordEncoder;
     private final RiderService riderService;
     private final PersonService personService;
@@ -62,10 +65,12 @@ public class AuthController {
         Person person = personService.getPersonByEmail(email);
         UserDetails userDetails = springUserDetailsService.loadUserByUsername(person.getUsername());
 
-        if (!passwordEncoder.matches(password, person.getPassword()))
+        String encodedpw = passwordEncoder.encode(person.getPassword());
+        if (!passwordEncoder.matches(password, encodedpw))
             throw new BadCredentialsException("The provided password is wrong.");
-
+            
         String token = jwtTokenUtils.generateToken(userDetails);
+
         return new AuthTokenResponse("Authentication succeeded.", token);
 
     }
