@@ -11,6 +11,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.meds.deliveries.exception.ResourceNotFoundException;
@@ -21,7 +23,7 @@ import com.meds.deliveries.service.RiderService;
 import org.springframework.web.bind.annotation.RequestParam;
 import lombok.extern.log4j.Log4j2;
 
-@Controller
+@RestController
 @Log4j2
 public class RiderPageController {
     @Autowired ObjectFactory<HttpSession> httpSessionFactory;
@@ -49,14 +51,16 @@ public class RiderPageController {
         System.out.println("LISTA FILTRADA:" + listaFiltrada);
         modelAndView.addObject("listRiders", listaFiltrada);
 
+        
       } else {
         List<Rider> riderList = ridersv.getAllRiders();
         System.out.println("entrei");
 
         System.out.println("LISTA toda:" + riderList);
         modelAndView.addObject("listRiders", riderList);
-
+        
       }
+  
   
       return modelAndView;
     }

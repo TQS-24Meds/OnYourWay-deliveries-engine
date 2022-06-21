@@ -34,6 +34,10 @@ public class RiderService {
     public Optional<Rider> getRiderById(int rider_id) {
         return repository.findById(rider_id);
     }
+    public List<Rider> findKeyword(String keyword)  {
+
+        return repository.findKeyword(keyword);
+    }
 
 
     public List<Ride> getAllRidesByRiderId(int rider_id){ 
