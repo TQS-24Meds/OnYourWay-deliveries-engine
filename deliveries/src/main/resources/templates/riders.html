@@ -15,6 +15,7 @@
   <link rel="stylesheet" th:href="@{plugins/overlayScrollbars/css/OverlayScrollbars.min.css}">
   <link rel="stylesheet" th:href="@{plugins/daterangepicker/daterangepicker.css}">
   <link rel="stylesheet" th:href="@{plugins/summernote/summernote-bs4.min.css}">
+
 </head>
 <body class="hold-transition sidebar-mini layout-fixed">
 <div class="wrapper">
@@ -104,19 +105,23 @@
           <div class="card" style="width: 90%; margin-left: auto; margin-right: auto;">
             <div class="card-header">
               <h3 class="card-title">Riders information</h3>
-
+              
               <div class="card-tools">
+                <form th:action="@{/riders}" method="get">
                 <div class="input-group input-group-sm" style="width: 150px;">
-                  <input type="text" name="table_search" class="form-control float-right" placeholder="Search">
 
+                  <input type="text" th:name="keyword" th:value="${keyword}" class="form-control float-right" placeholder="Search">
+                  
                   <div class="input-group-append">
                     <button type="submit" class="btn btn-default">
                       <i class="fas fa-search"></i>
                     </button>
+                  </form>
                   </div>
                 </div>
               </div>
             </div>
+
             <!-- /.card-header -->
             <div class="card-body table-responsive p-0">
               <table class="table table-hover text-nowrap">
@@ -126,8 +131,8 @@
                     <th>Name</th>
                     <th>Username</th>
                     <th>Status</th>
+                    <th>Address</th>
                     <th>Review</th>
-                    <th>More info</th>
 
                   </tr>
                 </thead>
@@ -141,7 +146,7 @@
                 <td> [[${rider.address}]]</td>
                 <td> [[${rider.num_reviews}]]</td>
                              <td>
-                            <a th:href="@{/rider/{id}(id=${rider.id})}">
+                            <a id="moreInfo" th:href="@{/rider/{id}(id=${rider.id})}">
                         <i class="fa fa-plus" style="font-size:20px"></i>
                     </a>
               </tr>
