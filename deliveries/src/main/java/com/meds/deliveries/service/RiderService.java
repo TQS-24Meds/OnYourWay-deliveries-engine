@@ -43,7 +43,10 @@ public class RiderService {
 
         return repository.findById(rider_id).get().getRides();
     }
+    public List<Rider> findKeyword(String keyword)  {
 
+        return repository.findKeyword(keyword);
+    }
     
     public Rider registerRider(UserDTO userDTO) {
         Rider rider = new Rider(userDTO.getName(), userDTO.getUsername(), userDTO.getPassword(), userDTO.getEmail(), userDTO.getPhone(), "deliveries", userDTO.getAddress());
