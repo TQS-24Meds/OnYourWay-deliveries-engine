@@ -122,7 +122,7 @@ public class PackageService {
         return p;
     }
 
-    /*  public Package receiveNewOrder(String storeToken, Map<String, Object> data) throws  InvalidLoginException {
+     /* public Package receiveNewOrder(String storeToken, Map<String, Object> data) throws  InvalidLoginException {
         
         String client_addr = Optional.ofNullable(data.get("address")).toString() ;
         String client_name = Optional.ofNullable(data.get("name")).toString() ;

@@ -25,7 +25,7 @@ import org.springframework.stereotype.Service;
 @Service
 @Log4j2
 public class RiderService {
-
+    
     @Autowired RiderRepository repository;
     @Autowired PasswordEncoder passwordEncoder;
     
@@ -34,8 +34,11 @@ public class RiderService {
     public Optional<Rider> getRiderById(int rider_id) {
         return repository.findById(rider_id);
     }
-
-
+    
+    public Optional<Rider> getRiderByEmail(String rider_email) {
+        return repository.findByEmail(rider_email);
+    }
+    
     public List<Ride> getAllRidesByRiderId(int rider_id){ 
         if (!repository.existsById(rider_id)) {
             throw new ResourceNotFoundException("There is no rider with this id:" + rider_id);
@@ -107,6 +110,7 @@ public class RiderService {
         return rider;
 
     }
+
 
 
 

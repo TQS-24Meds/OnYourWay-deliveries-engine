@@ -36,6 +36,11 @@ public class RiderController {
         return riderService.getRiderById(rider_id);
     }
 
+    @GetMapping("/rider/{rider_email}")
+    public Optional<Rider> getRiderByEmail(@PathVariable(value = "rider_email") String rider_email) {
+        return riderService.getRiderByEmail(rider_email);
+    }
+
     @GetMapping("/rider/{rider_id}/package/{package_id}")
     public Package getRiderSpecificPackage(@PathVariable(value = "rider_id") int rider_id, @PathVariable(value = "package_id") int package_id) {
         List<Ride> rides = riderService.getAllRidesByRiderId(rider_id);
