@@ -2,6 +2,7 @@ package com.example.onyourway
 
 import android.os.Bundle
 import android.text.TextUtils
+import android.util.Log
 import android.util.Patterns
 import android.view.*
 import android.widget.EditText
@@ -11,6 +12,7 @@ import androidx.fragment.app.Fragment
 import androidx.navigation.findNavController
 import androidx.navigation.ui.NavigationUI
 import com.example.onyourway.databinding.FragmentLoginFragBinding
+import retrofit2.Call
 
 
 // TODO: Rename parameter arguments, choose names that match
@@ -31,10 +33,15 @@ private const val ARG_PARAM2 = "param2"
                               savedInstanceState: Bundle?): View? {
         binding = DataBindingUtil.inflate<FragmentLoginFragBinding>(inflater,
             R.layout.fragment_login_frag,container,false)
-        binding.btnLogin.setOnClickListener { view : View ->
-            if (checkdata()){
-                view.findNavController().navigate(R.id.login_to_main)
+        binding.btnLogin.setOnClickListener { view:View->
 
+            if (checkdata()) {
+                var loginRequest: LoginRequest = LoginRequest()
+
+                loginRequest.email= binding.etEmail.toString()
+                loginRequest.password= binding.etPassword.toString()
+
+                loginUser(loginRequest)
             }
         }
         binding.swapRegister.setOnClickListener { view : View ->
@@ -46,6 +53,22 @@ private const val ARG_PARAM2 = "param2"
 
     }
 
+    fun loginUser(loginRequest: LoginRequest ) {
+        val loginResponseCall: Call<LoginResponse?>? =
+            APIClient.service.loginUser(loginRequest);
+        loginRequest.let {
+            val amount = binding.etEmail.text.toString()
+            val action = LoginFragDirections.loginToMain(amount)
+
+            view?.findNavController()?.navigate(action)
+        } ?: run{
+            var t:Throwable = Throwable()
+            var msg= t.localizedMessage
+            Toast.makeText(activity, msg, Toast.LENGTH_SHORT)
+
+        }
+
+    }
 
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {

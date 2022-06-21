@@ -1,6 +1,7 @@
 package com.example.onyourway
 
 import android.os.Bundle
+import android.provider.CallLog
 import android.telephony.PhoneNumberUtils.isGlobalPhoneNumber
 import android.text.TextUtils
 import android.util.Log
@@ -15,6 +16,9 @@ import android.widget.Toast
 import androidx.databinding.DataBindingUtil
 import androidx.navigation.findNavController
 import com.example.onyourway.databinding.FragmentSignUpBinding
+import retrofit2.Call
+import retrofit2.Callback
+import retrofit2.Response
 
 
 // TODO: Rename parameter arguments, choose names that match
@@ -46,7 +50,15 @@ class SignUp : Fragment() {
         binding.btnRegister.setOnClickListener { view:View->
 
             if (checkdata()) {
-                view.findNavController().navigate(R.id.action_signUp_to_login_frag)
+                var registerRequest: RegisterRequest = RegisterRequest()
+
+                registerRequest.address= binding.address.toString()
+                registerRequest.email= binding.etEmail.toString()
+                registerRequest.name= binding.etName.toString()
+                registerRequest.phone = binding.etPhonenumber.text.toString().toInt()
+                registerRequest.username= binding.etUsername.toString()
+                registerRequest.password= binding.etPassword.toString()
+                registerUser(registerRequest)
             }
         }
 
@@ -55,6 +67,22 @@ class SignUp : Fragment() {
         return binding.root
 
     }
+    fun registerUser(registerRequest:RegisterRequest, ) {
+        val registerResponseCall: Call<RegisterResponse?>? =
+            APIClient.service.registerUser(registerRequest);
+        registerRequest.let {
+            view?.findNavController()?.navigate(R.id.action_signUp_to_login_frag)
+        } ?: run{
+            var t:Throwable = Throwable()
+            var msg= t.localizedMessage
+            Toast.makeText(activity, msg, Toast.LENGTH_SHORT)
+
+        }
+
+    }
+
+
+
 
     private fun isEmail(text: EditText?): Boolean {
         val email: CharSequence = text!!.text.toString()
@@ -62,8 +90,8 @@ class SignUp : Fragment() {
     }
     private fun isPhone(etPhonenumber: EditText): Boolean {
         Log.d("tag",
-            isGlobalPhoneNumber(isGlobalPhoneNumber(binding.etPhonenumber.toString()).toString()).toString()
-        )
+            binding.etPhonenumber.text.toString())
+
         return !isGlobalPhoneNumber(isGlobalPhoneNumber(binding.etPhonenumber.toString()).toString())
     }
 

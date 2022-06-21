@@ -1,10 +1,13 @@
 package com.example.onyourway
 
+import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import android.view.*
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.navigation.findNavController
+import androidx.navigation.fragment.navArgs
 import com.example.onyourway.databinding.FragmentLoginFragBinding
 import com.example.onyourway.databinding.FragmentMainPageBinding
 import kotlinx.coroutines.Job
@@ -24,7 +27,7 @@ class MainPage : Fragment() {
     // TODO: Rename and change types of parameters
     private var param1: String? = null
     private var param2: String? = null
-
+    val args: MainPageArgs by navArgs()
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
         val binding = DataBindingUtil.inflate<FragmentMainPageBinding>(inflater,
@@ -39,6 +42,10 @@ class MainPage : Fragment() {
             view.findNavController().navigate(R.id.main_riderQR)
         }
 
+        val amount = args.username
+        Log.d("manooo",
+            args.username)
+        binding.ridername.text = amount
 
 
         setHasOptionsMenu(true)

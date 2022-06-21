@@ -12,44 +12,42 @@
 
         <Button
             android:id="@+id/qrcodebtn"
-            android:layout_width="411dp"
+            android:layout_width="419dp"
             android:layout_height="92dp"
             android:background="@drawable/rectangle"
-            android:textColor="@color/DarkDetails"
-
             android:drawableEnd="@drawable/arrow"
+
             android:text="@string/qrcode"
             android:textAlignment="center"
+            android:textColor="@color/DarkDetails"
             android:textSize="20sp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="1.0"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/madedeliveriesbtn"
             app:layout_constraintVertical_bias="0.0" />
 
         <Button
             android:id="@+id/madedeliveriesbtn"
-            android:layout_width="411dp"
-            android:layout_height="92dp"
+            android:layout_width="421dp"
+            android:layout_height="91dp"
             android:background="@drawable/rectangle"
-            android:textColor="@color/DarkDetails"
-
             android:drawableEnd="@drawable/arrow"
+
             android:text="@string/deliveries"
             android:textAlignment="center"
+            android:textColor="@color/DarkDetails"
             android:textSize="20sp"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="1.0"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/reqbuttn" />
 
         <Button
             android:id="@+id/reqbuttn"
-            android:layout_width="411dp"
+            android:layout_width="422dp"
 
-            android:layout_height="92dp"
-            android:layout_marginTop="100dp"
+            android:layout_height="91dp"
+            android:layout_marginTop="52dp"
             android:background="@drawable/rectangle"
             android:drawableEnd="@drawable/arrow"
             android:hapticFeedbackEnabled="false"
@@ -58,14 +56,14 @@
             android:textColor="@color/DarkDetails"
             android:textSize="20sp"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="1.0"
+            app:layout_constraintHorizontal_bias="0.545"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/ridername" />
 
         <TextView
             android:id="@+id/ridername"
-            android:layout_width="175dp"
-            android:layout_height="81dp"
+            android:layout_width="406dp"
+            android:layout_height="173dp"
             android:layout_marginTop="15dp"
             android:text="@string/empty"
             android:textAlignment="center"
@@ -80,9 +78,9 @@
 
         <TextView
             android:id="@+id/staticwelcome"
-            android:layout_width="291dp"
+            android:layout_width="295dp"
 
-            android:layout_height="137dp"
+            android:layout_height="92dp"
             android:layout_marginTop="@dimen/top_margin"
             android:text="@string/welcome"
             android:textAlignment="center"
