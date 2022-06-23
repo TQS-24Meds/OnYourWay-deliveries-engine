@@ -50,7 +50,7 @@ public class SecurityRestConfig extends WebSecurityConfigurerAdapter {
         // Add CORS Configuration
         httpSecurity.cors().configurationSource(corsConfigurationSource());
 
-        httpSecurity.cors().and().csrf().disable()
+        httpSecurity.cors().and()
                 .authorizeRequests().mvcMatchers("/api/auth/*").permitAll()
                 .antMatchers("/login").permitAll()
                 .antMatchers("/css/**").permitAll()
@@ -65,7 +65,7 @@ public class SecurityRestConfig extends WebSecurityConfigurerAdapter {
         httpSecurity.addFilterBefore(authRequestFilter, UsernamePasswordAuthenticationFilter.class);
 
         // We don't need CSRF for this example
-        httpSecurity.csrf().disable();
+        //httpSecurity.csrf();
         //httpSecurity.cors().disable();
 
     }
@@ -74,7 +74,7 @@ public class SecurityRestConfig extends WebSecurityConfigurerAdapter {
     public CorsConfigurationSource corsConfigurationSource() {
 
         final CorsConfiguration configuration = new CorsConfiguration();
-        configuration.setAllowedOrigins(List.of("http://localhost:8080", "192.168.160.238:6767"));
+        configuration.setAllowedOrigins(List.of("http://localhost:8080"));
         configuration.setAllowedMethods(List.of("GET", "POST", "PUT", "DELETE"));
         // setAllowCredentials(true) is important, otherwise:
         // The value of the 'Access-Control-Allow-Origin' header in the response must not be the wildcard '*' when the request's credentials mode is 'include'.
