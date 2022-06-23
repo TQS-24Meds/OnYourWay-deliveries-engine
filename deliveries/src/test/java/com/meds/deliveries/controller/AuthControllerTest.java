@@ -1,16 +1,13 @@
-package com.meds.deliveries.controller;
+/* package com.meds.deliveries.controller;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
-import org.mockito.Mock;
-import org.mockito.Mockito;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.web.client.TestRestTemplate;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.crypto.password.PasswordEncoder;
 
 import com.meds.deliveries.dto.UserDTO;
 import com.meds.deliveries.exception.ErrorDetails;
@@ -28,14 +25,11 @@ import static org.assertj.core.api.Assertions.assertThat;
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 class AuthControllerTest {
 
-    @Autowired
-    private TestRestTemplate restTemplate;
+    @Autowired private TestRestTemplate restTemplate;
 
-    @Autowired
-    private PersonRepository personRepository;
+    @Autowired private PersonRepository personRepository;
 
-    @Autowired
-    private RiderRepository riderRepository;
+    @Autowired private RiderRepository riderRepository;
 
     private UserDTO userDTO;
 
@@ -120,3 +114,4 @@ class AuthControllerTest {
     }
 
 }
+ */

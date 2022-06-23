@@ -38,7 +38,7 @@ public class DeliveriesApplication  {
     }
 
 }
-
+/* 
 @Profile("!test")
 @Component
 class DBLoader implements CommandLineRunner {
@@ -52,7 +52,6 @@ class DBLoader implements CommandLineRunner {
 	@Autowired CoordinatesRepository coordinatesRepository;
 
     @Autowired PasswordEncoder passwordEncoder;
-
 
 	public void run(String... args) throws Exception {
 
@@ -109,10 +108,10 @@ class DBLoader implements CommandLineRunner {
                 "deliveries",
                 "Pale Street");
 
-                riderRepository.saveAndFlush(r1);
-                riderRepository.saveAndFlush(r2);
-                riderRepository.saveAndFlush(r3);
+            riderRepository.saveAndFlush(r1);
+            riderRepository.saveAndFlush(r2);
+            riderRepository.saveAndFlush(r3);
         }
     }
 }
-
+ */
