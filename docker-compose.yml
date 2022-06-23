@@ -1,0 +1,51 @@
+
+version: '3.1'
+
+services: 
+
+  db:
+    image: mysql:8.0
+    command: --default-authentication-plugin=mysql_native_password 
+    ports: 
+       - "3307:3306"
+    environment:
+      MYSQL_DATABASE: OnYourWay
+      MYSQL_USER: user
+      MYSQL_PASSWORD: user
+      MYSQL_ROOT_PASSWORD: user
+    volumes:
+      - datafiles:/var/lib/mysql
+    restart: always
+    cap_add:
+      - SYS_NICE  # CAP_SYS_NICE
+    healthcheck:
+      test: "mysql OnYourWay -uuser -puser -e 'SELECT 1;'"
+      interval: 20s
+      timeout: 10s
+      retries: 2
+
+  deliveries:
+    depends_on:
+      db:
+        condition: service_healthy
+    build: ./deliveries
+    environment:
+      SPRING_APPLICATION_JSON: '{
+        "spring.datasource.url"  : "jdbc:mysql://db:3306/OnYourWay?useSSL=true",
+        "spring.datasource.username" : "user",
+        "spring.datasource.password" : "user",
+        "spring.jpa.properties.hibernate.dialect" : "org.hibernate.dialect.MySQL8Dialect",
+        "spring.jpa.hibernate.ddl-auto" : "update",
+        "server.port": 8000
+
+        }'
+    ports: 
+      - 6768:8000
+    restart: on-failure
+    healthcheck:
+        test: "curl http://localhost:8000"
+        interval: 20s
+        timeout: 10s
+        retries: 2
+volumes:
+  datafiles:
