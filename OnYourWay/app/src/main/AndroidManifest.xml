@@ -10,7 +10,7 @@
     <uses-sdk android:minSdkVersion="21" android:targetSdkVersion="32" />
 
     <application
-
+        android:name=".room.DeliveryApplication"
         android:allowBackup="true"
         android:hardwareAccelerated="true"
         android:dataExtractionRules="@xml/data_extraction_rules"

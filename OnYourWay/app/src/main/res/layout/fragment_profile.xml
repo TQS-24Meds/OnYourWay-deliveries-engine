@@ -94,7 +94,7 @@
                             android:id="@+id/statusbtn"
                             android:layout_width="wrap_content"
                             android:layout_height="36dp"
-                            android:text="Avaiable"
+                            android:text="Available"
                             android:backgroundTint="@color/DarkDetails"
                             />
 
@@ -114,7 +114,7 @@
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="360"
+                            android:text="4.5"
                             android:textStyle="bold"
                             android:textSize="20sp"
                             android:paddingTop="10dp"
