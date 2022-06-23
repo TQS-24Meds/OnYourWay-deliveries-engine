@@ -38,7 +38,7 @@ public class DeliveriesApplication  {
     }
 
 }
-/* 
+
 @Profile("!test")
 @Component
 class DBLoader implements CommandLineRunner {
@@ -114,4 +114,4 @@ class DBLoader implements CommandLineRunner {
         }
     }
 }
- */
+
