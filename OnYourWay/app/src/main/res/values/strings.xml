@@ -31,4 +31,9 @@
     <string name="new_request">New requests</string>
     <string name="profile">profile</string>
     <string name="requests">requests</string>
+    <string name="newdel">New Delivery</string>
+    <string name="notread">    New delivery, do you want to take it?</string>
+
+    <string name="egg_notification_channel_id" translatable="false">my_channel</string>
+    <string name="egg_notification_channel_name" translatable="true">Delivery</string>
 </resources>

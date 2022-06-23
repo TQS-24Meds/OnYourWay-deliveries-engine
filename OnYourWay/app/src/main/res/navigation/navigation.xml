@@ -14,15 +14,14 @@
         <action
             android:id="@+id/login_to_main"
             app:destination="@id/mainPage2"
-            >
-
-
+            app:popUpTo="@id/mainPage2">
 
 
         </action>
         <action
             android:id="@+id/action_login_frag_to_signUp"
-            app:destination="@id/signUp" />
+            app:destination="@id/signUp"
+            app:popUpTo="@id/login_frag" />
     </fragment>
     <fragment
         android:id="@+id/mainPage2"
@@ -32,13 +31,16 @@
         >
         <action
             android:id="@+id/main_accept_request"
-            app:destination="@id/answerRequest" />
+            app:destination="@id/answerRequest"
+            app:popUpTo="@id/mainPage2" />
         <action
             android:id="@+id/main_rider_deliveries"
-            app:destination="@id/deliveries" />
+            app:destination="@id/deliveries"
+            app:popUpTo="@id/mainPage2" />
         <action
             android:id="@+id/main_riderQR"
-            app:destination="@id/qrCode" />
+            app:destination="@id/qrCode"
+            app:popUpTo="@id/mainPage2" />
         <argument
             android:name="username"
             app:argType="string"
@@ -51,7 +53,8 @@
         tools:layout="@layout/fragment_sign_up" >
         <action
             android:id="@+id/action_signUp_to_login_frag"
-            app:destination="@id/login_frag" />
+            app:destination="@id/login_frag"
+            app:popUpTo="@id/login_frag" />
     </fragment>
     <fragment
         android:id="@+id/answerRequest"
@@ -60,16 +63,21 @@
         tools:layout="@layout/fragment_answer_request" >
         <action
             android:id="@+id/action_answerRequest_to_packageProducts"
-            app:destination="@id/packageProducts" />
+            app:destination="@id/packageProducts"
+            app:popUpTo="@id/answerRequest"
+            app:popUpToInclusive="false" />
         <action
             android:id="@+id/action_answerRequest_to_mapsFragment"
-            app:destination="@id/mapsFragment" />
+            app:destination="@id/mapsFragment"
+            app:popUpTo="@id/answerRequest" />
         <action
             android:id="@+id/action_answerRequest_to_mainPage2"
-            app:destination="@id/mainPage2" />
+            app:destination="@id/mainPage2"
+            app:popUpTo="@id/mainPage2" />
         <action
             android:id="@+id/action_answerRequest_to_requests"
-            app:destination="@id/requests" />
+            app:destination="@id/requests"
+            app:popUpTo="@id/mainPage2" />
     </fragment>
     <fragment
         android:id="@+id/deliveries"
@@ -97,7 +105,8 @@
         android:label="Requests" >
         <action
             android:id="@+id/action_requests_to_mapsFragment"
-            app:destination="@id/mapsFragment" />
+            app:destination="@id/mapsFragment"
+            app:popUpTo="@id/requests" />
     </fragment>
     <fragment
         android:id="@+id/profile"

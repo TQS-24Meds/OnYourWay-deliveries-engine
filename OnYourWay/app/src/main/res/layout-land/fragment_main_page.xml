@@ -17,8 +17,9 @@
 
         <Button
             android:id="@+id/qrcodebtn"
-            android:layout_width="419dp"
-            android:layout_height="92dp"
+            android:layout_width="394dp"
+
+            android:layout_height="60dp"
             android:background="@drawable/rectangle"
             android:drawableEnd="@drawable/arrow"
 
@@ -34,25 +35,27 @@
 
         <Button
             android:id="@+id/madedeliveriesbtn"
-            android:layout_width="421dp"
-            android:layout_height="91dp"
-            android:background="@drawable/rectangle"
-            android:drawableEnd="@drawable/arrow"
+            android:layout_width="394dp"
 
+            android:layout_height="60dp"
+            android:layout_marginTop="8dp"
+            android:background="@drawable/rectangle"
+
+            android:drawableEnd="@drawable/arrow"
             android:text="@string/deliveries"
             android:textAlignment="center"
             android:textColor="@color/DarkDetails"
             android:textSize="20sp"
             app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.501"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/reqbuttn" />
 
         <Button
             android:id="@+id/reqbuttn"
-            android:layout_width="422dp"
+            android:layout_width="394dp"
 
-            android:layout_height="91dp"
-            android:layout_marginTop="52dp"
+            android:layout_height="60dp"
             android:background="@drawable/rectangle"
             android:drawableEnd="@drawable/arrow"
             android:hapticFeedbackEnabled="false"
@@ -61,55 +64,54 @@
             android:textColor="@color/DarkDetails"
             android:textSize="20sp"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.545"
+            app:layout_constraintHorizontal_bias="0.505"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/ridername" />
+            app:layout_constraintTop_toBottomOf="@+id/staticwelcome" />
 
         <TextView
             android:id="@+id/ridername"
-            android:layout_width="406dp"
-            android:layout_height="173dp"
-            android:layout_marginTop="15dp"
+            android:layout_width="427dp"
+            android:layout_height="70dp"
             android:text="@string/empty"
             android:textAlignment="center"
-            android:textSize="48sp"
 
+            android:textSize="48sp"
             android:textStyle="bold"
             app:layout_constraintBottom_toTopOf="@+id/reqbuttn"
             app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="1.0"
+            app:layout_constraintStart_toEndOf="@+id/staticwelcome"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.079" />
+
+        <Switch
+            android:id="@+id/on_off_switch"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:checked="@{myVM.isAlarmOn}"
+            android:onCheckedChanged="@{(button, on)-> myVM.setAlarm(on)}"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.092"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/staticwelcome"
-            app:layout_constraintVertical_bias="0.0" />
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.501"
+            tools:ignore="UseSwitchCompatOrMaterialXml" />
 
         <TextView
             android:id="@+id/staticwelcome"
             android:layout_width="295dp"
 
             android:layout_height="92dp"
-            android:layout_marginTop="@dimen/top_margin"
+            android:layout_marginTop="4dp"
             android:text="@string/welcome"
             android:textAlignment="center"
             android:textSize="54sp"
             android:typeface="normal"
             app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.002"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
-
-        <Switch
-            android:id="@+id/on_off_switch"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="16dp"
-            android:layout_marginBottom="21dp"
-            android:checked="@{myVM.isAlarmOn}"
-            android:onCheckedChanged="@{(button, on)-> myVM.setAlarm(on)}"
-            app:layout_constraintBottom_toTopOf="@+id/staticwelcome"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias=".5"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.009"
-            tools:ignore="UseSwitchCompatOrMaterialXml" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>
