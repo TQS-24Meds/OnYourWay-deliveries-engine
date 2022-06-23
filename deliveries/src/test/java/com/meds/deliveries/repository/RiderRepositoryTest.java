@@ -32,14 +32,14 @@ class RiderRepositoryTest extends RunTestContainer {
 
     @Test
     public void whenFindRiderByValidId_thenReturnValidRider() {
-        Rider riderFound = repository.findById(john.getId()).orElse(null);;
+        Rider riderFound = repository.findById(john.getId());
         assertThat( riderFound ).isEqualTo( john );
     }
 
     @Test
     public void whenFindRiderByInvalidId_thenReturnNull() {
         int invalidId = -1;
-        Rider riderFound = repository.findById(invalidId).orElse(null);;
+        Rider riderFound = repository.findById(invalidId);
         assertThat( riderFound ).isNull();
     }
 

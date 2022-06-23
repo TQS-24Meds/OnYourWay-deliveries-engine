@@ -29,7 +29,7 @@ public class PersonService {
         if (!repository.existsById(id)) {
             throw new ResourceNotFoundException("Person not found for this id:" + id);
         }
-        return (Person) repository.findById(id).get();
+        return repository.findById(id);
 
     }
 
@@ -37,7 +37,7 @@ public class PersonService {
     public Person getPersonByUsername(String username) {
         if (!repository.existsByUsername(username)) throw new ResourceNotFoundException("Person not found for this username:" + username);
         
-        return (Person) repository.findByUsername(username).get();
+        return repository.findByUsername(username);
     }
 
     @NonNull
@@ -45,7 +45,7 @@ public class PersonService {
         if (!repository.existsByEmail(email)) {
             throw new ResourceNotFoundException("Person not found for this email:" + email);
         }
-        return (Person) repository.findByEmail(email).get();
+        return repository.findByEmail(email);
     }
 
     public Map<String, Boolean> deletePerson(Person Person) throws ResourceNotFoundException {
@@ -70,7 +70,7 @@ public class PersonService {
             throw new ResourceNotFoundException("Person not found for this id:" + id);
         }
 
-        Person existingPerson = repository.findById(id).get();
+        Person existingPerson = repository.findById(id);
 
         existingPerson.setName(person.getName());
         existingPerson.setEmail(person.getEmail());

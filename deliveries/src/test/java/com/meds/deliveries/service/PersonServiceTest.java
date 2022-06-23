@@ -45,7 +45,7 @@ public class PersonServiceTest {
     @DisplayName("Find person by username.")
     void findByUsername() {
 
-        when(repository.findByUsername(person.getUsername())).thenReturn(Optional.of(person));
+        when(repository.findByUsername(person.getUsername())).thenReturn(person);
         when(repository.existsByUsername(person.getUsername())).thenReturn(true);
 
         assertThat(service.getPersonByUsername(person.getUsername()))
@@ -74,7 +74,7 @@ public class PersonServiceTest {
     @DisplayName("Find person by email.")
     void findByEmail() {
 
-        when(repository.findByEmail(person.getEmail())).thenReturn(Optional.of(person));
+        when(repository.findByEmail(person.getEmail())).thenReturn(person);
         when(repository.existsByEmail(person.getEmail())).thenReturn(true);
 
         assertThat(service.getPersonByEmail(person.getEmail()))

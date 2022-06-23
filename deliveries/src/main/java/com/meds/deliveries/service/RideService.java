@@ -53,7 +53,7 @@ public class RideService {
 
     public Rider chooseRider(Package p) {
         p.setStatus(DeliveryStatusEnum.ACCEPTED);
-        return riderRepository.findById(0).get();
+        return riderRepository.findById(0);
     }
 
     public Ride rideInit(Package p) {

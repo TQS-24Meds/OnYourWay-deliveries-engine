@@ -83,7 +83,7 @@ public class PackageService {
         if (!repository.existsById(id)) {
             throw new ResourceNotFoundException("There are no packages with this ID:" + id);
         }
-        return repository.findById(id).get();
+        return repository.findById(id);
 
     }
 
@@ -130,7 +130,7 @@ public class PackageService {
         String client_addr = Optional.ofNullable(data.get("address")).toString() ;
         String client_name = Optional.ofNullable(data.get("name")).toString() ;
         int order_id = Integer.parseInt((String)(data.get("order_id")));
-        Store store = storeRP.findById(Integer.parseInt((String) (data.get("storeid")))).get();
+        Store store = storeRP.findById(Integer.parseInt((String) (data.get("storeid"))));
 
         Package pac = new Package(client_addr, client_name, order_id, store);
         repository.save(pac);

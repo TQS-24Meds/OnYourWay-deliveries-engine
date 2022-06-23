@@ -31,7 +31,7 @@ public class RiderService {
     
     public List<Rider> getAllRiders() { return repository.findAll(); }
 
-    public Optional<Rider> getRiderById(int rider_id) {
+    public Rider getRiderById(int rider_id) {
         return repository.findById(rider_id);
     }
     public List<Rider> findKeyword(String keyword)  {
@@ -45,7 +45,7 @@ public class RiderService {
             throw new ResourceNotFoundException("There is no rider with this id:" + rider_id);
         }
 
-        return repository.findById(rider_id).get().getRides();
+        return repository.findById(rider_id).getRides();
     }
     
     public Rider registerRider(UserDTO userDTO) {

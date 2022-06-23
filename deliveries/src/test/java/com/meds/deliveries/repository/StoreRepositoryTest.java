@@ -33,7 +33,7 @@ class StoreRepositoryTest extends RunTestContainer {
 
     @Test
     void whenFindStoreByValidId_thenReturnValidStore() {
-        Store storeFound = repository.findById(meds.getId()).orElse(null);
+        Store storeFound = repository.findById(meds.getId());
 
         assertThat( storeFound ).isEqualTo( meds );
         assertThat( storeFound ).isNotNull();

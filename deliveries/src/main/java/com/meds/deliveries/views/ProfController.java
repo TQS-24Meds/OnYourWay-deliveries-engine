@@ -42,8 +42,7 @@ public class ProfController {
     @GetMapping("/rider/{rider_id}")
     public ModelAndView profile(@PathVariable(value="rider_id") int rider_id, Model model) throws NumberFormatException, ResourceNotFoundException { 
         ModelAndView modelAndView = new ModelAndView();
-        Rider rider = ridersv.getRiderById(rider_id).orElseThrow(()->  new ResourceNotFoundException("Rider not found for this id:" + rider_id));
-
+        Rider rider = ridersv.getRiderById(rider_id);
         model.addAttribute("rider_id", rider.getId());
         model.addAttribute("email", rider.getEmail());
         model.addAttribute("name", rider.getName());

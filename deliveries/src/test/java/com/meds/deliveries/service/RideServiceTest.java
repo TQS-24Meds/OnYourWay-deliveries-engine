@@ -71,7 +71,7 @@ public class RideServiceTest {
         Mockito.when(riderRepository.save(rider)).thenReturn(rider);
         //Mockito.when(packageRepository.save(ride_package)).thenReturn(ride_package);
         Mockito.when(repository.findById(1)).thenReturn(ride);
-        Mockito.when(riderRepository.findById(1)).thenReturn(Optional.of(rider));
+        Mockito.when(riderRepository.findById(1)).thenReturn(rider);
         Mockito.when(repository.save(ride)).thenReturn(ride);
     }
 
@@ -120,7 +120,7 @@ public class RideServiceTest {
     @DisplayName("Find rides from a rider.")
     void whenRequestRidesFromRider_thenGetRides() {
         
-        given(riderRepository.findById(rider.getId())).willReturn(Optional.of(rider));
+        given(riderRepository.findById(rider.getId())).willReturn(rider);
         when(riderRepository.existsById(ride.getId())).thenReturn(true);
 
         assertThat(service.getAllRidesFromRider(rider))

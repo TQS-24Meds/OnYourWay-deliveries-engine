@@ -48,7 +48,7 @@ public class PackageRepositoryTest extends RunTestContainer {
 
     @Test
     void whenFindPackageByValidId_thenReturnValidPackage() {
-        Package packageFound = repository.findById(p1.getId()).orElse(null);
+        Package packageFound = repository.findById(p1.getId());
 
         assertThat( packageFound ).isEqualTo( p1 );
         assertThat( packageFound ).isNotNull();
@@ -64,8 +64,8 @@ public class PackageRepositoryTest extends RunTestContainer {
 
     @Test
     void whenGetAllPackages_ThenReturnAllPackages(){
-        Package p1Found = repository.findById(p1.getId()).orElse(null);
-        Package p2Found = repository.findById(p2.getId()).orElse(null);
+        Package p1Found = repository.findById(p1.getId());
+        Package p2Found = repository.findById(p2.getId());
         assertThat( p1Found ).isEqualTo( p1 );
         assertThat( p2Found ).isEqualTo( p2 );
 

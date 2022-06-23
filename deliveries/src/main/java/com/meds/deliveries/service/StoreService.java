@@ -16,7 +16,7 @@ public class StoreService {
     public List<Store> getAllStores() {return repository.findAll();}
 
     public Store getStoreById(int store_id) {
-        return repository.findById(store_id).get();
+        return repository.findById(store_id);
     }
 
 }

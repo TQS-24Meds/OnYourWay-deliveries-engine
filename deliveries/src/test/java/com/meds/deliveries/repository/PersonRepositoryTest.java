@@ -29,40 +29,40 @@ public class PersonRepositoryTest extends RunTestContainer {
 
     @Test
     public void whenFindPersonByExistingId_thenReturnPerson() {
-        Person personFound = repository.findById(john.getId()).orElse(null);;
+        Person personFound = repository.findById(john.getId());
         assertThat( personFound ).isEqualTo( john );
     }
 
     @Test
     public void whenFindPersonByInvalidId_thenReturnNull() {
         int invalidId = -1;
-        Person personFound = repository.findById(invalidId).orElse(null);;
+        Person personFound = repository.findById(invalidId);
         assertThat( personFound ).isNull();
     }
 
     @Test
     public void whenFindPersonByValidUsername_thenReturnValidPerson() {
-        Person personFound = repository.findByUsername(john.getUsername()).orElse(null);;
+        Person personFound = repository.findByUsername(john.getUsername());
         assertThat( personFound ).isEqualTo( john );
     }
 
     @Test
     public void whenFindPersonByInvalidUsername_thenReturnNull() {
         String invalidUsername = "anndoe";
-        Person personFound = repository.findByUsername(invalidUsername).orElse(null);;
+        Person personFound = repository.findByUsername(invalidUsername);
         assertThat( personFound ).isNull();
     }
 
     @Test
     public void whenFindByValidPhone_thenReturnValidPerson() {
-        Person personFound = repository.findByPhone(john.getPhone()).orElse(null);;
+        Person personFound = repository.findByPhone(john.getPhone()).orElse(null);
         assertThat( personFound ).isEqualTo( john );
     }
 
     @Test
     public void whenFindPersonByInvalidPhone() {
         int invalidPhone = 1234;
-        Person personFound = repository.findByPhone(invalidPhone).orElse(null);;
+        Person personFound = repository.findByPhone(invalidPhone).orElse(null);
         assertThat( personFound ).isNull();
     }
 

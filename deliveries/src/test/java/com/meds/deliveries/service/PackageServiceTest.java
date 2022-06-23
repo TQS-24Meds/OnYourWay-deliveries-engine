@@ -74,7 +74,7 @@ public class PackageServiceTest {
         Mockito.when(repository.save(p)).thenReturn(p);
         Mockito.when(repository.save(p2)).thenReturn(p2);
 
-        Mockito.when(repository.findById(1)).thenReturn(Optional.of(p));
+        Mockito.when(repository.findById(1)).thenReturn(p);
         package_status.put(p, p.getStatus());
         package_status.put(p2, p2.getStatus());
 
@@ -88,7 +88,7 @@ public class PackageServiceTest {
     @Test
     @DisplayName("Find package by ID")
     void whenSearchingForPackageId_returnRightPackage() {
-        when(repository.findById(p.getId())).thenReturn(Optional.of(p));
+        when(repository.findById(p.getId())).thenReturn(p);
         when(repository.existsById(p.getId())).thenReturn(true);
         System.out.println(p.getId());
 
@@ -199,7 +199,7 @@ public class PackageServiceTest {
     @Test
     @DisplayName("Get package status")
     void whenGettingAPackageStatus_returnRightStatus() {
-        Mockito.when(repository.findById(1)).thenReturn(Optional.of(p));
+        Mockito.when(repository.findById(1)).thenReturn(p);
         when(repository.existsById(p.getId())).thenReturn(true);
 
         assertThat(service.getPackageStatus(p))
@@ -211,7 +211,7 @@ public class PackageServiceTest {
 
     @Test
     void testWhenPackageIsUpdated_packageStatusIsUpdated() {
-        Mockito.when(repository.findById(1)).thenReturn(Optional.of(p));
+        Mockito.when(repository.findById(1)).thenReturn(p);
         when(repository.existsById(p.getId())).thenReturn(true);
 
         DeliveryStatusEnum actual_state = p.getStatus();
