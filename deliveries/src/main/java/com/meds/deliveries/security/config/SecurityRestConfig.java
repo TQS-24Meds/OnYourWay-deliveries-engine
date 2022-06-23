@@ -50,7 +50,7 @@ public class SecurityRestConfig extends WebSecurityConfigurerAdapter {
         // Add CORS Configuration
         httpSecurity.cors().configurationSource(corsConfigurationSource());
 
-        httpSecurity.cors().and().csrf().disable()
+        httpSecurity.cors().and().csrf()
                 .authorizeRequests().mvcMatchers("/api/auth/*").permitAll()
                 .antMatchers("/login").permitAll()
                 .antMatchers("/css/**").permitAll()
@@ -65,7 +65,7 @@ public class SecurityRestConfig extends WebSecurityConfigurerAdapter {
         httpSecurity.addFilterBefore(authRequestFilter, UsernamePasswordAuthenticationFilter.class);
 
         // We don't need CSRF for this example
-        httpSecurity.csrf().disable();
+        httpSecurity.csrf();
         //httpSecurity.cors().disable();
 
     }
