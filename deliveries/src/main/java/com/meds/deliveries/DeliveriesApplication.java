@@ -30,7 +30,7 @@ public class DeliveriesApplication  {
             @Override
             public void addCorsMappings(CorsRegistry registry) {
                 registry.addMapping("/**")
-                        .allowedOrigins("http://localhost:8080", "192.168.160.238:6768")
+                        .allowedOrigins("http://localhost:8080")
                         .allowedMethods("GET", "POST","PUT", "DELETE");
             }
 
